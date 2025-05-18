@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>عقد التمويل العقاري</title>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            direction: rtl;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        #contract {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>عقد التمويل العقاري</h1>
+
+    <div class="form-group">
+        <label for="name">الاسم الكامل</label>
+        <input type="text" id="name" required>
+    </div>
+    <div class="form-group">
+        <label for="idNumber">رقم السجل المدني</label>
+        <input type="text" id="idNumber" required>
+    </div>
+    <button id="showContractBtn" onclick="showContract()">عرض العقد</button>
+    <button onclick="resetForm()">إعادة التقديم</button>
+
+    <div id="contract" style="display:none;">
+        <h2>نص العقد</h2>
+        <p id="contractText">
+            <!-- سيتم تعبئة النص هنا تلقائيًا -->
+        </p>
+        <button onclick="generatePDF('موافقة')">موافقة</button>
+        <button onclick="generatePDF('رفض')">رفض</button>
+    </div>
+</div>
+
+<script>
+    // عند تحميل الصفحة، نتحقق إذا فيه بيانات محفوظة
+    window.onload = function () {
+        const savedData = localStorage.getItem('contractData');
+        if (savedData) {
+            const data = JSON.parse(savedData);
+            document.getElementById('name').value = data.name;
+            document.getElementById('idNumber').value = data.idNumber;
+
+            document.getElementById('contract').style.display = "block";
+            document.getElementById('contractText').innerHTML = `
+                المملكة العربية السعودية<br>
+                الوساطة العقارية والتسويق<br>
+                ترخيص رقم (1100042624)<br><br>
+                تم بحمد الله الاتفاق بين:<br>
+                الطرف الأول: الوساطة العقارية والتسويق<br>
+                الطرف الثاني: ${data.name} رقم السجل المدني: ${data.idNumber}<br><br>
+                حالة الطلب: <strong>${data.status}</strong><br>
+                تاريخ ووقت الإجراء: ${data.date}<br><br>
+                (محتوى العقد يكتب هنا لاحقاً بالتفصيل)
+            `;
+        }
+    };
+
+    function showContract() {
+        const name = document.getElementById('name').value.trim();
+        const idNumber = document.getElementById('idNumber').value.trim();
+        if (!name || !idNumber) {
+            alert("يرجى تعبئة جميع الحقول.");
+            return;
+        }
+
+        document.getElementById('contract').style.display = "block";
+        document.getElementById('contractText').innerHTML = `
+            المملكة العربية السعودية<br>
+            الوساطة العقارية والتسويق<br>
+            ترخيص رقم (1100042624)<br><br>
+            تم بحمد الله الاتفاق بين:<br>
+            الطرف الأول: الوساطة العقارية والتسويق<br>
+            الطرف الثاني: ${name} رقم السجل المدني: ${idNumber}<br><br>
+            (محتوى العقد يكتب هنا لاحقاً بالتفصيل)
+        `;
+    }
+
+    function generatePDF(status) {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        const name = document.getElementById('name').value;
+        const idNumber = document.getElementById('idNumber').value;
+        const currentDate = new Date().toLocaleString();
+
+        const contractText = `
+المملكة العربية السعودية
+الوساطة العقارية والتسويق
+ترخيص رقم (1100042624)
+
+عقد اتفاق إنهاء إجراءات تمويل عقاري
+
+تم الاتفاق بين:
+الطرف الأول: الوساطة العقارية والتسويق
+الطرف الثاني: ${name} رقم السجل المدني: ${idNumber}
+
+حالة الطلب: ${status}
+تاريخ ووقت الإجراء: ${currentDate}
+
+(محتوى العقد يكتب هنا لاحقاً بالتفصيل)
+`;
+
+        // حفظ البيانات
+        localStorage.setItem('contractData', JSON.stringify({
+            name,
+            idNumber,
+            status,
+            date: currentDate
+        }));
+
+        doc.setFont("Arial");
+        doc.setFontSize(12);
+        doc.setR2L(true);
+        doc.text(contractText, 200, 10, { align: "right" });
+        doc.save(`contract-${status}.pdf`);
+
+        // تحديث نص العقد في الصفحة
+        document.getElementById('contractText').innerHTML = `
+            المملكة العربية السعودية<br>
+            الوساطة العقارية والتسويق<br>
+            ترخيص رقم (1100042624)<br><br>
+            تم بحمد الله الاتفاق بين:<br>
+            الطرف الأول: الوساطة العقارية والتسويق<br>
+            الطرف الثاني: ${name} رقم السجل المدني: ${idNumber}<br><br>
+            حالة الطلب: <strong>${status}</strong><br>
+            تاريخ ووقت الإجراء: ${currentDate}<br><br>
+            (محتوى العقد يكتب هنا لاحقاً بالتفصيل)
+        `;
+    }
+
+    function resetForm() {
+        localStorage.clear();
+        location.reload();
+    }
+</script>
+
+</body>
+</html>
