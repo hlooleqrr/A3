@@ -3,56 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <title>عقد تمويل عقاري</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    html, body {
+    body {
+      font-family: 'Tajawal', sans-serif;
       margin: 0;
       padding: 0;
-      font-family: 'Tajawal', sans-serif;
       background-color: #f5f7fa;
-      height: 100%;
       color: #222;
     }
     .page {
       display: none;
-      min-height: 100vh;
       padding: 30px 20px;
+      min-height: 100vh;
       box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
     }
-    .show {
-      display: flex !important;
+    .page.show {
+      display: block;
     }
     h1 {
       font-size: 28px;
       color: #004d40;
+      text-align: center;
       margin-bottom: 20px;
     }
     h2 {
       font-size: 22px;
       color: #00a98f;
-      margin-top: 0;
+      text-align: center;
     }
     .btn {
+      display: block;
       background-color: #00a98f;
       color: #fff;
       border: none;
-      padding: 12px 30px;
+      padding: 12px 25px;
       font-size: 18px;
       border-radius: 8px;
-      margin-top: 20px;
+      margin: 20px auto 0;
       cursor: pointer;
     }
     input {
       width: 100%;
       padding: 12px;
       font-size: 18px;
-      margin-top: 10px;
-      margin-bottom: 20px;
+      margin: 10px 0 20px;
       border: 1px solid #ccc;
       border-radius: 6px;
     }
@@ -61,23 +56,22 @@
       padding: 20px;
       border-radius: 10px;
       border: 1px solid #ccc;
-      max-width: 100%;
-      font-size: 16px;
       line-height: 2;
-      text-align: right;
+      font-size: 16px;
       white-space: pre-line;
     }
     .success, .reject {
       font-size: 20px;
-      margin-top: 20px;
+      text-align: center;
+      margin-top: 30px;
     }
     .success { color: green; }
     .reject { color: red; }
     footer {
+      text-align: center;
+      padding: 15px;
       font-size: 14px;
       color: #555;
-      text-align: center;
-      padding: 20px;
     }
   </style>
 </head>
@@ -86,8 +80,8 @@
 <div class="page show" id="page1">
   <h1>سرعة تملك العقار والحلول التمويلية المتكاملة</h1>
   <h2>نرحب بك عميلنا العزيز</h2>
-  <p>نبرم معك هذا العقد</p>
-  <p style="font-size: 20px; color: #004d40;">ابدأ بسم الله</p>
+  <p style="text-align:center;font-size:20px;">نبرم معك هذا العقد</p>
+  <p style="text-align:center;font-size:22px;color:#004d40;">ابدأ بسم الله</p>
   <button class="btn" onclick="goToPage(2)">التالي</button>
 </div>
 
@@ -131,13 +125,13 @@ function goToPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('show'));
   document.getElementById("page" + id)?.classList.add('show');
   if (id === 3) generateContract();
+  if (id !== 'reject') updateFooter();
 }
 
 function generateContract() {
   const name = document.getElementById('fullName').value || '________';
   const now = new Date();
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  const arabicDate = now.toLocaleDateString('ar-EG', options);
+  const date = now.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
   const time = now.toLocaleTimeString('ar-EG');
 
   const text = `
@@ -150,14 +144,17 @@ function generateContract() {
 
 عقد اتفاقية إنهاء إجراءات تمويل عقاري من جهة تمويلية
 
-تم بعون الله وتوفيقه في يوم ${arabicDate}، الساعة ${time}، الاتفاق بين كلٍ من:
+تم بعون الله وتوفيقه في يوم ${date}، الساعة ${time}، الاتفاق بين كلٍ من:
 
 الطرف الأول:
-شركة الوساطة العقارية والتسويق، ويمثلها الأستاذ: نايف المطيري
-بصفته: مدير الإدارة (ويُشار إليه بـ "الطرف الأول")
+شركة الوساطة العقارية والتسويق
+ويمثلها في التوقيع على هذا العقد الأستاذ: نايف المطيري
+بصفته: مدير الادراة
+ويُشار إليه في هذا العقد بـ (الطرف الأول)
 
 الطرف الثاني:
-${name} (ويُشار إليه بـ "الطرف الثاني")
+${name}
+ويُشار إليه في هذا العقد بـ (الطرف الثاني)
 
 التمهيد:
 حيثُ أن الطرف الأول وساطة عقارية مرخصة بالوساطة العقارية وشراء وبيع العقارات، وتقوم بخدمة عملائها بتوفير العقار المناسب بناء على طلبهم، وتيسير حصولهم على تمويل مالي يمكنهم من تملّك العقار، وذلك بأي من برامج المرابحة أو الإجارة المنتهية بالتمليك المعتمدة من الهيئات الشرعية لدى البنوك والجهات التمويلية، ولخبرة الطرف الاول فقد اوكل الطرف الثاني هذي المهمة.
@@ -178,20 +175,22 @@ ${name} (ويُشار إليه بـ "الطرف الثاني")
 11. في حال حدوث نزاع – لا سمح الله – ولم يتم حله وديًا خلال 10 أيام، يُحال إلى المحكمة المختصة بمدينة الرياض.
 12. حُرر هذا العقد من نسختين أصليتين، بيد كل طرف نسخة للعمل بموجبها، وقد تفاهم الطرفان على حسن التعامل، وإعطاء كل ذي حق حقه.
 
-تمت الموافقة من الطرف الأول بتاريخ ${arabicDate} الساعة ${time}
+تمت الموافقة من الطرف الأول بتاريخ ${date}، الساعة ${time}.
 `;
+  document.getElementById('contractContent').innerText = text;
+}
 
-  document.getElementById("contractContent").innerText = text;
-
-  // تحديث الفوتر أيضاً
-  document.getElementById("footerDate").innerText = `التاريخ والوقت الحالي: ${arabicDate} - ${time}`;
+function updateFooter() {
+  const now = new Date();
+  const date = now.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  const time = now.toLocaleTimeString('ar-EG');
+  document.getElementById('footerDate').innerText = `التاريخ والوقت الحالي: ${date} - ${time}`;
 }
 
 function verifyAndFinish() {
   const id = document.getElementById('confirmId').value;
   const word = document.getElementById('confirmWord').value.trim();
   const realId = document.getElementById('nationalId').value;
-
   if (id === realId && word === "موافق") {
     goToPage('successPage');
   } else {
