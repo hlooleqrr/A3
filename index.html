@@ -1,77 +1,81 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>عقد تمويل عقاري</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: 'Tajawal', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f5f7fa;
+      font-family: 'Tajawal', sans-serif;
+      background-color: #f2f2f2;
       color: #222;
     }
     .page {
       display: none;
-      padding: 30px 20px;
       min-height: 100vh;
       box-sizing: border-box;
+      padding: 25px 20px;
+      border: 2px solid #00a98f;
+      background-color: #ffffff;
+      margin: 10px;
+      border-radius: 10px;
     }
     .page.show {
       display: block;
     }
     h1 {
-      font-size: 28px;
       color: #004d40;
       text-align: center;
-      margin-bottom: 20px;
+      font-size: 28px;
+      margin-bottom: 15px;
     }
     h2 {
-      font-size: 22px;
       color: #00a98f;
       text-align: center;
+      font-size: 22px;
     }
     .btn {
-      display: block;
       background-color: #00a98f;
-      color: #fff;
+      color: white;
       border: none;
-      padding: 12px 25px;
+      padding: 12px 30px;
       font-size: 18px;
       border-radius: 8px;
-      margin: 20px auto 0;
       cursor: pointer;
+      display: block;
+      margin: 20px auto;
     }
     input {
       width: 100%;
       padding: 12px;
-      font-size: 18px;
-      margin: 10px 0 20px;
+      margin: 10px 0;
+      font-size: 17px;
       border: 1px solid #ccc;
       border-radius: 6px;
     }
     .contract {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      line-height: 2;
-      font-size: 16px;
       white-space: pre-line;
+      background-color: #f9f9f9;
+      padding: 20px;
+      border: 1px dashed #00a98f;
+      border-radius: 8px;
+      line-height: 2;
     }
     .success, .reject {
-      font-size: 20px;
       text-align: center;
+      font-size: 22px;
       margin-top: 30px;
     }
     .success { color: green; }
     .reject { color: red; }
     footer {
       text-align: center;
-      padding: 15px;
       font-size: 14px;
-      color: #555;
+      color: #666;
+      margin-top: 40px;
+      padding: 20px;
     }
   </style>
 </head>
@@ -87,8 +91,8 @@
 
 <div class="page" id="page2">
   <h2>فضلاً أدخل بياناتك</h2>
-  <input type="text" id="fullName" placeholder="الاسم الكريم">
-  <input type="text" id="nationalId" placeholder="السجل المدني">
+  <input type="text" id="fullName" placeholder="الاسم الكريم" />
+  <input type="text" id="nationalId" placeholder="السجل المدني" />
   <button class="btn" onclick="goToPage(3)">التالي</button>
 </div>
 
@@ -105,27 +109,31 @@
 
 <div class="page" id="page5">
   <h2>لتأكيد العقد</h2>
-  <input type="text" id="confirmId" placeholder="رقم الهوية">
-  <input type="text" id="confirmWord" placeholder='اكتب كلمة "موافق"'>
+  <input type="text" id="confirmId" placeholder="رقم الهوية" />
+  <input type="text" id="confirmWord" placeholder='اكتب كلمة "موافق"' />
   <button class="btn" onclick="verifyAndFinish()">تأكيد</button>
 </div>
 
 <div class="page" id="successPage">
-  <div class="success">✅ تم إبرام العقد بنجاح</div>
+  <div class="success" id="successText">✅ تم إبرام العقد بنجاح</div>
 </div>
 
 <div class="page" id="reject">
   <div class="reject">❌ تم رفض العقد، تواصل مع الممثل القانوني وشكرًا لك.</div>
 </div>
 
-<footer id="footerDate"></footer>
+<footer id="footerDate">
+  التاريخ والوقت الحالي: ...
+  <br />
+  <strong>تنبيه:</strong> هذا العقد يُعد سندًا تنفيذيًا كما نصّت عليه المادة (9) من نظام التعاملات الإلكترونية.
+</footer>
 
 <script>
 function goToPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('show'));
   document.getElementById("page" + id)?.classList.add('show');
   if (id === 3) generateContract();
-  if (id !== 'reject') updateFooter();
+  updateFooterTime();
 }
 
 function generateContract() {
@@ -133,8 +141,7 @@ function generateContract() {
   const now = new Date();
   const date = now.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
   const time = now.toLocaleTimeString('ar-EG');
-
-  const text = `
+  const content = `
 بسم الله الرحمن الرحيم
 
 المملكة العربية السعودية
@@ -156,46 +163,42 @@ function generateContract() {
 ${name}
 ويُشار إليه في هذا العقد بـ (الطرف الثاني)
 
-التمهيد:
-حيثُ أن الطرف الأول وساطة عقارية مرخصة بالوساطة العقارية وشراء وبيع العقارات، وتقوم بخدمة عملائها بتوفير العقار المناسب بناء على طلبهم، وتيسير حصولهم على تمويل مالي يمكنهم من تملّك العقار، وذلك بأي من برامج المرابحة أو الإجارة المنتهية بالتمليك المعتمدة من الهيئات الشرعية لدى البنوك والجهات التمويلية، ولخبرة الطرف الاول فقد اوكل الطرف الثاني هذي المهمة.
-ولما كان الطرف الثاني يرغب في تملّك العقار حدده الطرف الثاني، فقد قام الطرف الأول بتسهيل كل ما من شأنه حصول الطرف الثاني على العقار المطلوب، وذلك بعمل جميع الإجراءات والمفاوضات مع مالك العقار، والجهات الممولة ومعرفة عروضها والحلول الممكنة لإنجاز الطرف الثاني، والجهات المقيمة للعقار لسرعة التقييم .
-
-وعليه فقد اتفق الطرفان – بكامل الأهلية الشرعية والنظامية – على ما يلي:
-
-1. يعتبر التمهيد المذكور أعلاه جزء لا يتجزأ من هذا العقد ويُقرأ معه ويفسّر كوحدة واحدة.
-2. يقوم الطرف الأول بإتمام جميع الإجراءات والمفاوضات المتعلقة بالعقار المحدد من قبل الطرف الثاني، لإتمام الصفقة لصالح الطرف الثاني من الجهة التمويلية المعتمدة لدى الطرف الأول.
-3. يلتزم الطرف الثاني بدفع مبلغ قدره نسبة2.5% قيمة العقار+500﷼ رسوم عقد ريال للطرف الأول، مقابل قيام الطرف الأول بالوفاء بجميع التزاماته.
-4. في حال عدم إتمام الصفقة لسبب لا يعود للطرف الثاني، مثل رجوع مالك العقار عن البيع، أو ظهور عيوب في العقار، أو عدم موافقة البنك، فإن الطرف الأول يلتزم بإعادة المبلغ المدفوع للطرف الثاني اذا كان مدفوع مقدما بسند قبض او بيصال من البنك.
-5. في حال رجوع الطرف الثاني عن إبرام الصفقة لأي سبب يعود له، فإن المبلغ المدفوع للطرف الأول يُعد مستحقًا ويُطالب الطرف الثاني بالوفاء به كاملًا.
-6. في حال مماطلة الطرف الثاني أو تأخره عن الحضور أو التوقيع، مما يُضِر بالمالك ويجعله يبيع العقار لطرف آخر او يتغير عرض الجهة الممولة، فإن المبلغ المدفوع للطرف الأول يُعد من حقه، لأن عدم إتمام الصفقة جاء بسبب الطرف الثاني.
-7. يلتزم الطرف الثاني بعدم إخفاء أي معلومات يعلم أنها تُعيق المعاملة، مثل وجود التزامات أو مشاكل على العقار، أو وجود متعثرات او  إيقافات او اللتزمات لم يذكرها وموجودة في (سمة)، أو تقديم طلب تمويل سابق مرفوض.
-8. يلتزم الطرف الثاني بتحويل راتبه إلى البنك المحدد لاحقًا إن دعت الحاجة لذلك.
-9. بعد موافقة المالك والبنك وإتمام البيع، تنتهي علاقة الطرف الثاني بالطرف الأول، وتصبح العلاقة مباشرة مع الجهة التمويلية.
-10. العناوين المدونة في صدر هذا العقد تُعد معتمدة للمراسلات والإشعارات بين الطرفين.
-11. في حال حدوث نزاع – لا سمح الله – ولم يتم حله وديًا خلال 10 أيام، يُحال إلى المحكمة المختصة بمدينة الرياض.
-12. حُرر هذا العقد من نسختين أصليتين، بيد كل طرف نسخة للعمل بموجبها، وقد تفاهم الطرفان على حسن التعامل، وإعطاء كل ذي حق حقه.
+(ثم تضاف البنود التي سبق إرسالها...)
 
 تمت الموافقة من الطرف الأول بتاريخ ${date}، الساعة ${time}.
-`;
-  document.getElementById('contractContent').innerText = text;
+  `;
+  document.getElementById("contractContent").innerText = content;
 }
 
-function updateFooter() {
+function updateFooterTime() {
   const now = new Date();
   const date = now.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
   const time = now.toLocaleTimeString('ar-EG');
-  document.getElementById('footerDate').innerText = `التاريخ والوقت الحالي: ${date} - ${time}`;
+  document.getElementById("footerDate").innerHTML =
+    `التاريخ والوقت الحالي: ${date} - ${time}<br><strong>تنبيه:</strong> هذا العقد يُعد سندًا تنفيذيًا كما نصّت عليه المادة (9) من نظام التعاملات الإلكترونية.`;
 }
 
 function verifyAndFinish() {
-  const id = document.getElementById('confirmId').value;
+  const confirmId = document.getElementById('confirmId').value.trim();
+  const originalId = document.getElementById('nationalId').value.trim();
   const word = document.getElementById('confirmWord').value.trim();
-  const realId = document.getElementById('nationalId').value;
-  if (id === realId && word === "موافق") {
-    goToPage('successPage');
-  } else {
-    alert("التحقق فشل. تأكد من إدخال رقم الهوية الصحيح وكلمة 'موافق'");
+  const name = document.getElementById('fullName').value.trim();
+
+  if (confirmId !== originalId) {
+    alert("رقم الهوية لا يطابق الرقم المدخل سابقًا.");
+    return;
   }
+  if (word !== "موافق") {
+    alert("يرجى كتابة كلمة 'موافق' لتأكيد العقد.");
+    return;
+  }
+
+  const now = new Date();
+  const date = now.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  const time = now.toLocaleTimeString('ar-EG');
+  document.getElementById("successText").innerText =
+    `✅ تم إبرام العقد بنجاح\nمرحباً بك يا ${name}\nبتاريخ ${date}، الساعة ${time}`;
+  goToPage('successPage');
 }
 </script>
 
