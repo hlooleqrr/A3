@@ -1,206 +1,422 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8"/>
-  <title>عقد إنهاء إجراءات تمويل عقاري</title>
+  <meta charset="UTF-8">
+  <title>سرعة تملك العقار</title>
   <style>
     body {
+      margin: 0;
+      padding: 0;
       font-family: 'Tajawal', sans-serif;
-      margin: 0; padding: 0;
-      background-color: #f5f5f5;
-      color: #000;
-    }
-    .page {
-      padding: 30px;
-      min-height: 100vh;
+      background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+      color: #004d40;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background: #fff;
-      border: 1px solid #ccc;
+      height: 100vh;
+    }
+    .main {
+      text-align: center;
+      padding: 50px 20px;
     }
     h1 {
-      text-align: center;
-      font-size: 36px;
-      color: #003366;
+      font-size: 30px;
+      color: #002c27;
       margin-bottom: 20px;
     }
     h2 {
-      text-align: center;
-      font-size: 26px;
-      color: #00796b;
-      margin-bottom: 15px;
+      font-size: 24px;
+      color: #009688;
+      margin-bottom: 40px;
     }
-    .highlight {
-      color: red;
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .section {
-      margin-bottom: 20px;
-      font-size: 18px;
-    }
-    .footer {
-      text-align: center;
-      font-size: 14px;
-      color: #666;
-      padding-top: 10px;
-      border-top: 1px solid #ccc;
-    }
-    input {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      margin-bottom: 20px;
+    p {
+      font-size: 20px;
+      margin-bottom: 40px;
     }
     button {
+      font-size: 20px;
       background-color: #00796b;
       color: white;
-      padding: 12px 24px;
-      font-size: 18px;
+      padding: 15px 40px;
       border: none;
-      cursor: pointer;
       border-radius: 8px;
+      cursor: pointer;
     }
-    button:hover {
-      background-color: #004d40;
-    }
-    .contract-box {
-      border: 1px solid #000;
-      padding: 20px;
-      background-color: #fafafa;
+    .footer {
+      background-color: #eeeeee;
+      padding: 15px;
+      text-align: center;
+      font-size: 16px;
+      border-top: 2px solid #ccc;
+      color: #d32f2f;
     }
   </style>
 </head>
 <body>
-
-<div class="page" id="start">
-  <h1>📘 سرعة تملك العقار والحلول التمويلية المتكاملة</h1>
-  <h2>نرحب بك عميلنا العزيز</h2>
-  <div class="highlight">تنبيه: هذا العقد يُعد سندًا تنفيذيًا كما نصّت عليه المادة (9) من نظام التعاملات الإلكترونية</div>
-  <div class="section" style="text-align:center;">نبرم معك هذا العقد</div>
-  <div class="section" style="text-align:center;">بسم الله الرحمن الرحيم</div>
-  <div style="text-align:center;">
-    <button onclick="location.href='#form'">🚀 ابدأ الآن</button>
+  <div class="main">
+    <h1>سرعة تملك العقار والحلول التمويلية المتكاملة</h1>
+    <h2>نرحب بك عميلنا العزيز</h2>
+    <p>نبرم معك هذا العقد</p>
+    <form action="page2.html">
+      <button type="submit">ابدأ بسم الله</button>
+    </form>
   </div>
-  <div class="footer" id="startFooter"></div>
-</div>
-
-<div class="page" id="form">
-  <div class="highlight">تنبيه: هذا العقد يُعد سندًا تنفيذيًا كما نصّت عليه المادة (9)</div>
-  <label>الاسم الكريم:</label>
-  <input id="clientName" type="text" required>
-  <label>رقم السجل المدني:</label>
-  <input id="nationalId" type="text" required>
-  <div style="text-align:center;">
-    <button onclick="fillContract()">التالي</button>
+  <div class="footer">
+    ⚠️ هذا العقد يُعد سندًا تنفيذيًا حسب المادة (9) من نظام التعاملات الإلكترونية<br>
+    التاريخ والوقت الآن: 2025/07/12 - 03:57:39
   </div>
-  <div class="footer" id="formFooter"></div>
-</div>
+</body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>معلومات العميل</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Tajawal', sans-serif;
+      background: #fdfdfd;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100vh;
+      color: #004d40;
+    }
+    .container {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    label {
+      font-size: 20px;
+      display: block;
+      margin: 20px 0 10px;
+    }
+    input {
+      font-size: 18px;
+      padding: 10px;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+    }
+    button {
+      margin-top: 40px;
+      font-size: 20px;
+      background-color: #00796b;
+      color: white;
+      padding: 15px 40px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .footer {
+      background-color: #eeeeee;
+      padding: 15px;
+      text-align: center;
+      font-size: 16px;
+      border-top: 2px solid #ccc;
+      color: #d32f2f;
+    }
+  </style>
+  <script>
+    function handleNext() {
+      const name = document.getElementById("name").value.trim();
+      const id = document.getElementById("id").value.trim();
+      if (name === "" || id.length !== 10 || isNaN(id)) {
+        alert("الرجاء إدخال الاسم ورقم السجل المدني بشكل صحيح.");
+        return;
+      }
+      // حفظ البيانات في التخزين المحلي
+      localStorage.setItem("clientName", name);
+      localStorage.setItem("clientID", id);
+      window.location.href = "page3.html";
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <label for="name">الاسم الكريم:</label>
+    <input type="text" id="name" placeholder="مثال: محمد بن عبدالله">
 
-<div class="page" id="contract" style="display:none;">
-  <div class="highlight">تنبيه: هذا العقد يُعد سندًا تنفيذيًا كما نصّت عليه المادة (9)</div>
-  <div class="contract-box" id="contractText"></div>
-  <div style="text-align:center;">
-    <button onclick="goToConfirmation()">هل توافق؟</button>
+    <label for="id">رقم السجل المدني:</label>
+    <input type="text" id="id" placeholder="10 أرقام فقط" maxlength="10">
+
+    <button onclick="handleNext()">التالي</button>
   </div>
-  <div class="footer" id="contractFooter"></div>
-</div>
 
-<div class="page" id="confirm" style="display:none;">
-  <div class="highlight">تنبيه: يرجى تأكيد الموافقة على العقد</div>
-  <label>أدخل رقم السجل المدني:</label>
-  <input id="confirmId" type="text">
-  <label>اكتب كلمة (موافق):</label>
-  <input id="confirmWord" type="text">
-  <div style="text-align:center;">
-    <button onclick="finalizeContract()">تأكيد</button>
+  <div class="footer">
+    ⚠️ هذا العقد يُعد سندًا تنفيذيًا حسب المادة (9) من نظام التعاملات الإلكترونية<br>
+    التاريخ والوقت الآن: 2025/07/12 - 03:57:39
   </div>
-  <div class="footer" id="confirmFooter"></div>
-</div>
+</body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>عرض العقد</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Tajawal', sans-serif;
+      background-color: #fff;
+      color: #212121;
+      line-height: 2;
+    }
+    .contract {
+      max-width: 900px;
+      margin: auto;
+      border: 2px solid #004d40;
+      padding: 30px;
+      background-color: #fdfdfd;
+    }
+    h2 {
+      color: #004d40;
+      text-align: center;
+      font-size: 26px;
+    }
+    .section-title {
+      font-weight: bold;
+      color: #00796b;
+      margin-top: 30px;
+      font-size: 20px;
+    }
+    .highlight {
+      font-size: 20px;
+      color: #d32f2f;
+    }
+    .buttons {
+      margin-top: 40px;
+      text-align: center;
+    }
+    button {
+      font-size: 18px;
+      margin: 0 10px;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .approve {
+      background-color: #388e3c;
+      color: white;
+    }
+    .reject {
+      background-color: #d32f2f;
+      color: white;
+    }
+    .footer {
+      margin-top: 50px;
+      border-top: 2px solid #ccc;
+      padding: 10px;
+      font-size: 16px;
+      color: #d32f2f;
+      text-align: center;
+    }
+  </style>
+  <script>
+    const name = localStorage.getItem("clientName") || "________";
+    const id = localStorage.getItem("clientID") || "________";
 
-<div class="page" id="success" style="display:none;">
-  <h2 style="color:green; text-align:center;">✅ تم يا <span id="finalName"></span> إبرام العقد بنجاح</h2>
-  <div class="footer" id="successFooter"></div>
-</div>
+    window.onload = function () {
+      document.getElementById("clientInfo").innerText = "الاسم: " + name + " | رقم الهوية: " + id;
+      document.getElementById("clientNameFill").innerText = name;
+      document.getElementById("clientIDFill").innerText = id;
+    }
 
-<div class="page" id="rejected" style="display:none;">
-  <h2 style="color:red; text-align:center;">❌ تم رفض العقد من قبل <span id="rejectedName"></span></h2>
-  <p style="text-align:center;">الرقم المدني: <span id="rejectedId"></span></p>
-  <p style="text-align:center;">يرجى التواصل مع الممثل القانوني. شكرًا لك.</p>
-  <div class="footer" id="rejectedFooter"></div>
-</div>
+    function approve() {
+      localStorage.setItem("agreed", "yes");
+      window.location.href = "page4.html";
+    }
 
-<script>
-function getCurrentTime(offsetMinutes = 0) {
-  const now = new Date(new Date().getTime() - offsetMinutes * 60000);
-  return now.toLocaleString('ar-SA', { hour12: false });
-}
+    function reject() {
+      localStorage.setItem("agreed", "no");
+      window.location.href = "reject.html";
+    }
+  </script>
+</head>
+<body>
+  <div class="contract">
+    <h2>عقد اتفاقية إنهاء إجراءات تمويل عقاري من جهة تمويلية</h2>
+    <div class="highlight" id="clientInfo"></div>
+    <p class="section-title">بسم الله الرحمن الرحيم</p>
+    <p>المملكة العربية السعودية<br>
+    شركة الوساطة العقارية والتسويق - ترخيص رقم 1100042624 - الرياض</p>
 
-document.getElementById("startFooter").innerText = "الوقت الآن: " + getCurrentTime();
-document.getElementById("formFooter").innerText = "الوقت الآن: " + getCurrentTime();
-document.getElementById("contractFooter").innerText = "الوقت الآن: " + getCurrentTime();
-document.getElementById("confirmFooter").innerText = "الوقت الآن: " + getCurrentTime();
+    <p class="section-title">الطرف الأول:</p>
+    <p>شركة الوساطة العقارية والتسويق، ويمثلها الأستاذ نايف المطيري، مدير الإدارة (يُشار إليه بـ "الطرف الأول")</p>
 
-function fillContract() {
-  const name = document.getElementById("clientName").value;
-  const id = document.getElementById("nationalId").value;
-  if (!name || !id) return alert("يرجى إدخال الاسم والسجل المدني");
+    <p class="section-title">الطرف الثاني:</p>
+    <p>الاسم: <span id="clientNameFill"></span><br>
+    رقم الهوية: <span id="clientIDFill"></span><br>
+    (يُشار إليه بـ "الطرف الثاني")</p>
 
-  const contractHtml = `
-    <div style="text-align:center; font-size: 22px; font-weight:bold;">بسم الله الرحمن الرحيم</div>
-    <h3 style="text-align:center;">عقد اتفاقية إنهاء إجراءات تمويل عقاري من جهة تمويلية</h3>
-    <p>تم بعون الله في يوم …… الموافق …… هـ، الموافق …… م بين:</p>
-    <p><strong>الطرف الأول:</strong> شركة الوساطة العقارية والتسويق ويمثلها الأستاذ نايف المطيري مدير الإدارة.</p>
-    <p><strong>الطرف الثاني:</strong> الاسم: <strong>${name}</strong>، رقم الهوية: <strong>${id}</strong>.</p>
-    <p><strong>التمهيد:</strong> حيثُ أن الطرف الأول مرخص ويقوم بخدمة العملاء لتملك العقارات، فقد أوكل الطرف الثاني إليه هذه المهمة.</p>
+    <p class="section-title">التمهيد:</p>
+    <p>حيث أن الطرف الأول وسيط عقاري مرخص، يقوم بتقديم خدمة إنهاء إجراءات التمويل العقاري لعملائه، وقد أوكل إليه الطرف الثاني هذه المهمة، فقد اتفق الطرفان على التالي:</p>
+
+    <p class="section-title">البنود:</p>
     <ol>
-      <li>يُعد التمهيد جزءاً لا يتجزأ من العقد.</li>
-      <li>إتمام الإجراءات لصالح الطرف الثاني.</li>
-      <li>دفع 2.5٪ من قيمة العقار + 500 ريال للطرف الأول.</li>
-      <li>في حال فشل الصفقة لأسباب لا تخص الطرف الثاني، يُعاد المبلغ.</li>
-      <li>في حال انسحاب الطرف الثاني، يُعد المبلغ مستحقًا للطرف الأول.</li>
-      <li>إذا تأخر الطرف الثاني وأضر الصفقة، يُعد المبلغ من حق الطرف الأول.</li>
-      <li>يلتزم الطرف الثاني بعدم إخفاء معلومات تعيق المعاملة.</li>
-      <li>التحويل البنكي إذا لزم.</li>
-      <li>بعد البيع، تنتهي علاقة الطرفين.</li>
-      <li>العناوين المعتمدة للمراسلات.</li>
-      <li>النزاع يُحال لمحكمة الرياض بعد 10 أيام دون حل ودي.</li>
-      <li>نُسختان أصليتان من العقد للطرفين.</li>
+      <li>التمهيد أعلاه جزء لا يتجزأ من العقد.</li>
+      <li>يقوم الطرف الأول بإكمال جميع الإجراءات المتعلقة بالعقار لصالح الطرف الثاني.</li>
+      <li>يدفع الطرف الثاني نسبة 2.5% من قيمة العقار + 500 ريال رسوم عقد للطرف الأول.</li>
+      <li>إذا لم تتم الصفقة لأسباب لا تخص الطرف الثاني، يُعاد المبلغ المدفوع له.</li>
+      <li>إذا تراجع الطرف الثاني، يُعد المبلغ مستحقًا للطرف الأول.</li>
+      <li>إذا تسبب الطرف الثاني في إلغاء الصفقة أو تأخيرها، يُعد المبلغ من حق الطرف الأول.</li>
+      <li>يلتزم الطرف الثاني بالإفصاح عن أي مشاكل مالية أو التزامات.</li>
+      <li>يلتزم بتحويل راتبه إلى البنك عند الحاجة.</li>
+      <li>بعد البيع، تنتهي العلاقة بين الطرفين.</li>
+      <li>العناوين الواردة تعتمد للمراسلات.</li>
+      <li>أي نزاع يُحال لمحكمة الرياض بعد 10 أيام من فشل الحل الودي.</li>
+      <li>حرر العقد من نسختين أصليتين، بيد كل طرف نسخة.</li>
     </ol>
-    <p style="color:#00796b;">تمت الموافقة من الطرف الأول/ نايف المطيري بتاريخ ${getCurrentTime(21)}</p>
-  `;
-  document.getElementById("contractText").innerHTML = contractHtml;
-  document.getElementById("contract").style.display = "block";
-  document.getElementById("form").style.display = "none";
-}
 
-function goToConfirmation() {
-  document.getElementById("contract").style.display = "none";
-  document.getElementById("confirm").style.display = "block";
-}
+    <p class="section-title">تم توقيع هذا العقد من الطرف الأول:</p>
+    <p>الاسم: نايف المطيري (مدير الإدارة)<br>
+    التوقيع: تم بتاريخ <strong>2025/07/12 - 03:36:39</strong> (قبل 21 دقيقة)</p>
 
-function finalizeContract() {
-  const enteredId = document.getElementById("confirmId").value;
-  const word = document.getElementById("confirmWord").value;
-  const realId = document.getElementById("nationalId").value;
-  const name = document.getElementById("clientName").value;
+    <p class="section-title">هل توافق على هذا العقد بصفتك الطرف الثاني؟</p>
 
-  if (enteredId !== realId || word !== "موافق") {
-    document.getElementById("confirm").style.display = "none";
-    document.getElementById("rejected").style.display = "block";
-    document.getElementById("rejectedName").innerText = name;
-    document.getElementById("rejectedId").innerText = enteredId;
-    document.getElementById("rejectedFooter").innerText = "الوقت الآن: " + getCurrentTime();
-    return;
-  }
+    <div class="buttons">
+      <button class="approve" onclick="approve()">أوافق</button>
+      <button class="reject" onclick="reject()">لا أوافق</button>
+    </div>
+  </div>
 
-  document.getElementById("confirm").style.display = "none";
-  document.getElementById("success").style.display = "block";
-  document.getElementById("finalName").innerText = name;
-  document.getElementById("successFooter").innerText = "الوقت الآن: " + getCurrentTime();
-}
-</script>
+  <div class="footer">
+    ⚠️ هذا العقد يُعد سندًا تنفيذيًا حسب المادة (9) من نظام التعاملات الإلكترونية<br>
+    التاريخ والوقت الآن: 2025/07/12 - 03:57:39
+  </div>
+</body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تأكيد الموافقة</title>
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: #ffffff;
+      padding: 40px;
+      text-align: center;
+      color: #004d40;
+    }
+    h2 {
+      font-size: 26px;
+      margin-bottom: 30px;
+    }
+    label {
+      font-size: 18px;
+      display: block;
+      margin: 20px 0 10px;
+    }
+    input {
+      padding: 12px;
+      font-size: 18px;
+      width: 90%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 30px;
+      padding: 12px 40px;
+      font-size: 18px;
+      background-color: #00796b;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .footer {
+      margin-top: 50px;
+      border-top: 2px solid #ccc;
+      padding: 10px;
+      font-size: 16px;
+      color: #d32f2f;
+    }
+  </style>
+  <script>
+    function confirmAgreement() {
+      const inputID = document.getElementById("idConfirm").value;
+      const keyword = document.getElementById("keyword").value.trim().toLowerCase();
+      const storedID = localStorage.getItem("clientID") || "";
+
+      if (inputID === storedID && keyword === "موافق") {
+        window.location.href = "success.html";
+      } else {
+        alert("يرجى التأكد من إدخال رقم الهوية الصحيح وكتابة كلمة (موافق)");
+      }
+    }
+  </script>
+</head>
+<body>
+  <h2>تأكيد الموافقة على العقد</h2>
+
+  <label for="idConfirm">أدخل رقم هويتك:</label>
+  <input type="text" id="idConfirm" placeholder="رقم الهوية الوطنية" required>
+
+  <label for="keyword">أدخل كلمة (موافق):</label>
+  <input type="text" id="keyword" placeholder="موافق" required>
+
+  <br>
+  <button onclick="confirmAgreement()">تأكيد</button>
+
+  <div class="footer">
+    ⚠️ هذا العقد يُعد سندًا تنفيذيًا حسب المادة (9) من نظام التعاملات الإلكترونية<br>
+    التاريخ والوقت الآن: 2025/07/12 - 03:57:39
+  </div>
+</body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تم إبرام العقد</title>
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: #e8f5e9;
+      color: #004d40;
+      text-align: center;
+      padding: 50px 20px;
+    }
+    h1 {
+      font-size: 30px;
+      margin-bottom: 20px;
+      color: #2e7d32;
+    }
+    h2 {
+      font-size: 24px;
+      margin-bottom: 40px;
+    }
+    .footer {
+      margin-top: 60px;
+      padding: 20px;
+      border-top: 2px solid #ccc;
+      font-size: 16px;
+      color: #d32f2f;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      const name = localStorage.getItem("clientName") || "العميل";
+      const now = new Date();
+      const today = now.toLocaleDateString('ar-EG');
+      const time = now.toLocaleTimeString('ar-EG');
+
+      document.getElementById("successMessage").innerHTML =
+        `تم يا ${name} إبرام العقد بنجاح ✅`;
+      document.getElementById("dateTime").innerHTML =
+        `التاريخ: ${today} — الوقت: ${time}`;
+    }
+  </script>
+</head>
+<body>
+  <h1 id="successMessage"></h1>
+  <h2>شكرًا لثقتك بنا</h2>
+
+  <div class="footer">
+    ⚠️ هذا العقد يُعد سندًا تنفيذيًا حسب المادة (9) من نظام التعاملات الإلكترونية<br>
+    <div id="dateTime"></div>
+  </div>
 </body>
 </html>
