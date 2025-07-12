@@ -1,144 +1,220 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <title>عقد التمويل العقاري</title>
-    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 20px;
-            direction: rtl;
-            background-color: #f4f4f4;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 10px;
-        }
-        button {
-            padding: 10px 20px;
-            margin: 5px;
-            cursor: pointer;
-        }
-        #contract {
-            margin-top: 20px;
-            padding: 15px;
-            background: #fff;
-            border: 1px solid #ddd;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>عقد اتفاق إنهاء إجراءات تمويل عقاري</title>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 20px;
+      background-color: #f4f4f4;
+      direction: rtl;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 800px;
+      margin: auto;
+    }
+    h1, h2 {
+      color: #004d40;
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    #contract {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background: #fff;
+      border: 1px solid #ddd;
+    }
+    .signature-buttons {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>عقد التمويل العقاري</h1>
-    <div class="form-group">
-        <label for="name">الاسم الكامل</label>
-        <input type="text" id="name" required>
-    </div>
-    <div class="form-group">
-        <label for="idNumber">رقم السجل المدني</label>
-        <input type="text" id="idNumber" required>
-    </div>
-    <button onclick="showContract()">عرض العقد</button>
+  <h1>عقد اتفاق إنهاء إجراءات تمويل عقاري</h1>
 
-    <div id="contract" style="display:none;">
-        <h2>نص العقد</h2>
-        <p>
-            المملكة العربية السعودية<br>
-            الوساطة العقارية والتسويق<br>
-            ترخيص رقم (1100042624)<br><br>
-            تم بحمد الله الاتفاق بين:<br>
-            الطرف الأول: الوساطة العقارية والتسويق<br>
-            الطرف الثاني: <span id="clientName"></span> رقم السجل المدني: <span id="clientId"></span><br><br>
-            بناءً عليه سيتم إنهاء إجراءات التمويل العقاري وفق الشروط المذكورة.<br><br>
-            (نص العقد كامل يظهر هنا عندك لاحقاً)
-        </p>
-        <button onclick="generatePDF('موافقة')">موافقة</button>
-        <button onclick="generatePDF('رفض')">رفض</button>
+  <div class="form-group">
+    <label for="name">الاسم الثلاثي (باللغة العربية)</label>
+    <input type="text" id="name" placeholder="مثال: محمد أحمد الغامدي" required>
+  </div>
+  <div class="form-group">
+    <label for="idNumber">رقم السجل المدني (10 أرقام)</label>
+    <input type="text" id="idNumber" maxlength="10" placeholder="مثال: 1234567890" required>
+  </div>
+
+  <button onclick="showContract()">التالي</button>
+
+  <div id="contract">
+    <h2>نص العقد</h2>
+    <div id="contractText"></div>
+
+    <div class="signature-buttons">
+      <button onclick="generatePDF('موافقة')">✅ أوافق على بنود العقد</button>
+      <button onclick="generatePDF('رفض')">❌ أرفض</button>
     </div>
+  </div>
 </div>
 
 <script>
-    // عرض العقد
-    function showContract() {
-        const name = document.getElementById('name').value;
-        const idNumber = document.getElementById('idNumber').value;
+  function formatTime(date) {
+    return date.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+  }
 
-        if (!name || !idNumber) {
-            alert("يرجى تعبئة جميع الحقول.");
-            return;
-        }
+  function formatDate(date) {
+    return date.toLocaleDateString('ar-EG');
+  }
 
-        // حفظ البيانات في localStorage
-        localStorage.setItem('clientName', name);
-        localStorage.setItem('clientId', idNumber);
-        localStorage.setItem('hasResponded', 'true');
-
-        document.getElementById('clientName').innerText = name;
-        document.getElementById('clientId').innerText = idNumber;
-        document.getElementById('contract').style.display = "block";
+  function showContract() {
+    const name = document.getElementById("name").value.trim();
+    const idNumber = document.getElementById("idNumber").value.trim();
+    if (name === "" || idNumber === "" || idNumber.length !== 10) {
+      alert("يرجى تعبئة الاسم الثلاثي ورقم السجل المدني بشكل صحيح.");
+      return;
     }
 
-    // توليد ملف PDF
-    function generatePDF(status) {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
+    const now = new Date();
+    const companySignTime = new Date(now.getTime() - 16 * 60000); // -16 دقيقة
 
-        const name = document.getElementById('name').value;
-        const idNumber = document.getElementById('idNumber').value;
-        const currentDate = new Date().toLocaleString();
+    const dateStr = formatDate(now);
+    const clientTime = formatTime(now);
+    const companyTime = formatTime(companySignTime);
 
-        let contractText = `
-المملكة العربية السعودية
-الوساطة العقارية والتسويق
-ترخيص رقم (1100042624)
+    const contractHTML = `
+      <p>الحمد لله وحده، والصلاة والسلام على من لا نبي بعده، وبعد:</p>
 
-عقد اتفاق إنهاء إجراءات تمويل عقاري
+      <p>تم بحمد الله وتوفيقه بتاريخ <strong>${dateStr}</strong>، بمدينة <strong>الرياض</strong>، الاتفاق بين كل من:</p>
 
-تم الاتفاق بين:
-الطرف الأول: الوساطة العقارية والتسويق
-الطرف الثاني: ${name} رقم السجل المدني: ${idNumber}
+      <p><strong>الطرف الأول:</strong> شركة الوساطة العقارية والتسويق، ترخيص رقم (1100042624).</p>
+      <p><strong>الطرف الثاني:</strong> ${name}، رقم السجل المدني: ${idNumber}.</p>
+
+      <h3>تمهيد:</h3>
+      <p>نظرًا لرغبة الطرف الثاني في إنهاء إجراءات التمويل العقاري، فقد اتفق الطرفان على ما يلي:</p>
+
+      <h3>البند الأول: موضوع العقد</h3>
+      <p>يقوم الطرف الأول بإنهاء إجراءات التمويل العقاري للطرف الثاني والتنسيق مع الجهات التمويلية المختصة داخل المملكة.</p>
+
+      <h3>البند الثاني: مدة العقد</h3>
+      <p>مدة العقد 30 يومًا من تاريخ التوقيع، قابلة للتجديد باتفاق الطرفين.</p>
+
+      <h3>البند الثالث: الأتعاب</h3>
+      <p>لا يُطلب من الطرف الثاني دفع أي مبلغ مقدمًا. وتُستحق عمولة عند إتمام التمويل حسب الاتفاق المسبق.</p>
+
+      <h3>البند الرابع: التزامات الطرف الأول</h3>
+      <ul>
+        <li>تقديم عروض تمويلية متعددة للطرف الثاني.</li>
+        <li>العمل على إتمام الطلب بأفضل الطرق الممكنة.</li>
+        <li>الحفاظ على سرية المعلومات.</li>
+      </ul>
+
+      <h3>البند الخامس: التزامات الطرف الثاني</h3>
+      <ul>
+        <li>تقديم بيانات صحيحة وكاملة.</li>
+        <li>الجدية في الطلب.</li>
+        <li>الالتزام بسداد العمولة فور توقيع العقد مع الجهة التمويلية.</li>
+      </ul>
+
+      <h3>البند السادس: أحكام عامة</h3>
+      <p>في حال نشوء أي نزاع، يتم حله وديًا أو يُحال إلى المحكمة المختصة في المملكة العربية السعودية.</p>
+
+      <h3>توقيع الطرفين:</h3>
+      <p><strong>الطرف الأول:</strong> شركة الوساطة العقارية والتسويق</p>
+      <p>تم التوقيع في الرياض بتاريخ: ${dateStr}، الساعة: ${companyTime}</p>
+
+      <p><strong>الطرف الثاني:</strong> ${name}</p>
+      <p>تم التوقيع في الرياض بتاريخ: ${dateStr}، الساعة: ${clientTime}</p>
+    `;
+
+    document.getElementById("contractText").innerHTML = contractHTML;
+    document.getElementById("contract").style.display = "block";
+  }
+
+  function generatePDF(status) {
+    const name = document.getElementById("name").value.trim();
+    const idNumber = document.getElementById("idNumber").value.trim();
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const now = new Date();
+    const companySignTime = new Date(now.getTime() - 16 * 60000);
+
+    const dateStr = formatDate(now);
+    const clientTime = formatTime(now);
+    const companyTime = formatTime(companySignTime);
+
+    const fullText = `
+الحمد لله وحده، والصلاة والسلام على من لا نبي بعده، وبعد:
+
+تم بحمد الله وتوفيقه بتاريخ ${dateStr}، بمدينة الرياض، الاتفاق بين كل من:
+
+الطرف الأول: شركة الوساطة العقارية والتسويق، ترخيص رقم (1100042624).
+الطرف الثاني: ${name}، رقم السجل المدني: ${idNumber}.
+
+تمهيد:
+نظرًا لرغبة الطرف الثاني في إنهاء إجراءات التمويل العقاري، فقد اتفق الطرفان على ما يلي:
+
+البند الأول: موضوع العقد
+يقوم الطرف الأول بإنهاء إجراءات التمويل العقاري للطرف الثاني والتنسيق مع الجهات التمويلية المختصة داخل المملكة.
+
+البند الثاني: مدة العقد
+مدة العقد 30 يومًا من تاريخ التوقيع، قابلة للتجديد باتفاق الطرفين.
+
+البند الثالث: الأتعاب
+لا يُطلب من الطرف الثاني دفع أي مبلغ مقدمًا. وتُستحق عمولة عند إتمام التمويل حسب الاتفاق المسبق.
+
+البند الرابع: التزامات الطرف الأول
+- تقديم عروض تمويلية متعددة للطرف الثاني.
+- العمل على إتمام الطلب بأفضل الطرق الممكنة.
+- الحفاظ على سرية المعلومات.
+
+البند الخامس: التزامات الطرف الثاني
+- تقديم بيانات صحيحة وكاملة.
+- الجدية في الطلب.
+- الالتزام بسداد العمولة فور توقيع العقد مع الجهة التمويلية.
+
+البند السادس: أحكام عامة
+في حال نشوء أي نزاع، يتم حله وديًا أو يُحال إلى المحكمة المختصة في المملكة العربية السعودية.
+
+توقيع الطرفين:
+الطرف الأول: شركة الوساطة العقارية والتسويق
+تم التوقيع في الرياض بتاريخ: ${dateStr}، الساعة: ${companyTime}
+
+الطرف الثاني: ${name}
+تم التوقيع في الرياض بتاريخ: ${dateStr}، الساعة: ${clientTime}
 
 حالة الطلب: ${status}
-تاريخ ووقت الإجراء: ${currentDate}
-
-(محتوى العقد يكتب هنا لاحقاً بالتفصيل)
 `;
 
-        doc.text(contractText, 10, 10);
-        doc.save(`contract-${status}.pdf`);
-    }
-
-    // عند تحميل الصفحة: استرجاع البيانات إذا كانت محفوظة
-    window.onload = function () {
-        const savedName = localStorage.getItem('clientName');
-        const savedId = localStorage.getItem('clientId');
-        const hasResponded = localStorage.getItem('hasResponded');
-
-        if (savedName && savedId && hasResponded === 'true') {
-            document.getElementById('name').value = savedName;
-            document.getElementById('idNumber').value = savedId;
-            document.getElementById('clientName').innerText = savedName;
-            document.getElementById('clientId').innerText = savedId;
-            document.getElementById('contract').style.display = "block";
-        }
-    }
+    const lines = doc.splitTextToSize(fullText, 180);
+    doc.setFont("helvetica");
+    doc.setFontSize(12);
+    doc.setR2L(true);
+    doc.text(lines, 190, 10, { align: "right" });
+    doc.save(`عقد التمويل - ${status}.pdf`);
+  }
 </script>
 
 </body>
