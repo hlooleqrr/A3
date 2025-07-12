@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>سرعة تملك العقار</title>
   <style>
     body {
@@ -51,25 +51,33 @@
       color: #d32f2f;
     }
   </style>
+  <script>
+    function goToNext() {
+      window.location.href = "page2.html";
+    }
+  </script>
 </head>
 <body>
   <div class="main">
     <h1>سرعة تملك العقار والحلول التمويلية المتكاملة</h1>
     <h2>نرحب بك عميلنا العزيز</h2>
     <p>نبرم معك هذا العقد</p>
-    <form action="page2.html">
-      <button type="submit">ابدأ بسم الله</button>
-    </form>
+    <button onclick="goToNext()">ابدأ بسم الله</button>
   </div>
+
   <div class="footer">
     ⚠️ هذا العقد يُعد سندًا تنفيذيًا حسب المادة (9) من نظام التعاملات الإلكترونية<br>
-    التاريخ والوقت الآن: 2025/07/12 - 03:57:39
+    التاريخ والوقت الآن: <span id="now"></span>
   </div>
+
+  <script>
+    document.getElementById("now").innerText = new Date().toLocaleString('ar-EG');
+  </script>
 </body>
 </html><!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>معلومات العميل</title>
   <style>
     body {
@@ -119,14 +127,13 @@
     }
   </style>
   <script>
-    function handleNext() {
+    function goToContract() {
       const name = document.getElementById("name").value.trim();
       const id = document.getElementById("id").value.trim();
       if (name === "" || id.length !== 10 || isNaN(id)) {
         alert("الرجاء إدخال الاسم ورقم السجل المدني بشكل صحيح.");
         return;
       }
-      // حفظ البيانات في التخزين المحلي
       localStorage.setItem("clientName", name);
       localStorage.setItem("clientID", id);
       window.location.href = "page3.html";
@@ -136,18 +143,22 @@
 <body>
   <div class="container">
     <label for="name">الاسم الكريم:</label>
-    <input type="text" id="name" placeholder="مثال: محمد بن عبدالله">
+    <input type="text" id="name" placeholder="مثال: محمد بن عبدالله" />
 
     <label for="id">رقم السجل المدني:</label>
-    <input type="text" id="id" placeholder="10 أرقام فقط" maxlength="10">
+    <input type="text" id="id" placeholder="10 أرقام فقط" maxlength="10" />
 
-    <button onclick="handleNext()">التالي</button>
+    <button onclick="goToContract()">التالي</button>
   </div>
 
   <div class="footer">
     ⚠️ هذا العقد يُعد سندًا تنفيذيًا حسب المادة (9) من نظام التعاملات الإلكترونية<br>
-    التاريخ والوقت الآن: 2025/07/12 - 03:57:39
+    التاريخ والوقت الآن: <span id="now"></span>
   </div>
+
+  <script>
+    document.getElementById("now").innerText = new Date().toLocaleString('ar-EG');
+  </script>
 </body>
 </html><!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -184,6 +195,7 @@
     .highlight {
       font-size: 20px;
       color: #d32f2f;
+      text-align: center;
     }
     .buttons {
       margin-top: 40px;
@@ -239,6 +251,7 @@
   <div class="contract">
     <h2>عقد اتفاقية إنهاء إجراءات تمويل عقاري من جهة تمويلية</h2>
     <div class="highlight" id="clientInfo"></div>
+
     <p class="section-title">بسم الله الرحمن الرحيم</p>
     <p>المملكة العربية السعودية<br>
     شركة الوساطة العقارية والتسويق - ترخيص رقم 1100042624 - الرياض</p>
@@ -272,7 +285,7 @@
 
     <p class="section-title">تم توقيع هذا العقد من الطرف الأول:</p>
     <p>الاسم: نايف المطيري (مدير الإدارة)<br>
-    التوقيع: تم بتاريخ <strong>2025/07/12 - 03:36:39</strong> (قبل 21 دقيقة)</p>
+    التوقيع: تم بتاريخ <strong>2025/07/12</strong></p>
 
     <p class="section-title">هل توافق على هذا العقد بصفتك الطرف الثاني؟</p>
 
@@ -284,13 +297,17 @@
 
   <div class="footer">
     ⚠️ هذا العقد يُعد سندًا تنفيذيًا حسب المادة (9) من نظام التعاملات الإلكترونية<br>
-    التاريخ والوقت الآن: 2025/07/12 - 03:57:39
+    التاريخ والوقت الآن: <span id="now"></span>
   </div>
+
+  <script>
+    document.getElementById("now").innerText = new Date().toLocaleString('ar-EG');
+  </script>
 </body>
 </html><!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>تأكيد الموافقة</title>
   <style>
     body {
@@ -337,7 +354,7 @@
   </style>
   <script>
     function confirmAgreement() {
-      const inputID = document.getElementById("idConfirm").value;
+      const inputID = document.getElementById("idConfirm").value.trim();
       const keyword = document.getElementById("keyword").value.trim().toLowerCase();
       const storedID = localStorage.getItem("clientID") || "";
 
@@ -363,13 +380,17 @@
 
   <div class="footer">
     ⚠️ هذا العقد يُعد سندًا تنفيذيًا حسب المادة (9) من نظام التعاملات الإلكترونية<br>
-    التاريخ والوقت الآن: 2025/07/12 - 03:57:39
+    التاريخ والوقت الآن: <span id="now"></span>
   </div>
+
+  <script>
+    document.getElementById("now").innerText = new Date().toLocaleString('ar-EG');
+  </script>
 </body>
 </html><!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>تم إبرام العقد</title>
   <style>
     body {
