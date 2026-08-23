@@ -1,228 +1,2848 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>عرض العقد</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: 'Tajawal', sans-serif;
-      background-color: #fff;
-      color: #212121;
-      line-height: 2;
-    }
-    .contract {
-      max-width: 900px;
-      margin: auto;
-      border: 2px solid #004d40;
-      padding: 30px;
-      background-color: #fdfdfd;
-    }
-    h2 {
-      color: #004d40;
-      text-align: center;
-      font-size: 26px;
-    }
-    .section-title {
-      font-weight: bold;
-      color: #00796b;
-      margin-top: 30px;
-      font-size: 20px;
-    }
-    .highlight {
-      font-size: 20px;
-      color: #d32f2f;
-      text-align: center;
-    }
-    .buttons {
-      margin-top: 40px;
-      text-align: center;
-    }
-    button {
-      font-size: 18px;
-      margin: 0 10px;
-      padding: 12px 30px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .approve {
-      background-color: #388e3c;
-      color: white;
-    }
-    .reject {
-      background-color: #d32f2f;
-      color: white;
-    }
-    .footer {
-      margin-top: 50px;
-      border-top: 2px solid #ccc;
-      padding: 10px;
-      font-size: 16px;
-      color: #d32f2f;
-      text-align: center;
-    }
-  </style>
-  <script>
-    const name = localStorage.getItem("clientName") || "________";
-    const id = localStorage.getItem("clientID") || "________";
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
 
-    window.onload = function () {
-      document.getElementById("clientInfo").innerText = "الاسم: " + name + " | رقم الهوية: " + id;
-      document.getElementById("clientNameFill").innerText = name;
-      document.getElementById("clientIDFill").innerText = id;
-    }
+<title>FINO | حاسبات التمويل الذكية</title>
 
-    function approve() {
-      localStorage.setItem("agreed", "yes");
-      window.location.href = "page4.html";
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    function reject() {
-      localStorage.setItem("agreed", "no");
-      window.location.href = "reject.html";
-    }
-  </script>
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --bg:#f5f9fc;
+  --white:#fff;
+  --navy:#082f4f;
+  --navy2:#0c4c78;
+  --blue:#1585c7;
+  --blue2:#30a8e0;
+  --soft:#eef7fc;
+  --border:#dcebf4;
+  --text:#1b3445;
+  --muted:#6f8491;
+  --green:#16885e;
+  --red:#cf4b4b;
+  --orange:#d88a24;
+  --shadow:0 18px 55px rgba(19,70,100,.11);
+}
+
+body{
+  font-family:"Cairo",sans-serif;
+  background:
+    radial-gradient(circle at 15% 10%,rgba(36,157,218,.10),transparent 30%),
+    radial-gradient(circle at 85% 90%,rgba(8,74,116,.08),transparent 35%),
+    var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+
+button,input,select{
+  font-family:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.container{
+  width:min(1180px,94%);
+  margin:auto;
+}
+
+.topbar{
+  min-height:74px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(210,230,240,.85);
+  display:flex;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.topbar-inner{
+  width:min(1180px,94%);
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo-mark{
+  width:43px;
+  height:43px;
+  border-radius:15px;
+  background:linear-gradient(135deg,var(--navy),var(--blue2));
+  display:grid;
+  place-items:center;
+  color:white;
+  font-size:16px;
+  font-weight:900;
+  letter-spacing:1px;
+  box-shadow:0 8px 25px rgba(14,111,170,.25);
+}
+
+.logo-title{
+  font-size:22px;
+  font-weight:900;
+  color:var(--navy);
+}
+
+.logo-sub{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:-5px;
+}
+
+.usage-box{
+  background:var(--soft);
+  border:1px solid var(--border);
+  padding:8px 13px;
+  border-radius:14px;
+  font-size:12px;
+  display:flex;
+  gap:13px;
+  align-items:center;
+}
+
+.usage-box strong{
+  color:var(--navy);
+}
+
+.hero{
+  padding:45px 0 25px;
+  text-align:center;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  background:#e9f6fd;
+  color:var(--blue);
+  border:1px solid #caeafd;
+  padding:7px 14px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:15px;
+}
+
+.hero h1{
+  font-size:clamp(30px,5vw,50px);
+  line-height:1.25;
+  color:var(--navy);
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+.hero h1 span{
+  color:var(--blue);
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:15px;
+  max-width:700px;
+  margin:auto;
+  line-height:1.9;
+}
+
+.login-page{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+}
+
+.login-card{
+  width:min(480px,100%);
+  background:rgba(255,255,255,.96);
+  border:1px solid var(--border);
+  border-radius:30px;
+  padding:35px;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+
+.login-logo{
+  width:74px;
+  height:74px;
+  margin:0 auto 18px;
+  border-radius:24px;
+  background:linear-gradient(135deg,var(--navy),var(--blue2));
+  color:#fff;
+  font-size:22px;
+  font-weight:900;
+  display:grid;
+  place-items:center;
+  box-shadow:0 15px 35px rgba(17,117,179,.25);
+}
+
+.login-card h1{
+  font-size:29px;
+  color:var(--navy);
+  margin-bottom:7px;
+}
+
+.login-card p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.9;
+  margin-bottom:24px;
+}
+
+.code-input{
+  width:100%;
+  direction:ltr;
+  text-align:center;
+  letter-spacing:2px;
+  font-weight:800;
+  font-size:16px;
+  padding:16px;
+  border:1px solid var(--border);
+  background:#f9fcfe;
+  border-radius:15px;
+  outline:none;
+  transition:.2s;
+}
+
+.code-input:focus,
+.field input:focus,
+.field select:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 4px rgba(21,133,199,.08);
+  background:#fff;
+}
+
+.primary-btn{
+  width:100%;
+  margin-top:13px;
+  border:none;
+  background:linear-gradient(135deg,var(--navy2),var(--blue));
+  color:white;
+  padding:15px;
+  border-radius:15px;
+  font-size:14px;
+  font-weight:800;
+  box-shadow:0 12px 24px rgba(15,109,169,.18);
+}
+
+.primary-btn:hover{
+  transform:translateY(-1px);
+}
+
+.demo-code{
+  background:var(--soft);
+  border:1px dashed #acd7ec;
+  padding:13px;
+  margin-top:18px;
+  border-radius:15px;
+  font-size:12px;
+  line-height:2;
+}
+
+.demo-code strong{
+  direction:ltr;
+  display:inline-block;
+  color:var(--navy);
+  font-size:14px;
+}
+
+.error-msg{
+  display:none;
+  color:var(--red);
+  font-size:12px;
+  margin-top:12px;
+  font-weight:700;
+}
+
+.success-msg{
+  display:none;
+  color:var(--green);
+  background:#edf9f4;
+  border:1px solid #cdeee0;
+  padding:12px;
+  border-radius:13px;
+  margin-top:12px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.tools-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  padding-bottom:40px;
+}
+
+.tool-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:23px;
+  padding:22px;
+  box-shadow:0 10px 35px rgba(20,76,108,.06);
+  transition:.25s;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+
+.tool-card:before{
+  content:"";
+  position:absolute;
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:rgba(21,133,199,.07);
+  left:-25px;
+  bottom:-25px;
+}
+
+.tool-card:hover{
+  transform:translateY(-5px);
+  border-color:#bbdef1;
+  box-shadow:0 18px 40px rgba(17,83,123,.12);
+}
+
+.tool-icon{
+  width:48px;
+  height:48px;
+  border-radius:16px;
+  background:var(--soft);
+  display:grid;
+  place-items:center;
+  font-size:23px;
+  margin-bottom:14px;
+}
+
+.tool-card h3{
+  color:var(--navy);
+  font-size:17px;
+  margin-bottom:7px;
+}
+
+.tool-card p{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.8;
+}
+
+.tool-card .go{
+  margin-top:15px;
+  font-size:11px;
+  font-weight:800;
+  color:var(--blue);
+}
+
+.calc-section{
+  width:min(850px,94%);
+  margin:25px auto 60px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:27px;
+  padding:26px;
+  box-shadow:var(--shadow);
+}
+
+.calc-head{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:start;
+  margin-bottom:25px;
+}
+
+.calc-head h2{
+  color:var(--navy);
+  font-size:24px;
+  font-weight:900;
+}
+
+.calc-head p{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+.back-btn{
+  border:none;
+  background:var(--soft);
+  color:var(--navy);
+  border-radius:13px;
+  padding:10px 14px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+.field label{
+  font-size:12px;
+  font-weight:800;
+  color:#385568;
+}
+
+.field input,
+.field select{
+  width:100%;
+  padding:14px;
+  border-radius:13px;
+  border:1px solid var(--border);
+  background:#fbfdfe;
+  outline:none;
+  color:var(--navy);
+  font-weight:700;
+  font-size:13px;
+}
+
+.hint{
+  font-size:10px;
+  color:var(--muted);
+}
+
+.action-row{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+.action-row button{
+  border:none;
+  border-radius:14px;
+  padding:14px 18px;
+  font-weight:800;
+  flex:1;
+}
+
+.calculate{
+  background:linear-gradient(135deg,var(--navy2),var(--blue));
+  color:white;
+}
+
+.reset{
+  background:var(--soft);
+  color:var(--navy);
+}
+
+.result{
+  margin-top:24px;
+  border-radius:22px;
+  background:linear-gradient(145deg,#f3faff,#edf7fc);
+  border:1px solid #d4eaf6;
+  padding:22px;
+  display:none;
+}
+
+.result-title{
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:5px;
+}
+
+.result-main{
+  text-align:center;
+  color:var(--navy);
+  font-size:36px;
+  font-weight:900;
+  line-height:1.3;
+}
+
+.result-main small{
+  font-size:13px;
+}
+
+.result-grid{
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.result-item{
+  background:white;
+  border:1px solid #dcebf4;
+  border-radius:15px;
+  padding:13px;
+}
+
+.result-item span{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-bottom:3px;
+}
+
+.result-item strong{
+  font-size:14px;
+  color:var(--navy);
+}
+
+.result-note{
+  font-size:10px;
+  color:var(--muted);
+  line-height:1.8;
+  margin-top:15px;
+  text-align:center;
+}
+
+.save-btn{
+  width:100%;
+  border:none;
+  background:#fff;
+  border:1px solid var(--border);
+  color:var(--navy);
+  padding:12px;
+  border-radius:13px;
+  font-weight:800;
+  margin-top:14px;
+}
+
+.comparison-winner{
+  background:#ecf8f3;
+  color:var(--green);
+  border:1px solid #cdebdc;
+  padding:14px;
+  text-align:center;
+  border-radius:15px;
+  margin:15px 0;
+  font-size:13px;
+  font-weight:800;
+}
+
+.saved-section{
+  margin-bottom:50px;
+}
+
+.saved-title{
+  color:var(--navy);
+  font-size:20px;
+  margin-bottom:15px;
+}
+
+.saved-list{
+  display:grid;
+  gap:10px;
+}
+
+.saved-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+.saved-card h4{
+  color:var(--navy);
+  font-size:13px;
+}
+
+.saved-card p{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:3px;
+}
+
+.saved-value{
+  color:var(--blue);
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.notice{
+  background:#fff9ef;
+  border:1px solid #f2dfb9;
+  color:#83672d;
+  border-radius:15px;
+  padding:13px;
+  font-size:10px;
+  line-height:1.9;
+  margin-top:17px;
+}
+
+.expired-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(8,35,52,.82);
+  backdrop-filter:blur(10px);
+  z-index:200;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:25px;
+}
+
+.expired-card{
+  max-width:440px;
+  background:white;
+  border-radius:25px;
+  padding:30px;
+  text-align:center;
+}
+
+.expired-card h2{
+  color:var(--navy);
+  margin-bottom:10px;
+}
+
+.expired-card p{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.8;
+}
+
+.footer{
+  text-align:center;
+  padding:30px 0 40px;
+  color:var(--muted);
+  font-size:10px;
+}
+
+@media(max-width:800px){
+  .tools-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:560px){
+  .login-card{
+    padding:26px 18px;
+  }
+
+  .tools-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
+  .result-grid{
+    grid-template-columns:1fr;
+  }
+
+  .calc-section{
+    padding:20px 15px;
+  }
+
+  .hero{
+    padding-top:30px;
+  }
+
+  .usage-box{
+    font-size:9px;
+    gap:7px;
+  }
+
+  .logo-title{
+    font-size:17px;
+  }
+
+  .logo-sub{
+    display:none;
+  }
+
+  .action-row{
+    flex-direction:column;
+  }
+}
+</style>
 </head>
+
 <body>
-  <div class="contract">
-    <h2>عقد اتفاقية إنهاء إجراءات تمويل عقاري من جهة تمويلية</h2>
-    <div class="highlight" id="clientInfo"></div>
 
-    <p class="section-title">بسم الله الرحمن الرحيم</p>
-    <p>المملكة العربية السعودية<br>
-    شركة الوساطة العقارية والتسويق - ترخيص رقم 1100042624 - الرياض</p>
+<!-- =====================================================
+     شاشة الدخول
+===================================================== -->
 
-    <p class="section-title">الطرف الأول:</p>
-    <p>شركة الوساطة العقارية والتسويق، ويمثلها الأستاذ نايف المطيري، مدير الإدارة (يُشار إليه بـ "الطرف الأول")</p>
+<section id="loginPage" class="login-page">
 
-    <p class="section-title">الطرف الثاني:</p>
-    <p>الاسم: <span id="clientNameFill"></span><br>
-    رقم الهوية: <span id="clientIDFill"></span><br>
-    (يُشار إليه بـ "الطرف الثاني")</p>
+  <div class="login-card">
 
-    <p class="section-title">التمهيد:</p>
-    <p>حيث أن الطرف الأول وسيط عقاري مرخص، يقوم بتقديم خدمة إنهاء إجراءات التمويل العقاري لعملائه، وقد أوكل إليه الطرف الثاني هذه المهمة، فقد اتفق الطرفان على التالي:</p>
+    <div class="login-logo">FINO</div>
 
-    <p class="section-title">البنود:</p>
-    <ol>
-      <li>التمهيد أعلاه جزء لا يتجزأ من العقد.</li>
-      <li>يقوم الطرف الأول بإكمال جميع الإجراءات المتعلقة بالعقار لصالح الطرف الثاني.</li>
-      <li>يدفع الطرف الثاني نسبة 2.5% من قيمة العقار + 500 ريال رسوم عقد للطرف الأول.</li>
-      <li>إذا لم تتم الصفقة لأسباب لا تخص الطرف الثاني، يُعاد المبلغ المدفوع له.</li>
-      <li>إذا تراجع الطرف الثاني، يُعد المبلغ مستحقًا للطرف الأول.</li>
-      <li>إذا تسبب الطرف الثاني في إلغاء الصفقة أو تأخيرها، يُعد المبلغ من حق الطرف الأول.</li>
-      <li>يلتزم الطرف الثاني بالإفصاح عن أي مشاكل مالية أو التزامات.</li>
-      <li>يلتزم بتحويل راتبه إلى البنك عند الحاجة.</li>
-      <li>بعد البيع، تنتهي العلاقة بين الطرفين.</li>
-      <li>العناوين الواردة تعتمد للمراسلات.</li>
-      <li>أي نزاع يُحال لمحكمة الرياض بعد 10 أيام من فشل الحل الودي.</li>
-      <li>حرر العقد من نسختين أصليتين، بيد كل طرف نسخة.</li>
-    </ol>
+    <h1>حاسبات التمويل الذكية</h1>
 
-    <p class="section-title">تم توقيع هذا العقد من الطرف الأول:</p>
-    <p>الاسم: نايف المطيري (مدير الإدارة)<br>
-    التوقيع: تم بتاريخ <strong>2025/07/12</strong></p>
+    <p>
+      افهم عرض تمويلك، احسب الصافي،
+      قارن العروض واعرف أثر شراء المديونية
+      بناءً على البيانات التي تدخلها.
+    </p>
 
-    <p class="section-title">هل توافق على هذا العقد بصفتك الطرف الثاني؟</p>
+    <input
+      id="accessCode"
+      class="code-input"
+      type="text"
+      placeholder="أدخل كود الاشتراك"
+      autocomplete="off"
+    >
 
-    <div class="buttons">
-      <button class="approve" onclick="approve()">أوافق</button>
-      <button class="reject" onclick="reject()">لا أوافق</button>
+    <button class="primary-btn" onclick="activateCode()">
+      تفعيل الكود
+    </button>
+
+    <div id="loginError" class="error-msg">
+      الكود غير صحيح أو منتهي.
     </div>
+
+    <div id="loginSuccess" class="success-msg">
+      تم تفعيل الكود بنجاح ✓
+    </div>
+
+    <div class="demo-code">
+      للتجربة الحالية استخدم الكود:
+      <br>
+      <strong>FINO-7K29-X4</strong>
+      <br>
+      10 عمليات • 24 ساعة من أول تفعيل
+    </div>
+
   </div>
 
-  <div class="footer">
-    ⚠️ هذا العقد يُعد سندًا تنفيذيًا حسب المادة (9) من نظام التعاملات الإلكترونية<br>
-    التاريخ والوقت الآن: <span id="now"></span>
+</section>
+
+
+<!-- =====================================================
+     المنصة
+===================================================== -->
+
+<div id="app" class="hidden">
+
+<header class="topbar">
+  <div class="topbar-inner">
+
+    <div class="logo">
+      <div class="logo-mark">F</div>
+      <div>
+        <div class="logo-title">FINO</div>
+        <div class="logo-sub">حاسبات التمويل الذكية</div>
+      </div>
+    </div>
+
+    <div class="usage-box">
+      <span>
+        المتبقي:
+        <strong id="remainingUses">10</strong>
+      </span>
+
+      <span>
+        الوقت:
+        <strong id="remainingTime">--</strong>
+      </span>
+    </div>
+
+  </div>
+</header>
+
+
+<main id="dashboard">
+
+<section class="hero">
+  <div class="container">
+
+    <div class="badge">✦ أدوات مالية في مكان واحد</div>
+
+    <h1>
+      وش تبي تعرف عن
+      <span>تمويلك؟</span>
+    </h1>
+
+    <p>
+      اختر الأداة المناسبة وأدخل بيانات العرض الذي حصلت عليه.
+      FINO تحسب وتوضح لك الأرقام بدون الحاجة لتحديث نسب البنوك.
+    </p>
+
+  </div>
+</section>
+
+
+<section class="container">
+
+<div class="tools-grid">
+
+  <div class="tool-card" onclick="openTool('finance')">
+    <div class="tool-icon">💰</div>
+    <h3>كم يعطيني البنك؟</h3>
+    <p>
+      أدخل الراتب والنسبة والمدة واعرف صافي التمويل المتوقع.
+    </p>
+    <div class="go">ابدأ الحسبة ←</div>
   </div>
 
-  <script>
-    document.getElementById("now").innerText = new Date().toLocaleString('ar-EG');
-  </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <title>تأكيد الموافقة</title>
-  <style>
-    body {
-      font-family: 'Tajawal', sans-serif;
-      background-color: #ffffff;
-      padding: 40px;
-      text-align: center;
-      color: #004d40;
-    }
-    h2 {
-      font-size: 26px;
-      margin-bottom: 30px;
-    }
-    label {
-      font-size: 18px;
-      display: block;
-      margin: 20px 0 10px;
-    }
-    input {
-      padding: 12px;
-      font-size: 18px;
-      width: 90%;
-      max-width: 400px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    button {
-      margin-top: 30px;
-      padding: 12px 40px;
-      font-size: 18px;
-      background-color: #00796b;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .footer {
-      margin-top: 50px;
-      border-top: 2px solid #ccc;
-      padding: 10px;
-      font-size: 16px;
-      color: #d32f2f;
-    }
-  </style>
-  <script>
-    function confirmAgreement() {
-      const inputID = document.getElementById("idConfirm").value.trim();
-      const keyword = document.getElementById("keyword").value.trim().toLowerCase();
-      const storedID = localStorage.getItem("clientID") || "";
+  <div class="tool-card" onclick="openTool('buyout')">
+    <div class="tool-icon">🔄</div>
+    <h3>شراء المديونية</h3>
+    <p>
+      احسب التمويل المتوقع وكم يتبقى لك بعد سداد مديونيتك الحالية.
+    </p>
+    <div class="go">احسب الفائض ←</div>
+  </div>
 
-      if (inputID === storedID && keyword === "موافق") {
-        window.location.href = "success.html";
-      } else {
-        alert("يرجى التأكد من إدخال رقم الهوية الصحيح وكتابة كلمة (موافق)");
+  <div class="tool-card" onclick="openTool('refinance')">
+    <div class="tool-icon">♻️</div>
+    <h3>إعادة التمويل</h3>
+    <p>
+      احسب التمويل الجديد والصافي المتوقع بعد إغلاق التمويل القائم.
+    </p>
+    <div class="go">ابدأ الآن ←</div>
+  </div>
+
+  <div class="tool-card" onclick="openTool('compare')">
+    <div class="tool-icon">⚖️</div>
+    <h3>قارن عرضين</h3>
+    <p>
+      قارن الصافي والقسط وإجمالي السداد بين عرضين مختلفين.
+    </p>
+    <div class="go">قارن العروض ←</div>
+  </div>
+
+  <div class="tool-card" onclick="openTool('analyze')">
+    <div class="tool-icon">📊</div>
+    <h3>حلل عرض البنك</h3>
+    <p>
+      حول أرقام عرض البنك إلى ملخص واضح وسهل الفهم.
+    </p>
+    <div class="go">حلل العرض ←</div>
+  </div>
+
+  <div class="tool-card" onclick="openTool('capacity')">
+    <div class="tool-icon">🧮</div>
+    <h3>قدرتي التمويلية</h3>
+    <p>
+      اعرف القسط النظري بناءً على نسبة الاستقطاع التي تختارها.
+    </p>
+    <div class="go">احسب الآن ←</div>
+  </div>
+
+</div>
+
+<div class="saved-section">
+
+  <h2 class="saved-title">الحسبات المحفوظة</h2>
+
+  <div id="savedList" class="saved-list"></div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- =====================================================
+     حاسبة التمويل
+===================================================== -->
+
+<section id="tool-finance" class="calc-section hidden">
+
+<div class="calc-head">
+  <div>
+    <h2>كم يعطيني البنك؟</h2>
+    <p>احسب صافي التمويل المتوقع بناءً على البيانات المدخلة.</p>
+  </div>
+
+  <button class="back-btn" onclick="backHome()">رجوع</button>
+</div>
+
+
+<div class="form-grid">
+
+  <div class="field">
+    <label>صافي الراتب</label>
+    <input id="fSalary" type="number" placeholder="مثال: 15000">
+  </div>
+
+  <div class="field">
+    <label>نسبة الاستقطاع %</label>
+    <input id="fDeduction" type="number" step="0.01" value="33.33">
+  </div>
+
+  <div class="field">
+    <label>هامش الربح السنوي %</label>
+    <input id="fRate" type="number" step="0.01" placeholder="مثال: 1.99">
+  </div>
+
+  <div class="field">
+    <label>مدة التمويل بالأشهر</label>
+    <input id="fMonths" type="number" value="60">
+  </div>
+
+  <div class="field">
+    <label>رسوم السلعة / رسوم إضافية</label>
+    <input id="fCommodity" type="number" value="0">
+  </div>
+
+</div>
+
+
+<div class="action-row">
+  <button class="calculate" onclick="calculateFinance()">احسب الآن</button>
+  <button class="reset" onclick="resetFields('tool-finance')">مسح</button>
+</div>
+
+
+<div id="resultFinance" class="result">
+
+  <div class="result-title">صافي التمويل المتوقع</div>
+
+  <div id="financeMain" class="result-main"></div>
+
+  <div class="result-grid">
+
+    <div class="result-item">
+      <span>القسط المستخدم</span>
+      <strong id="financeInstallment"></strong>
+    </div>
+
+    <div class="result-item">
+      <span>إجمالي الأقساط</span>
+      <strong id="financeTotal"></strong>
+    </div>
+
+    <div class="result-item">
+      <span>الرسوم الإدارية + الضريبة</span>
+      <strong id="financeFees"></strong>
+    </div>
+
+    <div class="result-item">
+      <span>إجمالي تكلفة الأرباح التقريبية</span>
+      <strong id="financeProfit"></strong>
+    </div>
+
+  </div>
+
+  <button class="save-btn" onclick="saveCurrentResult()">
+    حفظ هذه الحسبة
+  </button>
+
+  <div class="result-note">
+    النتيجة تقديرية بناءً على البيانات المدخلة وليست عرضًا أو موافقة تمويلية.
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     شراء المديونية
+===================================================== -->
+
+<section id="tool-buyout" class="calc-section hidden">
+
+<div class="calc-head">
+
+  <div>
+    <h2>كم يصفي لك بعد شراء المديونية؟</h2>
+    <p>أدخل العرض الذي حصلت عليه ومبلغ السداد المبكر.</p>
+  </div>
+
+  <button class="back-btn" onclick="backHome()">رجوع</button>
+
+</div>
+
+
+<div class="form-grid">
+
+  <div class="field">
+    <label>صافي الراتب</label>
+    <input id="bSalary" type="number" placeholder="15000">
+  </div>
+
+  <div class="field">
+    <label>نسبة الاستقطاع %</label>
+    <input id="bDeduction" type="number" value="33.33" step="0.01">
+  </div>
+
+  <div class="field">
+    <label>هامش الربح السنوي %</label>
+    <input id="bRate" type="number" placeholder="1.99" step="0.01">
+  </div>
+
+  <div class="field">
+    <label>مدة التمويل بالأشهر</label>
+    <input id="bMonths" type="number" value="60">
+  </div>
+
+  <div class="field">
+    <label>مبلغ السداد المبكر الحالي</label>
+    <input id="bSettlement" type="number" placeholder="190000">
+  </div>
+
+  <div class="field">
+    <label>رسوم السلعة / تكاليف إضافية</label>
+    <input id="bCommodity" type="number" value="0">
+  </div>
+
+</div>
+
+
+<div class="action-row">
+  <button class="calculate" onclick="calculateBuyout()">احسب الفائض</button>
+  <button class="reset" onclick="resetFields('tool-buyout')">مسح</button>
+</div>
+
+
+<div id="resultBuyout" class="result">
+
+  <div class="result-title">المتوقع يصفي لك بعد سداد المديونية</div>
+
+  <div id="buyoutMain" class="result-main"></div>
+
+  <div class="result-grid">
+
+    <div class="result-item">
+      <span>صافي التمويل المتوقع</span>
+      <strong id="buyoutFinance"></strong>
+    </div>
+
+    <div class="result-item">
+      <span>السداد المبكر</span>
+      <strong id="buyoutSettlement"></strong>
+    </div>
+
+    <div class="result-item">
+      <span>القسط المستخدم</span>
+      <strong id="buyoutInstallment"></strong>
+    </div>
+
+    <div class="result-item">
+      <span>الرسوم المستخدمة بالحسبة</span>
+      <strong id="buyoutFees"></strong>
+    </div>
+
+  </div>
+
+  <button class="save-btn" onclick="saveCurrentResult()">
+    حفظ هذه الحسبة
+  </button>
+
+  <div class="result-note">
+    الفائض تقديري وقد يختلف حسب آلية البنك والرسوم والسلعة والتأمين وأي عناصر أخرى في العرض النهائي.
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     إعادة التمويل
+===================================================== -->
+
+<section id="tool-refinance" class="calc-section hidden">
+
+<div class="calc-head">
+
+  <div>
+    <h2>إعادة التمويل</h2>
+    <p>قارن مبلغ التمويل الجديد بالمبلغ المطلوب لإغلاق التمويل الحالي.</p>
+  </div>
+
+  <button class="back-btn" onclick="backHome()">رجوع</button>
+
+</div>
+
+
+<div class="form-grid">
+
+  <div class="field">
+    <label>صافي الراتب</label>
+    <input id="rSalary" type="number">
+  </div>
+
+  <div class="field">
+    <label>نسبة الاستقطاع %</label>
+    <input id="rDeduction" type="number" value="33.33" step="0.01">
+  </div>
+
+  <div class="field">
+    <label>هامش الربح الجديد %</label>
+    <input id="rRate" type="number" step="0.01">
+  </div>
+
+  <div class="field">
+    <label>المدة الجديدة بالأشهر</label>
+    <input id="rMonths" type="number" value="60">
+  </div>
+
+  <div class="field">
+    <label>المبلغ المطلوب لإغلاق التمويل الحالي</label>
+    <input id="rSettlement" type="number">
+  </div>
+
+  <div class="field">
+    <label>رسوم إضافية</label>
+    <input id="rCommodity" type="number" value="0">
+  </div>
+
+</div>
+
+
+<div class="action-row">
+  <button class="calculate" onclick="calculateRefinance()">احسب</button>
+  <button class="reset" onclick="resetFields('tool-refinance')">مسح</button>
+</div>
+
+
+<div id="resultRefinance" class="result">
+
+  <div class="result-title">الكاش المتوقع بعد إعادة التمويل</div>
+
+  <div id="refinanceMain" class="result-main"></div>
+
+  <div class="result-grid">
+
+    <div class="result-item">
+      <span>صافي التمويل الجديد</span>
+      <strong id="refinanceFinance"></strong>
+    </div>
+
+    <div class="result-item">
+      <span>إغلاق التمويل الحالي</span>
+      <strong id="refinanceSettlement"></strong>
+    </div>
+
+    <div class="result-item">
+      <span>القسط الجديد</span>
+      <strong id="refinanceInstallment"></strong>
+    </div>
+
+    <div class="result-item">
+      <span>إجمالي الأقساط الجديدة</span>
+      <strong id="refinanceTotal"></strong>
+    </div>
+
+  </div>
+
+  <button class="save-btn" onclick="saveCurrentResult()">
+    حفظ هذه الحسبة
+  </button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     مقارنة عرضين
+===================================================== -->
+
+<section id="tool-compare" class="calc-section hidden">
+
+<div class="calc-head">
+
+  <div>
+    <h2>قارن عرضين</h2>
+    <p>أدخل بيانات العرضين واعرف الفرق بالأرقام.</p>
+  </div>
+
+  <button class="back-btn" onclick="backHome()">رجوع</button>
+
+</div>
+
+
+<div class="form-grid">
+
+  <div class="field full">
+    <label>العرض الأول</label>
+  </div>
+
+  <div class="field">
+    <label>الصافي الذي تستلمه</label>
+    <input id="cCash1" type="number">
+  </div>
+
+  <div class="field">
+    <label>القسط الشهري</label>
+    <input id="cInstallment1" type="number">
+  </div>
+
+  <div class="field">
+    <label>عدد الأشهر</label>
+    <input id="cMonths1" type="number" value="60">
+  </div>
+
+
+  <div class="field full">
+    <label>العرض الثاني</label>
+  </div>
+
+  <div class="field">
+    <label>الصافي الذي تستلمه</label>
+    <input id="cCash2" type="number">
+  </div>
+
+  <div class="field">
+    <label>القسط الشهري</label>
+    <input id="cInstallment2" type="number">
+  </div>
+
+  <div class="field">
+    <label>عدد الأشهر</label>
+    <input id="cMonths2" type="number" value="60">
+  </div>
+
+</div>
+
+
+<div class="action-row">
+  <button class="calculate" onclick="compareOffers()">قارن الآن</button>
+  <button class="reset" onclick="resetFields('tool-compare')">مسح</button>
+</div>
+
+
+<div id="resultCompare" class="result">
+
+  <div id="compareWinner" class="comparison-winner"></div>
+
+  <div class="result-grid">
+
+    <div class="result-item">
+      <span>فرق الصافي</span>
+      <strong id="compareCash"></strong>
+    </div>
+
+    <div class="result-item">
+      <span>فرق القسط</span>
+      <strong id="compareInstallment"></strong>
+    </div>
+
+    <div class="result-item">
+      <span>إجمالي سداد العرض الأول</span>
+      <strong id="compareTotal1"></strong>
+    </div>
+
+    <div class="result-item">
+      <span>إجمالي سداد العرض الثاني</span>
+      <strong id="compareTotal2"></strong>
+    </div>
+
+  </div>
+
+  <div class="result-note">
+    الأعلى صافيًا ليس بالضرورة الأقل تكلفة. قارن القسط وإجمالي السداد والمدة بما يناسب احتياجك.
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     تحليل عرض البنك
+===================================================== -->
+
+<section id="tool-analyze" class="calc-section hidden">
+
+<div class="calc-head">
+
+  <div>
+    <h2>حلل عرض البنك</h2>
+    <p>أدخل بيانات العرض كما وصلتك من البنك.</p>
+  </div>
+
+  <button class="back-btn" onclick="backHome()">رجوع</button>
+
+</div>
+
+
+<div class="form-grid">
+
+  <div class="field">
+    <label>مبلغ التمويل / الصافي</label>
+    <input id="aCash" type="number">
+  </div>
+
+  <div class="field">
+    <label>القسط الشهري</label>
+    <input id="aInstallment" type="number">
+  </div>
+
+  <div class="field">
+    <label>عدد الأشهر</label>
+    <input id="aMonths" type="number">
+  </div>
+
+  <div class="field">
+    <label>الرسوم المدفوعة إن وجدت</label>
+    <input id="aFees" type="number" value="0">
+  </div>
+
+  <div class="field">
+    <label>النسبة المعلنة %</label>
+    <input id="aRate" type="number" step="0.01">
+  </div>
+
+  <div class="field">
+    <label>APR إن كانت موجودة %</label>
+    <input id="aAPR" type="number" step="0.01">
+  </div>
+
+</div>
+
+
+<div class="action-row">
+  <button class="calculate" onclick="analyzeOffer()">حلل العرض</button>
+  <button class="reset" onclick="resetFields('tool-analyze')">مسح</button>
+</div>
+
+
+<div id="resultAnalyze" class="result">
+
+  <div class="result-title">إجمالي المبلغ الذي ستدفعه</div>
+
+  <div id="analyzeMain" class="result-main"></div>
+
+  <div class="result-grid">
+
+    <div class="result-item">
+      <span>المبلغ الذي تستلمه</span>
+      <strong id="analyzeCash"></strong>
+    </div>
+
+    <div class="result-item">
+      <span>إجمالي الأقساط</span>
+      <strong id="analyzeTotal"></strong>
+    </div>
+
+    <div class="result-item">
+      <span>الفرق بين ما تستلمه وما تدفعه</span>
+      <strong id="analyzeCost"></strong>
+    </div>
+
+    <div class="result-item">
+      <span>النسبة / APR المدخلة</span>
+      <strong id="analyzeRates"></strong>
+    </div>
+
+  </div>
+
+  <button class="save-btn" onclick="saveCurrentResult()">
+    حفظ تحليل العرض
+  </button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     القدرة التمويلية
+===================================================== -->
+
+<section id="tool-capacity" class="calc-section hidden">
+
+<div class="calc-head">
+
+  <div>
+    <h2>قدرتي التمويلية</h2>
+    <p>تعرف على مبلغ القسط بناءً على نسبة الاستقطاع المدخلة.</p>
+  </div>
+
+  <button class="back-btn" onclick="backHome()">رجوع</button>
+
+</div>
+
+
+<div class="form-grid">
+
+  <div class="field">
+    <label>صافي الراتب</label>
+    <input id="pSalary" type="number">
+  </div>
+
+  <div class="field">
+    <label>نسبة الاستقطاع %</label>
+    <input id="pDeduction" type="number" step="0.01" value="33.33">
+  </div>
+
+</div>
+
+
+<div class="action-row">
+  <button class="calculate" onclick="calculateCapacity()">احسب القسط</button>
+  <button class="reset" onclick="resetFields('tool-capacity')">مسح</button>
+</div>
+
+
+<div id="resultCapacity" class="result">
+
+  <div class="result-title">القسط بناءً على النسبة المدخلة</div>
+
+  <div id="capacityMain" class="result-main"></div>
+
+  <div class="result-grid">
+
+    <div class="result-item">
+      <span>الراتب</span>
+      <strong id="capacitySalary"></strong>
+    </div>
+
+    <div class="result-item">
+      <span>نسبة الاستقطاع</span>
+      <strong id="capacityPercent"></strong>
+    </div>
+
+  </div>
+
+  <div class="result-note">
+    هذه عملية حسابية فقط ولا تعني أن البنك سيعتمد نسبة الاستقطاع المدخلة أو أن العميل مؤهل للتمويل.
+  </div>
+
+</div>
+
+</section>
+
+
+<div class="container">
+  <div class="notice">
+    تنبيه: جميع النتائج في FINO تقديرية وتعتمد على صحة البيانات المدخلة وطريقة الاحتساب المستخدمة.
+    النتيجة النهائية قد تختلف باختلاف البنك، العقد، معدل النسبة السنوي APR، الرسوم، السلعة، التأمين،
+    جهة العمل، العمر، الالتزامات والسياسات الائتمانية.
+  </div>
+</div>
+
+
+<footer class="footer">
+  FINO © 2026 — حاسبات التمويل الذكية
+</footer>
+
+</div>
+
+
+<div id="expiredOverlay" class="expired-overlay hidden">
+
+  <div class="expired-card">
+
+    <h2>انتهى اشتراك الكود</h2>
+
+    <p id="expiredText">
+      تم استهلاك جميع العمليات المتاحة أو انتهت صلاحية الكود.
+    </p>
+
+    <button class="primary-btn" onclick="logout()">
+      إدخال كود جديد
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   إعداد أكواد الاشتراك
+
+   مهم:
+   هذا نظام Front-End للتجربة.
+   في الموقع التجاري الحقيقي يجب تخزين الأكواد والتحقق منها
+   من السيرفر وليس داخل JavaScript حتى لا يستطيع المستخدم
+   مشاهدة الأكواد أو تعديل عدد الاستخدامات.
+========================================================= */
+
+const ACCESS_CODES = {
+
+  "FINO-7K29-X4":{
+    name:"FINO Plus تجريبي",
+    uses:10,
+    hours:24
+  },
+
+  "FINO-BASIC-25":{
+    name:"FINO Basic",
+    uses:3,
+    hours:24
+  },
+
+  "FINO-PLUS-40":{
+    name:"FINO Plus",
+    uses:15,
+    hours:72
+  },
+
+  "FINO-PRO-70":{
+    name:"FINO Pro",
+    uses:30,
+    hours:168
+  }
+
+};
+
+
+let currentResult = null;
+let activeTool = null;
+
+
+/* =========================================================
+   الأدوات العامة
+========================================================= */
+
+function money(n){
+
+  if(!Number.isFinite(Number(n))){
+    return "0 ريال";
+  }
+
+  return new Intl.NumberFormat(
+    "ar-SA",
+    {
+      maximumFractionDigits:0
+    }
+  ).format(Number(n)) + " ريال";
+
+}
+
+
+function val(id){
+
+  return Number(
+    document.getElementById(id).value
+  ) || 0;
+
+}
+
+
+function show(id){
+
+  document
+    .getElementById(id)
+    .classList.remove("hidden");
+
+}
+
+
+function hide(id){
+
+  document
+    .getElementById(id)
+    .classList.add("hidden");
+
+}
+
+
+/* =========================================================
+   تفعيل الكود
+========================================================= */
+
+function activateCode(){
+
+  const input =
+    document.getElementById("accessCode");
+
+  const code =
+    input.value.trim().toUpperCase();
+
+  const error =
+    document.getElementById("loginError");
+
+  const success =
+    document.getElementById("loginSuccess");
+
+  error.style.display="none";
+  success.style.display="none";
+
+  if(!ACCESS_CODES[code]){
+
+    error.style.display="block";
+    return;
+
+  }
+
+
+  let subscriptions =
+    JSON.parse(
+      localStorage.getItem("finoSubscriptions") || "{}"
+    );
+
+
+  let subscription =
+    subscriptions[code];
+
+
+  if(!subscription){
+
+    const data =
+      ACCESS_CODES[code];
+
+    const now =
+      Date.now();
+
+    subscription={
+
+      code:code,
+
+      name:data.name,
+
+      remainingUses:data.uses,
+
+      activatedAt:now,
+
+      expiresAt:
+        now + data.hours * 60 * 60 * 1000
+
+    };
+
+    subscriptions[code]=subscription;
+
+    localStorage.setItem(
+      "finoSubscriptions",
+      JSON.stringify(subscriptions)
+    );
+
+  }
+
+
+  localStorage.setItem(
+    "finoActiveCode",
+    code
+  );
+
+
+  if(
+    subscription.remainingUses<=0 ||
+    Date.now()>=subscription.expiresAt
+  ){
+
+    error.innerText=
+      "هذا الكود انتهت صلاحيته أو تم استهلاك عملياته.";
+
+    error.style.display="block";
+
+    return;
+
+  }
+
+
+  success.style.display="block";
+
+  setTimeout(()=>{
+
+    startApp();
+
+  },400);
+
+}
+
+
+/* =========================================================
+   تشغيل المنصة
+========================================================= */
+
+function startApp(){
+
+  hide("loginPage");
+  show("app");
+
+  updateSubscriptionUI();
+
+  renderSaved();
+
+}
+
+
+/* =========================================================
+   جلب الاشتراك الحالي
+========================================================= */
+
+function getSubscription(){
+
+  const code =
+    localStorage.getItem("finoActiveCode");
+
+  if(!code){
+    return null;
+  }
+
+  const all =
+    JSON.parse(
+      localStorage.getItem("finoSubscriptions") || "{}"
+    );
+
+  return all[code] || null;
+
+}
+
+
+/* =========================================================
+   تحديث الاشتراك
+========================================================= */
+
+function saveSubscription(subscription){
+
+  const all =
+    JSON.parse(
+      localStorage.getItem("finoSubscriptions") || "{}"
+    );
+
+  all[subscription.code]=subscription;
+
+  localStorage.setItem(
+    "finoSubscriptions",
+    JSON.stringify(all)
+  );
+
+}
+
+
+/* =========================================================
+   خصم عملية
+========================================================= */
+
+function consumeUse(){
+
+  let sub =
+    getSubscription();
+
+  if(!sub){
+    return false;
+  }
+
+
+  if(
+    sub.remainingUses<=0 ||
+    Date.now()>=sub.expiresAt
+  ){
+
+    showExpired();
+
+    return false;
+
+  }
+
+
+  sub.remainingUses--;
+
+  saveSubscription(sub);
+
+  updateSubscriptionUI();
+
+
+  if(sub.remainingUses<=0){
+
+    setTimeout(
+      showExpired,
+      1000
+    );
+
+  }
+
+
+  return true;
+
+}
+
+
+/* =========================================================
+   الوقت والاستخدامات
+========================================================= */
+
+function updateSubscriptionUI(){
+
+  const sub =
+    getSubscription();
+
+  if(!sub){
+
+    logout();
+    return;
+
+  }
+
+
+  document.getElementById(
+    "remainingUses"
+  ).innerText=
+    sub.remainingUses;
+
+
+  updateRemainingTime();
+
+
+  if(
+    sub.remainingUses<=0 ||
+    Date.now()>=sub.expiresAt
+  ){
+
+    showExpired();
+
+  }
+
+}
+
+
+function updateRemainingTime(){
+
+  const sub =
+    getSubscription();
+
+  if(!sub){
+    return;
+  }
+
+
+  let diff =
+    sub.expiresAt - Date.now();
+
+
+  if(diff<=0){
+
+    document.getElementById(
+      "remainingTime"
+    ).innerText="منتهي";
+
+    showExpired();
+
+    return;
+
+  }
+
+
+  const hours =
+    Math.floor(
+      diff / 3600000
+    );
+
+  const minutes =
+    Math.floor(
+      (diff % 3600000) / 60000
+    );
+
+
+  document.getElementById(
+    "remainingTime"
+  ).innerText=
+    hours + "س " + minutes + "د";
+
+}
+
+
+setInterval(
+  updateRemainingTime,
+  30000
+);
+
+
+/* =========================================================
+   انتهاء الاشتراك
+========================================================= */
+
+function showExpired(){
+
+  show("expiredOverlay");
+
+}
+
+
+function logout(){
+
+  localStorage.removeItem(
+    "finoActiveCode"
+  );
+
+  location.reload();
+
+}
+
+
+/* =========================================================
+   التنقل
+========================================================= */
+
+const toolIds=[
+  "finance",
+  "buyout",
+  "refinance",
+  "compare",
+  "analyze",
+  "capacity"
+];
+
+
+function openTool(tool){
+
+  hide("dashboard");
+
+  toolIds.forEach(t=>{
+
+    hide("tool-"+t);
+
+  });
+
+  show("tool-"+tool);
+
+  activeTool=tool;
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+function backHome(){
+
+  toolIds.forEach(t=>{
+
+    hide("tool-"+t);
+
+  });
+
+  show("dashboard");
+
+  activeTool=null;
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+   معادلة التمويل الأساسية
+
+   إجمالي الأقساط = القسط × الأشهر
+
+   معامل الربح =
+   1 + (السنوات × هامش الربح ÷ 100)
+
+   التمويل قبل الرسوم =
+   إجمالي الأقساط ÷ معامل الربح
+
+   الرسوم الإدارية =
+   0.5% من التمويل
+   مع ضريبة 15% على الرسوم
+
+========================================================= */
+
+function financeCalculation(
+  salary,
+  deduction,
+  annualRate,
+  months,
+  commodity
+){
+
+  const installment =
+    salary * (deduction / 100);
+
+
+  const totalPayments =
+    installment * months;
+
+
+  const years =
+    months / 12;
+
+
+  const factor =
+    1 + (
+      years *
+      annualRate /
+      100
+    );
+
+
+  const financeBeforeFees =
+    factor > 0
+      ? totalPayments / factor
+      : 0;
+
+
+  /*
+    رسوم إدارية 0.5%
+    ويمكن تعديل الحد أو طريقة الرسوم لاحقاً.
+  */
+
+  const adminFee =
+    financeBeforeFees * 0.005;
+
+
+  const vat =
+    adminFee * 0.15;
+
+
+  const totalFees =
+    adminFee +
+    vat +
+    commodity;
+
+
+  const netFinance =
+    Math.max(
+      0,
+      financeBeforeFees - totalFees
+    );
+
+
+  const approximateProfit =
+    Math.max(
+      0,
+      totalPayments -
+      financeBeforeFees
+    );
+
+
+  return{
+
+    installment,
+
+    totalPayments,
+
+    factor,
+
+    financeBeforeFees,
+
+    adminFee,
+
+    vat,
+
+    totalFees,
+
+    netFinance,
+
+    approximateProfit
+
+  };
+
+}
+
+
+/* =========================================================
+   كم يعطيني البنك؟
+========================================================= */
+
+function calculateFinance(){
+
+  const salary=val("fSalary");
+  const deduction=val("fDeduction");
+  const rate=val("fRate");
+  const months=val("fMonths");
+  const commodity=val("fCommodity");
+
+
+  if(
+    salary<=0 ||
+    deduction<=0 ||
+    months<=0
+  ){
+
+    alert(
+      "تأكد من إدخال الراتب ونسبة الاستقطاع والمدة."
+    );
+
+    return;
+
+  }
+
+
+  if(!consumeUse()){
+    return;
+  }
+
+
+  const r=
+    financeCalculation(
+      salary,
+      deduction,
+      rate,
+      months,
+      commodity
+    );
+
+
+  document.getElementById(
+    "financeMain"
+  ).innerHTML=
+    money(r.netFinance);
+
+
+  document.getElementById(
+    "financeInstallment"
+  ).innerText=
+    money(r.installment);
+
+
+  document.getElementById(
+    "financeTotal"
+  ).innerText=
+    money(r.totalPayments);
+
+
+  document.getElementById(
+    "financeFees"
+  ).innerText=
+    money(r.totalFees);
+
+
+  document.getElementById(
+    "financeProfit"
+  ).innerText=
+    money(r.approximateProfit);
+
+
+  document.getElementById(
+    "resultFinance"
+  ).style.display="block";
+
+
+  currentResult={
+
+    title:"كم يعطيني البنك؟",
+
+    value:r.netFinance,
+
+    details:
+      "راتب " +
+      money(salary) +
+      " • نسبة " +
+      rate +
+      "%"
+
+  };
+
+}
+
+
+/* =========================================================
+   شراء المديونية
+========================================================= */
+
+function calculateBuyout(){
+
+  const salary=val("bSalary");
+  const deduction=val("bDeduction");
+  const rate=val("bRate");
+  const months=val("bMonths");
+  const settlement=val("bSettlement");
+  const commodity=val("bCommodity");
+
+
+  if(
+    salary<=0 ||
+    months<=0 ||
+    settlement<=0
+  ){
+
+    alert(
+      "تأكد من إدخال بيانات الحسبة كاملة."
+    );
+
+    return;
+
+  }
+
+
+  if(!consumeUse()){
+    return;
+  }
+
+
+  const r=
+    financeCalculation(
+      salary,
+      deduction,
+      rate,
+      months,
+      commodity
+    );
+
+
+  const leftover=
+    r.netFinance - settlement;
+
+
+  document.getElementById(
+    "buyoutMain"
+  ).innerHTML=
+    money(leftover);
+
+
+  document.getElementById(
+    "buyoutFinance"
+  ).innerText=
+    money(r.netFinance);
+
+
+  document.getElementById(
+    "buyoutSettlement"
+  ).innerText=
+    money(settlement);
+
+
+  document.getElementById(
+    "buyoutInstallment"
+  ).innerText=
+    money(r.installment);
+
+
+  document.getElementById(
+    "buyoutFees"
+  ).innerText=
+    money(r.totalFees);
+
+
+  document.getElementById(
+    "resultBuyout"
+  ).style.display="block";
+
+
+  currentResult={
+
+    title:"شراء مديونية",
+
+    value:leftover,
+
+    details:
+      "صافي التمويل " +
+      money(r.netFinance) +
+      " • سداد " +
+      money(settlement)
+
+  };
+
+}
+
+
+/* =========================================================
+   إعادة التمويل
+========================================================= */
+
+function calculateRefinance(){
+
+  const salary=val("rSalary");
+  const deduction=val("rDeduction");
+  const rate=val("rRate");
+  const months=val("rMonths");
+  const settlement=val("rSettlement");
+  const commodity=val("rCommodity");
+
+
+  if(
+    salary<=0 ||
+    months<=0 ||
+    settlement<=0
+  ){
+
+    alert(
+      "تأكد من إدخال بيانات الحسبة."
+    );
+
+    return;
+
+  }
+
+
+  if(!consumeUse()){
+    return;
+  }
+
+
+  const r=
+    financeCalculation(
+      salary,
+      deduction,
+      rate,
+      months,
+      commodity
+    );
+
+
+  const cash=
+    r.netFinance - settlement;
+
+
+  document.getElementById(
+    "refinanceMain"
+  ).innerHTML=
+    money(cash);
+
+
+  document.getElementById(
+    "refinanceFinance"
+  ).innerText=
+    money(r.netFinance);
+
+
+  document.getElementById(
+    "refinanceSettlement"
+  ).innerText=
+    money(settlement);
+
+
+  document.getElementById(
+    "refinanceInstallment"
+  ).innerText=
+    money(r.installment);
+
+
+  document.getElementById(
+    "refinanceTotal"
+  ).innerText=
+    money(r.totalPayments);
+
+
+  document.getElementById(
+    "resultRefinance"
+  ).style.display="block";
+
+
+  currentResult={
+
+    title:"إعادة التمويل",
+
+    value:cash,
+
+    details:
+      "صافي جديد " +
+      money(r.netFinance)
+
+  };
+
+}
+
+
+/* =========================================================
+   مقارنة عرضين
+========================================================= */
+
+function compareOffers(){
+
+  const cash1=val("cCash1");
+  const installment1=val("cInstallment1");
+  const months1=val("cMonths1");
+
+  const cash2=val("cCash2");
+  const installment2=val("cInstallment2");
+  const months2=val("cMonths2");
+
+
+  if(
+    cash1<=0 ||
+    cash2<=0 ||
+    installment1<=0 ||
+    installment2<=0
+  ){
+
+    alert(
+      "أدخل بيانات العرضين كاملة."
+    );
+
+    return;
+
+  }
+
+
+  if(!consumeUse()){
+    return;
+  }
+
+
+  const total1=
+    installment1 * months1;
+
+  const total2=
+    installment2 * months2;
+
+
+  const cashDiff=
+    Math.abs(
+      cash1-cash2
+    );
+
+
+  const installmentDiff=
+    Math.abs(
+      installment1-installment2
+    );
+
+
+  let message="";
+
+
+  if(
+    cash1>cash2 &&
+    total1<total2
+  ){
+
+    message=
+      "العرض الأول أعلى صافيًا وأقل إجمالي سداد وفق البيانات المدخلة.";
+
+  }
+
+  else if(
+    cash2>cash1 &&
+    total2<total1
+  ){
+
+    message=
+      "العرض الثاني أعلى صافيًا وأقل إجمالي سداد وفق البيانات المدخلة.";
+
+  }
+
+  else{
+
+    message=
+      "لا يوجد عرض متفوق في كل شيء؛ قارن بين الصافي والقسط وإجمالي السداد.";
+
+  }
+
+
+  document.getElementById(
+    "compareWinner"
+  ).innerText=
+    message;
+
+
+  document.getElementById(
+    "compareCash"
+  ).innerText=
+    money(cashDiff);
+
+
+  document.getElementById(
+    "compareInstallment"
+  ).innerText=
+    money(installmentDiff);
+
+
+  document.getElementById(
+    "compareTotal1"
+  ).innerText=
+    money(total1);
+
+
+  document.getElementById(
+    "compareTotal2"
+  ).innerText=
+    money(total2);
+
+
+  document.getElementById(
+    "resultCompare"
+  ).style.display="block";
+
+}
+
+
+/* =========================================================
+   تحليل عرض البنك
+========================================================= */
+
+function analyzeOffer(){
+
+  const cash=val("aCash");
+  const installment=val("aInstallment");
+  const months=val("aMonths");
+  const fees=val("aFees");
+  const rate=val("aRate");
+  const apr=val("aAPR");
+
+
+  if(
+    cash<=0 ||
+    installment<=0 ||
+    months<=0
+  ){
+
+    alert(
+      "أدخل مبلغ التمويل والقسط والمدة."
+    );
+
+    return;
+
+  }
+
+
+  if(!consumeUse()){
+    return;
+  }
+
+
+  const total=
+    installment * months;
+
+
+  const cost=
+    Math.max(
+      0,
+      total - cash + fees
+    );
+
+
+  document.getElementById(
+    "analyzeMain"
+  ).innerHTML=
+    money(total);
+
+
+  document.getElementById(
+    "analyzeCash"
+  ).innerText=
+    money(cash);
+
+
+  document.getElementById(
+    "analyzeTotal"
+  ).innerText=
+    money(total);
+
+
+  document.getElementById(
+    "analyzeCost"
+  ).innerText=
+    money(cost);
+
+
+  document.getElementById(
+    "analyzeRates"
+  ).innerText=
+    "النسبة: " +
+    (rate || "-") +
+    "% | APR: " +
+    (apr || "-") +
+    "%";
+
+
+  document.getElementById(
+    "resultAnalyze"
+  ).style.display="block";
+
+
+  currentResult={
+
+    title:"تحليل عرض",
+
+    value:cash,
+
+    details:
+      "إجمالي السداد " +
+      money(total)
+
+  };
+
+}
+
+
+/* =========================================================
+   القدرة التمويلية
+========================================================= */
+
+function calculateCapacity(){
+
+  const salary=
+    val("pSalary");
+
+  const deduction=
+    val("pDeduction");
+
+
+  if(
+    salary<=0 ||
+    deduction<=0
+  ){
+
+    alert(
+      "أدخل الراتب ونسبة الاستقطاع."
+    );
+
+    return;
+
+  }
+
+
+  if(!consumeUse()){
+    return;
+  }
+
+
+  const installment=
+    salary *
+    deduction /
+    100;
+
+
+  document.getElementById(
+    "capacityMain"
+  ).innerHTML=
+    money(installment);
+
+
+  document.getElementById(
+    "capacitySalary"
+  ).innerText=
+    money(salary);
+
+
+  document.getElementById(
+    "capacityPercent"
+  ).innerText=
+    deduction.toFixed(2) + "%";
+
+
+  document.getElementById(
+    "resultCapacity"
+  ).style.display="block";
+
+}
+
+
+/* =========================================================
+   حفظ الحسبات
+========================================================= */
+
+function saveCurrentResult(){
+
+  if(!currentResult){
+
+    alert(
+      "نفذ الحسبة أولًا."
+    );
+
+    return;
+
+  }
+
+
+  const saved=
+    JSON.parse(
+      localStorage.getItem("finoSavedResults") || "[]"
+    );
+
+
+  saved.unshift({
+
+    ...currentResult,
+
+    createdAt:
+      new Date().toLocaleString("ar-SA")
+
+  });
+
+
+  localStorage.setItem(
+    "finoSavedResults",
+    JSON.stringify(
+      saved.slice(0,20)
+    )
+  );
+
+
+  renderSaved();
+
+  alert(
+    "تم حفظ الحسبة ✓"
+  );
+
+}
+
+
+function renderSaved(){
+
+  const box=
+    document.getElementById("savedList");
+
+  if(!box){
+    return;
+  }
+
+
+  const saved=
+    JSON.parse(
+      localStorage.getItem("finoSavedResults") || "[]"
+    );
+
+
+  if(!saved.length){
+
+    box.innerHTML=`
+      <div class="saved-card">
+        <div>
+          <h4>ما عندك حسبات محفوظة حتى الآن</h4>
+          <p>بعد ظهور النتيجة اضغط حفظ الحسبة.</p>
+        </div>
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  box.innerHTML=
+    saved.map(
+      (item,index)=>`
+
+      <div class="saved-card">
+
+        <div>
+
+          <h4>
+            ${item.title}
+          </h4>
+
+          <p>
+            ${item.details || ""}
+            <br>
+            ${item.createdAt}
+          </p>
+
+        </div>
+
+        <div class="saved-value">
+          ${money(item.value)}
+        </div>
+
+      </div>
+
+    `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   مسح الحقول
+========================================================= */
+
+function resetFields(sectionId){
+
+  const section=
+    document.getElementById(sectionId);
+
+  section
+    .querySelectorAll("input")
+    .forEach(input=>{
+
+      if(
+        input.id.includes("Deduction")
+      ){
+
+        input.value="33.33";
+
       }
+
+      else if(
+        input.id.includes("Months")
+      ){
+
+        input.value="60";
+
+      }
+
+      else if(
+        input.id.includes("Commodity") ||
+        input.id==="aFees"
+      ){
+
+        input.value="0";
+
+      }
+
+      else{
+
+        input.value="";
+
+      }
+
+    });
+
+
+  section
+    .querySelectorAll(".result")
+    .forEach(result=>{
+
+      result.style.display="none";
+
+    });
+
+
+  currentResult=null;
+
+}
+
+
+/* =========================================================
+   استعادة جلسة سابقة
+========================================================= */
+
+window.addEventListener(
+  "load",
+  ()=>{
+
+    const activeCode=
+      localStorage.getItem("finoActiveCode");
+
+    if(activeCode){
+
+      const sub=
+        getSubscription();
+
+      if(
+        sub &&
+        sub.remainingUses>0 &&
+        Date.now()<sub.expiresAt
+      ){
+
+        startApp();
+
+      }
+
     }
-  </script>
-</head>
-<body>
-  <h2>تأكيد الموافقة على العقد</h2>
 
-  <label for="idConfirm">أدخل رقم هويتك:</label>
-  <input type="text" id="idConfirm" placeholder="رقم الهوية الوطنية" required>
+  }
+);
 
-  <label for="keyword">أدخل كلمة (موافق):</label>
-  <input type="text" id="keyword" placeholder="موافق" required>
+</script>
 
-  <br>
-  <button onclick="confirmAgreement()">تأكيد</button>
-
-  <div class="footer">
-    ⚠️ هذا العقد يُعد سندًا تنفيذيًا حسب المادة (9) من نظام التعاملات الإلكترونية<br>
-    التاريخ والوقت الآن: <span id="now"></span>
-  </div>
-
-  <script>
-    document.getElementById("now").innerText = new Date().toLocaleString('ar-EG');
-  </script>
 </body>
 </html>
