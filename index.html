@@ -2,16 +2,31 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#ffffff">
 
-<title>FINO | حاسبات التمويل الذكية</title>
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"
+/>
+
+<meta name="theme-color" content="#071b2b">
+
+<title>FINO | افهم تمويلك بالأرقام</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
+  rel="stylesheet"
+/>
 
 <style>
+
+/* =========================================================
+   FINO 2026
+   Smart Finance Experience
+========================================================= */
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -19,33 +34,73 @@
 }
 
 :root{
-  --bg:#f5f9fc;
-  --white:#fff;
-  --navy:#082f4f;
-  --navy2:#0c4c78;
-  --blue:#1585c7;
-  --blue2:#30a8e0;
-  --soft:#eef7fc;
-  --border:#dcebf4;
-  --text:#1b3445;
-  --muted:#6f8491;
-  --green:#16885e;
-  --red:#cf4b4b;
-  --orange:#d88a24;
-  --shadow:0 18px 55px rgba(19,70,100,.11);
+
+  --navy:#061b2b;
+  --navy2:#092f4a;
+  --navy3:#0e486d;
+
+  --blue:#0a84c6;
+  --blue2:#1eaae6;
+  --cyan:#5edcff;
+
+  --white:#ffffff;
+  --page:#f5f9fc;
+  --page2:#eef7fb;
+
+  --text:#173245;
+  --muted:#718694;
+
+  --green:#15976c;
+  --greenSoft:#eaf8f2;
+
+  --red:#d85050;
+  --redSoft:#fff1f1;
+
+  --amber:#bc7b18;
+  --amberSoft:#fff8e9;
+
+  --line:#dbeaf1;
+
+  --shadow:
+    0 24px 70px rgba(8,46,72,.11);
+
+  --shadowStrong:
+    0 34px 90px rgba(5,43,67,.17);
+
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-  font-family:"Cairo",sans-serif;
-  background:
-    radial-gradient(circle at 15% 10%,rgba(36,157,218,.10),transparent 30%),
-    radial-gradient(circle at 85% 90%,rgba(8,74,116,.08),transparent 35%),
-    var(--bg);
-  color:var(--text);
+
   min-height:100vh;
+
+  font-family:"Cairo",sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 8% 4%,
+      rgba(31,171,229,.11),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 92% 35%,
+      rgba(6,79,122,.07),
+      transparent 30%
+    ),
+    var(--page);
+
+  color:var(--text);
+
+  overflow-x:hidden;
+
 }
 
-button,input,select{
+button,
+input,
+select{
   font-family:inherit;
 }
 
@@ -54,359 +109,1203 @@ button{
 }
 
 .hidden{
-  display:none!important;
+  display:none !important;
 }
 
-.container{
-  width:min(1180px,94%);
+.shell{
+  width:min(1180px,92%);
   margin:auto;
 }
 
-.topbar{
-  min-height:74px;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(210,230,240,.85);
+
+/* =========================================================
+   NAV
+========================================================= */
+
+.navbar{
+
+  height:72px;
+
   display:flex;
   align-items:center;
-  position:sticky;
-  top:0;
-  z-index:50;
+
+  position:relative;
+  z-index:20;
+
 }
 
-.topbar-inner{
-  width:min(1180px,94%);
+.nav-inner{
+
+  width:min(1180px,92%);
   margin:auto;
+
   display:flex;
+  align-items:center;
   justify-content:space-between;
-  align-items:center;
+
   gap:15px;
+
 }
 
-.logo{
+.brand{
+
   display:flex;
   align-items:center;
+
   gap:10px;
+
 }
 
-.logo-mark{
-  width:43px;
-  height:43px;
+.brand-logo{
+
+  width:44px;
+  height:44px;
+
   border-radius:15px;
-  background:linear-gradient(135deg,var(--navy),var(--blue2));
+
   display:grid;
   place-items:center;
+
   color:white;
-  font-size:16px;
+
+  font-size:15px;
   font-weight:900;
-  letter-spacing:1px;
-  box-shadow:0 8px 25px rgba(14,111,170,.25);
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--blue2),
+      var(--navy2)
+    );
+
+  box-shadow:
+    0 12px 28px rgba(13,128,190,.24);
+
 }
 
-.logo-title{
-  font-size:22px;
+.brand-name{
+
+  font-size:21px;
   font-weight:900;
+
   color:var(--navy);
+
 }
 
-.logo-sub{
+.brand-sub{
+
+  font-size:9px;
   color:var(--muted);
-  font-size:10px;
+
   margin-top:-5px;
+
 }
 
-.usage-box{
-  background:var(--soft);
-  border:1px solid var(--border);
-  padding:8px 13px;
-  border-radius:14px;
-  font-size:12px;
+.nav-status{
+
   display:flex;
-  gap:13px;
-  align-items:center;
-}
-
-.usage-box strong{
-  color:var(--navy);
-}
-
-.hero{
-  padding:45px 0 25px;
-  text-align:center;
-}
-
-.badge{
-  display:inline-flex;
   align-items:center;
   gap:7px;
-  background:#e9f6fd;
-  color:var(--blue);
-  border:1px solid #caeafd;
-  padding:7px 14px;
+
+  padding:8px 12px;
+
   border-radius:30px;
-  font-size:12px;
+
+  background:rgba(255,255,255,.7);
+
+  border:1px solid rgba(206,226,236,.9);
+
+  color:var(--navy2);
+
+  font-size:9px;
   font-weight:800;
-  margin-bottom:15px;
+
+  backdrop-filter:blur(13px);
+
+}
+
+.status-dot{
+
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:var(--green);
+
+}
+
+
+/* =========================================================
+   LANDING HERO
+========================================================= */
+
+.hero{
+
+  min-height:calc(100vh - 72px);
+
+  display:flex;
+  align-items:center;
+
+  padding:38px 0 68px;
+
+}
+
+.hero-grid{
+
+  display:grid;
+
+  grid-template-columns:1.08fr .92fr;
+
+  gap:58px;
+
+  align-items:center;
+
+}
+
+.eyebrow{
+
+  display:inline-flex;
+  align-items:center;
+
+  gap:7px;
+
+  background:#e8f6fd;
+
+  border:1px solid #c9e9f7;
+
+  color:var(--blue);
+
+  border-radius:40px;
+
+  padding:7px 13px;
+
+  font-size:10px;
+  font-weight:900;
+
+  margin-bottom:18px;
+
 }
 
 .hero h1{
-  font-size:clamp(30px,5vw,50px);
-  line-height:1.25;
-  color:var(--navy);
+
+  font-size:clamp(39px,5vw,66px);
+
+  line-height:1.18;
+
+  letter-spacing:-1.7px;
+
   font-weight:900;
-  margin-bottom:10px;
+
+  color:var(--navy);
+
 }
 
 .hero h1 span{
-  color:var(--blue);
+
+  display:block;
+
+  background:
+    linear-gradient(
+      90deg,
+      #0579b8,
+      #22aee6
+    );
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
 }
 
-.hero p{
+.hero-desc{
+
+  max-width:620px;
+
+  margin-top:17px;
+
+  line-height:2;
+
+  font-size:14px;
+
   color:var(--muted);
-  font-size:15px;
-  max-width:700px;
-  margin:auto;
-  line-height:1.9;
+
 }
 
-.login-page{
-  min-height:100vh;
+.hero-actions{
+
   display:flex;
   align-items:center;
-  justify-content:center;
-  padding:25px;
+
+  gap:10px;
+
+  margin-top:27px;
+
+  flex-wrap:wrap;
+
 }
 
-.login-card{
-  width:min(480px,100%);
-  background:rgba(255,255,255,.96);
-  border:1px solid var(--border);
-  border-radius:30px;
-  padding:35px;
-  box-shadow:var(--shadow);
-  text-align:center;
-}
+.primary{
 
-.login-logo{
-  width:74px;
-  height:74px;
-  margin:0 auto 18px;
-  border-radius:24px;
-  background:linear-gradient(135deg,var(--navy),var(--blue2));
-  color:#fff;
-  font-size:22px;
-  font-weight:900;
-  display:grid;
-  place-items:center;
-  box-shadow:0 15px 35px rgba(17,117,179,.25);
-}
-
-.login-card h1{
-  font-size:29px;
-  color:var(--navy);
-  margin-bottom:7px;
-}
-
-.login-card p{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.9;
-  margin-bottom:24px;
-}
-
-.code-input{
-  width:100%;
-  direction:ltr;
-  text-align:center;
-  letter-spacing:2px;
-  font-weight:800;
-  font-size:16px;
-  padding:16px;
-  border:1px solid var(--border);
-  background:#f9fcfe;
-  border-radius:15px;
-  outline:none;
-  transition:.2s;
-}
-
-.code-input:focus,
-.field input:focus,
-.field select:focus{
-  border-color:var(--blue);
-  box-shadow:0 0 0 4px rgba(21,133,199,.08);
-  background:#fff;
-}
-
-.primary-btn{
-  width:100%;
-  margin-top:13px;
   border:none;
-  background:linear-gradient(135deg,var(--navy2),var(--blue));
+
+  padding:15px 24px;
+
+  border-radius:15px;
+
   color:white;
-  padding:15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--navy2),
+      var(--blue)
+    );
+
+  font-size:12px;
+  font-weight:900;
+
+  box-shadow:
+    0 15px 32px rgba(9,110,170,.21);
+
+  transition:.2s;
+
+}
+
+.primary:hover{
+  transform:translateY(-2px);
+}
+
+.secondary{
+
+  border:1px solid var(--line);
+
+  padding:14px 20px;
+
   border-radius:15px;
-  font-size:14px;
-  font-weight:800;
-  box-shadow:0 12px 24px rgba(15,109,169,.18);
-}
 
-.primary-btn:hover{
-  transform:translateY(-1px);
-}
+  background:rgba(255,255,255,.8);
 
-.demo-code{
-  background:var(--soft);
-  border:1px dashed #acd7ec;
-  padding:13px;
-  margin-top:18px;
-  border-radius:15px;
-  font-size:12px;
-  line-height:2;
-}
-
-.demo-code strong{
-  direction:ltr;
-  display:inline-block;
   color:var(--navy);
-  font-size:14px;
-}
 
-.error-msg{
-  display:none;
-  color:var(--red);
-  font-size:12px;
-  margin-top:12px;
-  font-weight:700;
-}
-
-.success-msg{
-  display:none;
-  color:var(--green);
-  background:#edf9f4;
-  border:1px solid #cdeee0;
-  padding:12px;
-  border-radius:13px;
-  margin-top:12px;
-  font-size:12px;
-  font-weight:700;
-}
-
-.tools-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-  padding-bottom:40px;
-}
-
-.tool-card{
-  background:var(--white);
-  border:1px solid var(--border);
-  border-radius:23px;
-  padding:22px;
-  box-shadow:0 10px 35px rgba(20,76,108,.06);
-  transition:.25s;
-  cursor:pointer;
-  position:relative;
-  overflow:hidden;
-}
-
-.tool-card:before{
-  content:"";
-  position:absolute;
-  width:90px;
-  height:90px;
-  border-radius:50%;
-  background:rgba(21,133,199,.07);
-  left:-25px;
-  bottom:-25px;
-}
-
-.tool-card:hover{
-  transform:translateY(-5px);
-  border-color:#bbdef1;
-  box-shadow:0 18px 40px rgba(17,83,123,.12);
-}
-
-.tool-icon{
-  width:48px;
-  height:48px;
-  border-radius:16px;
-  background:var(--soft);
-  display:grid;
-  place-items:center;
-  font-size:23px;
-  margin-bottom:14px;
-}
-
-.tool-card h3{
-  color:var(--navy);
-  font-size:17px;
-  margin-bottom:7px;
-}
-
-.tool-card p{
-  font-size:12px;
-  color:var(--muted);
-  line-height:1.8;
-}
-
-.tool-card .go{
-  margin-top:15px;
   font-size:11px;
   font-weight:800;
-  color:var(--blue);
+
 }
 
-.calc-section{
-  width:min(850px,94%);
-  margin:25px auto 60px;
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:27px;
-  padding:26px;
-  box-shadow:var(--shadow);
-}
+.hero-points{
 
-.calc-head{
+  margin-top:21px;
+
   display:flex;
-  justify-content:space-between;
+  align-items:center;
+
   gap:15px;
-  align-items:start;
-  margin-bottom:25px;
-}
 
-.calc-head h2{
-  color:var(--navy);
-  font-size:24px;
-  font-weight:900;
-}
+  flex-wrap:wrap;
 
-.calc-head p{
+  font-size:9px;
+
   color:var(--muted);
+
+}
+
+.hero-point{
+
+  display:flex;
+  align-items:center;
+  gap:6px;
+
+}
+
+.check{
+
+  width:18px;
+  height:18px;
+
+  border-radius:50%;
+
+  display:grid;
+  place-items:center;
+
+  background:var(--greenSoft);
+
+  color:var(--green);
+
+  font-weight:900;
+  font-size:9px;
+
+}
+
+
+/* =========================================================
+   HERO PREVIEW
+========================================================= */
+
+.preview-wrap{
+  position:relative;
+}
+
+.preview-glow{
+
+  width:360px;
+  height:360px;
+
+  border-radius:50%;
+
+  position:absolute;
+
+  top:30px;
+  right:30px;
+
+  background:rgba(22,169,227,.13);
+
+  filter:blur(65px);
+
+}
+
+.preview-card{
+
+  max-width:455px;
+
+  margin:auto;
+
+  position:relative;
+
+  padding:20px;
+
+  border-radius:31px;
+
+  background:
+    linear-gradient(
+      150deg,
+      rgba(255,255,255,.99),
+      rgba(243,250,253,.97)
+    );
+
+  border:1px solid rgba(206,229,239,.95);
+
+  box-shadow:var(--shadowStrong);
+
+}
+
+.preview-head{
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  margin-bottom:23px;
+
+}
+
+.preview-live{
+
+  border-radius:25px;
+
+  background:var(--greenSoft);
+
+  color:var(--green);
+
+  padding:6px 10px;
+
+  font-size:8px;
+  font-weight:900;
+
+}
+
+.preview-label{
+
+  font-size:10px;
+  color:var(--muted);
+
+}
+
+.preview-question{
+
+  margin-top:3px;
+
+  font-size:24px;
+
+  line-height:1.5;
+
+  color:var(--navy);
+
+  font-weight:900;
+
+}
+
+.preview-grid{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:9px;
+
+  margin-top:18px;
+
+}
+
+.preview-cell{
+
+  padding:12px;
+
+  border-radius:13px;
+
+  background:white;
+
+  border:1px solid var(--line);
+
+}
+
+.preview-cell span{
+
+  display:block;
+
+  font-size:8px;
+
+  color:var(--muted);
+
+}
+
+.preview-cell strong{
+
   font-size:12px;
+
+  color:var(--navy);
+
+}
+
+.preview-result{
+
+  margin-top:12px;
+
+  border-radius:19px;
+
+  padding:19px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #08263d,
+      #0b679d
+    );
+
+  color:white;
+
+}
+
+.preview-result span{
+
+  display:block;
+
+  font-size:9px;
+
+  opacity:.72;
+
+}
+
+.preview-result strong{
+
+  display:block;
+
+  margin-top:3px;
+
+  font-size:30px;
+
+  font-weight:900;
+
+}
+
+.preview-result small{
+
+  display:block;
+
   margin-top:4px;
+
+  font-size:8px;
+
+  opacity:.6;
+
+}
+
+
+/* =========================================================
+   INFO SECTION
+========================================================= */
+
+.explain{
+
+  padding:76px 0;
+
+}
+
+.section-head{
+
+  text-align:center;
+
+  max-width:720px;
+
+  margin:0 auto 30px;
+
+}
+
+.section-head small{
+
+  color:var(--blue);
+
+  font-size:10px;
+  font-weight:900;
+
+}
+
+.section-head h2{
+
+  margin-top:5px;
+
+  color:var(--navy);
+
+  font-size:clamp(27px,4vw,40px);
+
+  font-weight:900;
+
+}
+
+.section-head p{
+
+  margin-top:8px;
+
+  color:var(--muted);
+
+  line-height:1.9;
+
+  font-size:11px;
+
+}
+
+.features{
+
+  display:grid;
+
+  grid-template-columns:repeat(4,1fr);
+
+  gap:12px;
+
+}
+
+.feature{
+
+  padding:18px;
+
+  background:rgba(255,255,255,.85);
+
+  border:1px solid var(--line);
+
+  border-radius:21px;
+
+}
+
+.feature-icon{
+
+  width:42px;
+  height:42px;
+
+  border-radius:13px;
+
+  display:grid;
+  place-items:center;
+
+  background:#edf8fd;
+
+  font-size:20px;
+
+  margin-bottom:12px;
+
+}
+
+.feature h3{
+
+  font-size:13px;
+
+  color:var(--navy);
+
+  font-weight:900;
+
+}
+
+.feature p{
+
+  font-size:9px;
+
+  color:var(--muted);
+
+  line-height:1.8;
+
+  margin-top:5px;
+
+}
+
+
+/* =========================================================
+   ONBOARDING
+========================================================= */
+
+.page{
+
+  min-height:100vh;
+
+  padding-bottom:55px;
+
+}
+
+.page-head{
+
+  padding:25px 0 16px;
+
 }
 
 .back-btn{
-  border:none;
-  background:var(--soft);
+
+  border:1px solid var(--line);
+
+  background:white;
+
   color:var(--navy);
-  border-radius:13px;
-  padding:10px 14px;
+
+  border-radius:12px;
+
+  padding:9px 13px;
+
+  font-size:10px;
   font-weight:800;
-  white-space:nowrap;
+
 }
 
-.form-grid{
+.card{
+
+  max-width:720px;
+
+  margin:auto;
+
+  border-radius:29px;
+
+  background:rgba(255,255,255,.96);
+
+  border:1px solid var(--line);
+
+  box-shadow:var(--shadow);
+
+  padding:30px;
+
+}
+
+.step-pill{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  padding:7px 11px;
+
+  border-radius:30px;
+
+  background:#eaf7fd;
+
+  color:var(--blue);
+
+  font-size:9px;
+  font-weight:900;
+
+}
+
+.card h2{
+
+  margin-top:11px;
+
+  color:var(--navy);
+
+  font-size:28px;
+
+  line-height:1.5;
+
+  font-weight:900;
+
+}
+
+.card-desc{
+
+  margin-top:5px;
+
+  color:var(--muted);
+
+  font-size:11px;
+
+  line-height:1.9;
+
+}
+
+.profile-field{
+
+  margin-top:22px;
+
+}
+
+.profile-field label{
+
+  display:block;
+
+  margin-bottom:7px;
+
+  color:#395669;
+
+  font-size:10px;
+  font-weight:800;
+
+}
+
+.text-input{
+
+  width:100%;
+
+  border:1px solid var(--line);
+
+  background:#f9fcfd;
+
+  border-radius:14px;
+
+  outline:none;
+
+  padding:14px;
+
+  color:var(--navy);
+
+  font-size:13px;
+  font-weight:700;
+
+}
+
+.text-input:focus{
+
+  border-color:var(--blue2);
+
+  background:white;
+
+  box-shadow:
+    0 0 0 4px rgba(20,164,224,.08);
+
+}
+
+.option-grid{
+
   display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:9px;
+
+}
+
+.option{
+
+  border:1px solid var(--line);
+
+  background:white;
+
+  border-radius:15px;
+
+  padding:12px 10px;
+
+  color:var(--navy);
+
+  text-align:center;
+
+  font-size:10px;
+  font-weight:800;
+
+  transition:.2s;
+
+}
+
+.option:hover{
+
+  border-color:#acd8eb;
+
+  background:#f7fcff;
+
+}
+
+.option.active{
+
+  border-color:var(--blue);
+
+  background:#eaf7fd;
+
+  color:var(--blue);
+
+  box-shadow:
+    0 0 0 3px rgba(10,132,198,.06);
+
+}
+
+.continue-btn{
+
+  width:100%;
+
+  margin-top:23px;
+
+  border:none;
+
+  border-radius:15px;
+
+  padding:15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--navy2),
+      var(--blue)
+    );
+
+  color:white;
+
+  font-size:12px;
+
+  font-weight:900;
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard-top{
+
+  padding:25px 0 18px;
+
+}
+
+.welcome-card{
+
+  position:relative;
+
+  overflow:hidden;
+
+  border-radius:28px;
+
+  padding:27px;
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #07223a,
+      #0a5684
+    );
+
+  box-shadow:
+    0 22px 60px rgba(6,63,99,.17);
+
+}
+
+.welcome-card:after{
+
+  content:"";
+
+  position:absolute;
+
+  width:250px;
+  height:250px;
+
+  border-radius:50%;
+
+  background:rgba(84,211,255,.12);
+
+  left:-80px;
+  top:-80px;
+
+}
+
+.welcome-small{
+
+  font-size:9px;
+
+  opacity:.68;
+
+}
+
+.welcome-card h1{
+
+  margin-top:3px;
+
+  font-size:31px;
+
+  font-weight:900;
+
+}
+
+.welcome-desc{
+
+  margin-top:5px;
+
+  font-size:10px;
+
+  line-height:1.9;
+
+  opacity:.72;
+
+  max-width:650px;
+
+}
+
+.profile-chips{
+
+  margin-top:17px;
+
+  display:flex;
+
+  gap:7px;
+
+  flex-wrap:wrap;
+
+}
+
+.profile-chip{
+
+  border-radius:30px;
+
+  padding:7px 10px;
+
+  background:rgba(255,255,255,.1);
+
+  border:1px solid rgba(255,255,255,.12);
+
+  font-size:8px;
+
+}
+
+.question-heading{
+
+  margin-top:29px;
+
+  margin-bottom:14px;
+
+}
+
+.question-heading small{
+
+  color:var(--blue);
+
+  font-weight:900;
+
+  font-size:9px;
+
+}
+
+.question-heading h2{
+
+  color:var(--navy);
+
+  font-size:25px;
+
+  font-weight:900;
+
+}
+
+.tool-grid{
+
+  display:grid;
+
   grid-template-columns:repeat(2,1fr);
-  gap:14px;
+
+  gap:12px;
+
+}
+
+.tool-card{
+
+  position:relative;
+
+  overflow:hidden;
+
+  border-radius:22px;
+
+  padding:20px;
+
+  background:white;
+
+  border:1px solid var(--line);
+
+  min-height:165px;
+
+  transition:.23s;
+
+  cursor:pointer;
+
+}
+
+.tool-card:hover{
+
+  transform:translateY(-4px);
+
+  box-shadow:
+    0 19px 40px rgba(7,57,87,.09);
+
+  border-color:#baddec;
+
+}
+
+.tool-card:after{
+
+  content:"";
+
+  position:absolute;
+
+  width:100px;
+  height:100px;
+
+  border-radius:50%;
+
+  left:-34px;
+  bottom:-35px;
+
+  background:rgba(21,161,221,.05);
+
+}
+
+.tool-icon{
+
+  width:43px;
+  height:43px;
+
+  border-radius:13px;
+
+  display:grid;
+  place-items:center;
+
+  background:#edf8fd;
+
+  font-size:20px;
+
+}
+
+.tool-card h3{
+
+  margin-top:11px;
+
+  color:var(--navy);
+
+  font-size:14px;
+
+  font-weight:900;
+
+}
+
+.tool-card p{
+
+  margin-top:5px;
+
+  color:var(--muted);
+
+  font-size:9px;
+
+  line-height:1.8;
+
+}
+
+.tool-link{
+
+  margin-top:10px;
+
+  color:var(--blue);
+
+  font-size:9px;
+
+  font-weight:900;
+
+}
+
+
+/* =========================================================
+   CALCULATOR
+========================================================= */
+
+.calc-wrap{
+
+  max-width:790px;
+
+  margin:auto;
+
+  background:white;
+
+  border:1px solid var(--line);
+
+  border-radius:29px;
+
+  padding:28px;
+
+  box-shadow:var(--shadow);
+
+}
+
+.calc-kicker{
+
+  color:var(--blue);
+
+  font-size:9px;
+  font-weight:900;
+
+}
+
+.calc-title{
+
+  color:var(--navy);
+
+  font-size:27px;
+
+  line-height:1.45;
+
+  font-weight:900;
+
+  margin-top:4px;
+
+}
+
+.calc-desc{
+
+  color:var(--muted);
+
+  font-size:10px;
+
+  line-height:1.9;
+
+  margin-top:4px;
+
+  margin-bottom:21px;
+
+}
+
+.calc-fields{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:12px;
+
 }
 
 .field{
+
   display:flex;
+
   flex-direction:column;
+
   gap:6px;
+
 }
 
 .field.full{
@@ -414,247 +1313,684 @@ button{
 }
 
 .field label{
-  font-size:12px;
+
+  color:#38586c;
+
+  font-size:10px;
+
   font-weight:800;
-  color:#385568;
+
 }
 
 .field input,
 .field select{
+
   width:100%;
-  padding:14px;
+
+  border:1px solid var(--line);
+
   border-radius:13px;
-  border:1px solid var(--border);
-  background:#fbfdfe;
+
+  padding:13px 14px;
+
   outline:none;
+
+  background:#f9fcfd;
+
   color:var(--navy);
+
+  font-size:12px;
   font-weight:700;
-  font-size:13px;
+
 }
 
-.hint{
-  font-size:10px;
+.field input:focus,
+.field select:focus{
+
+  background:white;
+
+  border-color:var(--blue2);
+
+  box-shadow:
+    0 0 0 4px rgba(20,164,224,.08);
+
+}
+
+.field-note{
+
+  font-size:8px;
+
   color:var(--muted);
+
 }
 
-.action-row{
-  display:flex;
-  gap:10px;
-  margin-top:20px;
-}
+.calc-action{
 
-.action-row button{
+  width:100%;
+
+  margin-top:18px;
+
   border:none;
-  border-radius:14px;
-  padding:14px 18px;
-  font-weight:800;
-  flex:1;
-}
 
-.calculate{
-  background:linear-gradient(135deg,var(--navy2),var(--blue));
+  border-radius:15px;
+
+  padding:15px;
+
   color:white;
-}
 
-.reset{
-  background:var(--soft);
-  color:var(--navy);
+  background:
+    linear-gradient(
+      135deg,
+      var(--navy2),
+      var(--blue)
+    );
+
+  font-size:12px;
+
+  font-weight:900;
+
 }
 
 .result{
-  margin-top:24px;
-  border-radius:22px;
-  background:linear-gradient(145deg,#f3faff,#edf7fc);
-  border:1px solid #d4eaf6;
-  padding:22px;
+
   display:none;
+
+  margin-top:21px;
+
 }
 
-.result-title{
-  text-align:center;
+.personal-result{
+
+  background:
+    linear-gradient(
+      145deg,
+      #eff9fd,
+      #f9fdff
+    );
+
+  border:1px solid #d4eaf4;
+
+  border-radius:22px;
+
+  padding:21px;
+
+}
+
+.result-intro{
+
+  font-size:10px;
+
   color:var(--muted);
-  font-size:12px;
-  margin-bottom:5px;
+
+  text-align:center;
+
+}
+
+.result-label{
+
+  margin-top:3px;
+
+  text-align:center;
+
+  color:var(--navy);
+
+  font-size:13px;
+
+  font-weight:800;
+
 }
 
 .result-main{
-  text-align:center;
-  color:var(--navy);
-  font-size:36px;
-  font-weight:900;
-  line-height:1.3;
-}
 
-.result-main small{
-  font-size:13px;
+  text-align:center;
+
+  margin-top:2px;
+
+  color:var(--navy);
+
+  font-size:38px;
+
+  font-weight:900;
+
 }
 
 .result-grid{
-  margin-top:20px;
+
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:9px;
+
+  margin-top:17px;
+
 }
 
-.result-item{
+.result-cell{
+
   background:white;
-  border:1px solid #dcebf4;
-  border-radius:15px;
-  padding:13px;
-}
 
-.result-item span{
-  display:block;
-  color:var(--muted);
-  font-size:10px;
-  margin-bottom:3px;
-}
+  border:1px solid var(--line);
 
-.result-item strong{
-  font-size:14px;
-  color:var(--navy);
-}
-
-.result-note{
-  font-size:10px;
-  color:var(--muted);
-  line-height:1.8;
-  margin-top:15px;
-  text-align:center;
-}
-
-.save-btn{
-  width:100%;
-  border:none;
-  background:#fff;
-  border:1px solid var(--border);
-  color:var(--navy);
-  padding:12px;
   border-radius:13px;
-  font-weight:800;
-  margin-top:14px;
+
+  padding:12px;
+
 }
 
-.comparison-winner{
-  background:#ecf8f3;
-  color:var(--green);
-  border:1px solid #cdebdc;
-  padding:14px;
-  text-align:center;
-  border-radius:15px;
-  margin:15px 0;
-  font-size:13px;
-  font-weight:800;
-}
+.result-cell span{
 
-.saved-section{
-  margin-bottom:50px;
-}
+  display:block;
 
-.saved-title{
-  color:var(--navy);
-  font-size:20px;
-  margin-bottom:15px;
-}
-
-.saved-list{
-  display:grid;
-  gap:10px;
-}
-
-.saved-card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:14px 16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-}
-
-.saved-card h4{
-  color:var(--navy);
-  font-size:13px;
-}
-
-.saved-card p{
   color:var(--muted);
-  font-size:10px;
-  margin-top:3px;
+
+  font-size:8px;
+
 }
 
-.saved-value{
-  color:var(--blue);
-  font-weight:900;
-  white-space:nowrap;
+.result-cell strong{
+
+  display:block;
+
+  margin-top:2px;
+
+  color:var(--navy);
+
+  font-size:12px;
+
 }
+
+.result-message{
+
+  margin-top:13px;
+
+  padding:12px;
+
+  border-radius:13px;
+
+  background:#fff;
+
+  border:1px solid var(--line);
+
+  font-size:9px;
+
+  line-height:1.9;
+
+  color:#496779;
+
+}
+
+.result-actions{
+
+  display:flex;
+
+  gap:8px;
+
+  margin-top:12px;
+
+}
+
+.result-actions button{
+
+  flex:1;
+
+  border-radius:12px;
+
+  padding:11px;
+
+  font-size:9px;
+
+  font-weight:900;
+
+}
+
+.dark-button{
+
+  border:none;
+
+  background:var(--navy);
+
+  color:white;
+
+}
+
+.light-button{
+
+  border:1px solid var(--line);
+
+  background:white;
+
+  color:var(--navy);
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:100;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:18px;
+
+  background:rgba(4,21,32,.76);
+
+  backdrop-filter:blur(12px);
+
+}
+
+.modal-card{
+
+  width:min(430px,100%);
+
+  background:white;
+
+  border-radius:27px;
+
+  padding:27px;
+
+  box-shadow:
+    0 35px 100px rgba(0,0,0,.26);
+
+  position:relative;
+
+}
+
+.close-modal{
+
+  position:absolute;
+
+  top:12px;
+  left:12px;
+
+  width:31px;
+  height:31px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:#f0f5f7;
+
+  color:var(--navy);
+
+  font-weight:900;
+
+}
+
+.lock{
+
+  width:58px;
+  height:58px;
+
+  margin:auto;
+
+  border-radius:18px;
+
+  display:grid;
+  place-items:center;
+
+  font-size:25px;
+
+  background:#e9f7fd;
+
+}
+
+.modal-card h3{
+
+  text-align:center;
+
+  margin-top:11px;
+
+  color:var(--navy);
+
+  font-size:22px;
+
+  font-weight:900;
+
+}
+
+.modal-text{
+
+  max-width:340px;
+
+  margin:5px auto 17px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  line-height:1.9;
+
+  font-size:10px;
+
+}
+
+.code-input{
+
+  width:100%;
+
+  border:1px solid var(--line);
+
+  border-radius:14px;
+
+  padding:14px;
+
+  outline:none;
+
+  direction:ltr;
+
+  text-align:center;
+
+  letter-spacing:1.7px;
+
+  color:var(--navy);
+
+  font-size:13px;
+  font-weight:900;
+
+  background:#f8fbfd;
+
+}
+
+.code-input:focus{
+
+  border-color:var(--blue2);
+
+  box-shadow:
+    0 0 0 4px rgba(20,164,224,.08);
+
+}
+
+.unlock{
+
+  width:100%;
+
+  margin-top:9px;
+
+  border:none;
+
+  border-radius:14px;
+
+  padding:14px;
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--navy2),
+      var(--blue)
+    );
+
+  font-size:11px;
+
+  font-weight:900;
+
+}
+
+.demo-code{
+
+  margin-top:13px;
+
+  border:1px dashed #aed9eb;
+
+  background:#eef9fd;
+
+  border-radius:13px;
+
+  padding:10px;
+
+  text-align:center;
+
+  color:var(--navy);
+
+  font-size:9px;
+
+}
+
+.demo-code strong{
+
+  display:block;
+
+  direction:ltr;
+
+  margin:2px 0;
+
+  font-size:12px;
+
+}
+
+.modal-error{
+
+  display:none;
+
+  margin-top:9px;
+
+  text-align:center;
+
+  color:var(--red);
+
+  font-size:9px;
+
+  font-weight:800;
+
+}
+
+
+/* =========================================================
+   MEMBER BAR
+========================================================= */
+
+.memberbar{
+
+  position:fixed;
+
+  z-index:80;
+
+  bottom:14px;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  display:flex;
+  align-items:center;
+
+  gap:12px;
+
+  border-radius:17px;
+
+  padding:9px 13px;
+
+  color:white;
+
+  background:rgba(6,31,48,.94);
+
+  box-shadow:
+    0 14px 35px rgba(0,0,0,.17);
+
+  backdrop-filter:blur(12px);
+
+  font-size:8px;
+
+}
+
+.memberbar strong{
+
+  font-size:10px;
+
+}
+
+
+/* =========================================================
+   NOTICE
+========================================================= */
 
 .notice{
-  background:#fff9ef;
-  border:1px solid #f2dfb9;
-  color:#83672d;
-  border-radius:15px;
-  padding:13px;
-  font-size:10px;
+
+  max-width:790px;
+
+  margin:15px auto 0;
+
+  border-radius:14px;
+
+  background:var(--amberSoft);
+
+  border:1px solid #efdfb8;
+
+  color:#795d27;
+
+  padding:11px 13px;
+
   line-height:1.9;
-  margin-top:17px;
+
+  font-size:8px;
+
 }
 
-.expired-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(8,35,52,.82);
-  backdrop-filter:blur(10px);
-  z-index:200;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:25px;
-}
 
-.expired-card{
-  max-width:440px;
-  background:white;
-  border-radius:25px;
-  padding:30px;
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+
+  padding:34px 0 45px;
+
   text-align:center;
-}
 
-.expired-card h2{
-  color:var(--navy);
-  margin-bottom:10px;
-}
-
-.expired-card p{
-  font-size:12px;
   color:var(--muted);
-  line-height:1.8;
+
+  line-height:1.9;
+
+  font-size:8px;
+
 }
 
-.footer{
-  text-align:center;
-  padding:30px 0 40px;
-  color:var(--muted);
-  font-size:10px;
-}
 
-@media(max-width:800px){
-  .tools-grid{
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:900px){
+
+  .hero-grid{
+    grid-template-columns:1fr;
+    gap:38px;
+  }
+
+  .hero-copy{
+    text-align:center;
+  }
+
+  .hero-desc{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .hero-actions,
+  .hero-points{
+    justify-content:center;
+  }
+
+  .features{
     grid-template-columns:repeat(2,1fr);
   }
+
 }
 
-@media(max-width:560px){
-  .login-card{
-    padding:26px 18px;
+@media(max-width:580px){
+
+  .navbar{
+    height:64px;
   }
 
-  .tools-grid{
+  .brand-logo{
+    width:39px;
+    height:39px;
+    border-radius:13px;
+  }
+
+  .brand-name{
+    font-size:18px;
+  }
+
+  .brand-sub{
+    display:none;
+  }
+
+  .hero{
+    min-height:auto;
+    padding:28px 0 55px;
+  }
+
+  .hero h1{
+    font-size:38px;
+  }
+
+  .hero-desc{
+    font-size:11px;
+  }
+
+  .hero-actions{
+    flex-direction:column;
+  }
+
+  .hero-actions button{
+    width:100%;
+  }
+
+  .preview-card{
+    padding:16px;
+    border-radius:24px;
+  }
+
+  .preview-question{
+    font-size:20px;
+  }
+
+  .preview-result strong{
+    font-size:27px;
+  }
+
+  .features{
     grid-template-columns:1fr;
   }
 
-  .form-grid{
+  .card{
+    padding:22px 15px;
+    border-radius:23px;
+  }
+
+  .card h2{
+    font-size:23px;
+  }
+
+  .option-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .tool-grid{
+    grid-template-columns:1fr;
+  }
+
+  .calc-wrap{
+    padding:21px 14px;
+    border-radius:23px;
+  }
+
+  .calc-fields{
     grid-template-columns:1fr;
   }
 
@@ -666,975 +2002,2927 @@ button{
     grid-template-columns:1fr;
   }
 
-  .calc-section{
-    padding:20px 15px;
-  }
-
-  .hero{
-    padding-top:30px;
-  }
-
-  .usage-box{
-    font-size:9px;
-    gap:7px;
-  }
-
-  .logo-title{
-    font-size:17px;
-  }
-
-  .logo-sub{
-    display:none;
-  }
-
-  .action-row{
+  .result-actions{
     flex-direction:column;
   }
+
+  .memberbar{
+    width:calc(100% - 22px);
+    justify-content:center;
+  }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- =====================================================
-     شاشة الدخول
-===================================================== -->
 
-<section id="loginPage" class="login-page">
+<!-- =========================================================
+     1. LANDING
+========================================================= -->
 
-  <div class="login-card">
+<div id="landingPage">
 
-    <div class="login-logo">FINO</div>
+<header class="navbar">
 
-    <h1>حاسبات التمويل الذكية</h1>
+<div class="nav-inner">
 
-    <p>
-      افهم عرض تمويلك، احسب الصافي،
-      قارن العروض واعرف أثر شراء المديونية
-      بناءً على البيانات التي تدخلها.
-    </p>
+  <div class="brand">
 
-    <input
-      id="accessCode"
-      class="code-input"
-      type="text"
-      placeholder="أدخل كود الاشتراك"
-      autocomplete="off"
-    >
-
-    <button class="primary-btn" onclick="activateCode()">
-      تفعيل الكود
-    </button>
-
-    <div id="loginError" class="error-msg">
-      الكود غير صحيح أو منتهي.
+    <div class="brand-logo">
+      F
     </div>
 
-    <div id="loginSuccess" class="success-msg">
-      تم تفعيل الكود بنجاح ✓
-    </div>
+    <div>
 
-    <div class="demo-code">
-      للتجربة الحالية استخدم الكود:
-      <br>
-      <strong>FINO-7K29-X4</strong>
-      <br>
-      10 عمليات • 24 ساعة من أول تفعيل
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     المنصة
-===================================================== -->
-
-<div id="app" class="hidden">
-
-<header class="topbar">
-  <div class="topbar-inner">
-
-    <div class="logo">
-      <div class="logo-mark">F</div>
-      <div>
-        <div class="logo-title">FINO</div>
-        <div class="logo-sub">حاسبات التمويل الذكية</div>
+      <div class="brand-name">
+        FINO
       </div>
-    </div>
 
-    <div class="usage-box">
-      <span>
-        المتبقي:
-        <strong id="remainingUses">10</strong>
-      </span>
+      <div class="brand-sub">
+        حاسبات التمويل الذكية
+      </div>
 
-      <span>
-        الوقت:
-        <strong id="remainingTime">--</strong>
-      </span>
     </div>
 
   </div>
+
+
+  <div class="nav-status">
+
+    <span class="status-dot"></span>
+
+    حسبة أوضح قبل القرار
+
+  </div>
+
+</div>
+
 </header>
 
 
-<main id="dashboard">
-
 <section class="hero">
-  <div class="container">
 
-    <div class="badge">✦ أدوات مالية في مكان واحد</div>
-
-    <h1>
-      وش تبي تعرف عن
-      <span>تمويلك؟</span>
-    </h1>
-
-    <p>
-      اختر الأداة المناسبة وأدخل بيانات العرض الذي حصلت عليه.
-      FINO تحسب وتوضح لك الأرقام بدون الحاجة لتحديث نسب البنوك.
-    </p>
-
-  </div>
-</section>
+<div class="shell hero-grid">
 
 
-<section class="container">
+<div class="hero-copy">
 
-<div class="tools-grid">
-
-  <div class="tool-card" onclick="openTool('finance')">
-    <div class="tool-icon">💰</div>
-    <h3>كم يعطيني البنك؟</h3>
-    <p>
-      أدخل الراتب والنسبة والمدة واعرف صافي التمويل المتوقع.
-    </p>
-    <div class="go">ابدأ الحسبة ←</div>
+  <div class="eyebrow">
+    ✦ افهم عرضك قبل تكمل إجراءاتك
   </div>
 
-  <div class="tool-card" onclick="openTool('buyout')">
-    <div class="tool-icon">🔄</div>
-    <h3>شراء المديونية</h3>
-    <p>
-      احسب التمويل المتوقع وكم يتبقى لك بعد سداد مديونيتك الحالية.
-    </p>
-    <div class="go">احسب الفائض ←</div>
+
+  <h1>
+
+    عندك عرض تمويل؟
+
+    <span>
+      خل الأرقام تتكلم.
+    </span>
+
+  </h1>
+
+
+  <p class="hero-desc">
+
+    تعرف النسبة اللي عطاك البنك لكن ما تعرف كم التمويل؟
+    أو عليك مديونية وتبي تعرف كم ممكن يصفي لك؟
+    FINO تساعدك تحسب وتفهم وتقارن العرض بناءً على بياناتك.
+
+  </p>
+
+
+  <div class="hero-actions">
+
+    <button
+      class="primary"
+      onclick="startOnboarding()"
+    >
+      ابدأ الآن
+    </button>
+
+
+    <button
+      class="secondary"
+      onclick="scrollToExplain()"
+    >
+      وش تحسب لي FINO؟
+    </button>
+
   </div>
 
-  <div class="tool-card" onclick="openTool('refinance')">
-    <div class="tool-icon">♻️</div>
-    <h3>إعادة التمويل</h3>
-    <p>
-      احسب التمويل الجديد والصافي المتوقع بعد إغلاق التمويل القائم.
-    </p>
-    <div class="go">ابدأ الآن ←</div>
-  </div>
 
-  <div class="tool-card" onclick="openTool('compare')">
-    <div class="tool-icon">⚖️</div>
-    <h3>قارن عرضين</h3>
-    <p>
-      قارن الصافي والقسط وإجمالي السداد بين عرضين مختلفين.
-    </p>
-    <div class="go">قارن العروض ←</div>
-  </div>
+  <div class="hero-points">
 
-  <div class="tool-card" onclick="openTool('analyze')">
-    <div class="tool-icon">📊</div>
-    <h3>حلل عرض البنك</h3>
-    <p>
-      حول أرقام عرض البنك إلى ملخص واضح وسهل الفهم.
-    </p>
-    <div class="go">حلل العرض ←</div>
-  </div>
-
-  <div class="tool-card" onclick="openTool('capacity')">
-    <div class="tool-icon">🧮</div>
-    <h3>قدرتي التمويلية</h3>
-    <p>
-      اعرف القسط النظري بناءً على نسبة الاستقطاع التي تختارها.
-    </p>
-    <div class="go">احسب الآن ←</div>
-  </div>
-
-</div>
-
-<div class="saved-section">
-
-  <h2 class="saved-title">الحسبات المحفوظة</h2>
-
-  <div id="savedList" class="saved-list"></div>
-
-</div>
-
-</section>
-
-</main>
-
-
-<!-- =====================================================
-     حاسبة التمويل
-===================================================== -->
-
-<section id="tool-finance" class="calc-section hidden">
-
-<div class="calc-head">
-  <div>
-    <h2>كم يعطيني البنك؟</h2>
-    <p>احسب صافي التمويل المتوقع بناءً على البيانات المدخلة.</p>
-  </div>
-
-  <button class="back-btn" onclick="backHome()">رجوع</button>
-</div>
-
-
-<div class="form-grid">
-
-  <div class="field">
-    <label>صافي الراتب</label>
-    <input id="fSalary" type="number" placeholder="مثال: 15000">
-  </div>
-
-  <div class="field">
-    <label>نسبة الاستقطاع %</label>
-    <input id="fDeduction" type="number" step="0.01" value="33.33">
-  </div>
-
-  <div class="field">
-    <label>هامش الربح السنوي %</label>
-    <input id="fRate" type="number" step="0.01" placeholder="مثال: 1.99">
-  </div>
-
-  <div class="field">
-    <label>مدة التمويل بالأشهر</label>
-    <input id="fMonths" type="number" value="60">
-  </div>
-
-  <div class="field">
-    <label>رسوم السلعة / رسوم إضافية</label>
-    <input id="fCommodity" type="number" value="0">
-  </div>
-
-</div>
-
-
-<div class="action-row">
-  <button class="calculate" onclick="calculateFinance()">احسب الآن</button>
-  <button class="reset" onclick="resetFields('tool-finance')">مسح</button>
-</div>
-
-
-<div id="resultFinance" class="result">
-
-  <div class="result-title">صافي التمويل المتوقع</div>
-
-  <div id="financeMain" class="result-main"></div>
-
-  <div class="result-grid">
-
-    <div class="result-item">
-      <span>القسط المستخدم</span>
-      <strong id="financeInstallment"></strong>
+    <div class="hero-point">
+      <span class="check">✓</span>
+      ما تحتاج تعرف نسب جميع البنوك
     </div>
 
-    <div class="result-item">
-      <span>إجمالي الأقساط</span>
-      <strong id="financeTotal"></strong>
+    <div class="hero-point">
+      <span class="check">✓</span>
+      أدخل العرض اللي وصلك
     </div>
 
-    <div class="result-item">
-      <span>الرسوم الإدارية + الضريبة</span>
-      <strong id="financeFees"></strong>
-    </div>
-
-    <div class="result-item">
-      <span>إجمالي تكلفة الأرباح التقريبية</span>
-      <strong id="financeProfit"></strong>
+    <div class="hero-point">
+      <span class="check">✓</span>
+      النتيجة خلال ثوانٍ
     </div>
 
   </div>
 
-  <button class="save-btn" onclick="saveCurrentResult()">
-    حفظ هذه الحسبة
-  </button>
+</div>
 
-  <div class="result-note">
-    النتيجة تقديرية بناءً على البيانات المدخلة وليست عرضًا أو موافقة تمويلية.
+
+
+<div class="preview-wrap">
+
+  <div class="preview-glow"></div>
+
+  <div class="preview-card">
+
+
+    <div class="preview-head">
+
+      <div class="brand">
+
+        <div
+          class="brand-logo"
+          style="
+            width:34px;
+            height:34px;
+            border-radius:11px;
+            font-size:11px;
+          "
+        >
+          F
+        </div>
+
+        <div>
+
+          <div
+            style="
+              color:var(--navy);
+              font-weight:900;
+              font-size:13px;
+            "
+          >
+            FINO
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="preview-live">
+        ● مثال توضيحي
+      </div>
+
+    </div>
+
+
+    <div class="preview-label">
+      السؤال
+    </div>
+
+
+    <div class="preview-question">
+      كم يصفي لي بعد شراء المديونية؟
+    </div>
+
+
+    <div class="preview-grid">
+
+      <div class="preview-cell">
+
+        <span>
+          صافي الراتب
+        </span>
+
+        <strong>
+          15,000 ريال
+        </strong>
+
+      </div>
+
+
+      <div class="preview-cell">
+
+        <span>
+          نسبة العرض
+        </span>
+
+        <strong>
+          1.99%
+        </strong>
+
+      </div>
+
+
+      <div class="preview-cell">
+
+        <span>
+          السداد الحالي
+        </span>
+
+        <strong>
+          190,000 ريال
+        </strong>
+
+      </div>
+
+
+      <div class="preview-cell">
+
+        <span>
+          المدة
+        </span>
+
+        <strong>
+          60 شهر
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="preview-result">
+
+      <span>
+        مثال للمبلغ المتبقي
+      </span>
+
+      <strong>
+        74,350 ريال
+      </strong>
+
+      <small>
+        الأرقام هنا مثال توضيحي وليست عرضًا فعليًا.
+      </small>
+
+    </div>
+
+
   </div>
 
 </div>
 
-</section>
-
-
-<!-- =====================================================
-     شراء المديونية
-===================================================== -->
-
-<section id="tool-buyout" class="calc-section hidden">
-
-<div class="calc-head">
-
-  <div>
-    <h2>كم يصفي لك بعد شراء المديونية؟</h2>
-    <p>أدخل العرض الذي حصلت عليه ومبلغ السداد المبكر.</p>
-  </div>
-
-  <button class="back-btn" onclick="backHome()">رجوع</button>
-
-</div>
-
-
-<div class="form-grid">
-
-  <div class="field">
-    <label>صافي الراتب</label>
-    <input id="bSalary" type="number" placeholder="15000">
-  </div>
-
-  <div class="field">
-    <label>نسبة الاستقطاع %</label>
-    <input id="bDeduction" type="number" value="33.33" step="0.01">
-  </div>
-
-  <div class="field">
-    <label>هامش الربح السنوي %</label>
-    <input id="bRate" type="number" placeholder="1.99" step="0.01">
-  </div>
-
-  <div class="field">
-    <label>مدة التمويل بالأشهر</label>
-    <input id="bMonths" type="number" value="60">
-  </div>
-
-  <div class="field">
-    <label>مبلغ السداد المبكر الحالي</label>
-    <input id="bSettlement" type="number" placeholder="190000">
-  </div>
-
-  <div class="field">
-    <label>رسوم السلعة / تكاليف إضافية</label>
-    <input id="bCommodity" type="number" value="0">
-  </div>
-
-</div>
-
-
-<div class="action-row">
-  <button class="calculate" onclick="calculateBuyout()">احسب الفائض</button>
-  <button class="reset" onclick="resetFields('tool-buyout')">مسح</button>
-</div>
-
-
-<div id="resultBuyout" class="result">
-
-  <div class="result-title">المتوقع يصفي لك بعد سداد المديونية</div>
-
-  <div id="buyoutMain" class="result-main"></div>
-
-  <div class="result-grid">
-
-    <div class="result-item">
-      <span>صافي التمويل المتوقع</span>
-      <strong id="buyoutFinance"></strong>
-    </div>
-
-    <div class="result-item">
-      <span>السداد المبكر</span>
-      <strong id="buyoutSettlement"></strong>
-    </div>
-
-    <div class="result-item">
-      <span>القسط المستخدم</span>
-      <strong id="buyoutInstallment"></strong>
-    </div>
-
-    <div class="result-item">
-      <span>الرسوم المستخدمة بالحسبة</span>
-      <strong id="buyoutFees"></strong>
-    </div>
-
-  </div>
-
-  <button class="save-btn" onclick="saveCurrentResult()">
-    حفظ هذه الحسبة
-  </button>
-
-  <div class="result-note">
-    الفائض تقديري وقد يختلف حسب آلية البنك والرسوم والسلعة والتأمين وأي عناصر أخرى في العرض النهائي.
-  </div>
 
 </div>
 
 </section>
 
 
-<!-- =====================================================
-     إعادة التمويل
-===================================================== -->
 
-<section id="tool-refinance" class="calc-section hidden">
+<section
+  id="explain"
+  class="explain"
+>
 
-<div class="calc-head">
-
-  <div>
-    <h2>إعادة التمويل</h2>
-    <p>قارن مبلغ التمويل الجديد بالمبلغ المطلوب لإغلاق التمويل الحالي.</p>
-  </div>
-
-  <button class="back-btn" onclick="backHome()">رجوع</button>
-
-</div>
+<div class="shell">
 
 
-<div class="form-grid">
+<div class="section-head">
 
-  <div class="field">
-    <label>صافي الراتب</label>
-    <input id="rSalary" type="number">
-  </div>
+  <small>
+    أدوات واضحة بدون تعقيد
+  </small>
 
-  <div class="field">
-    <label>نسبة الاستقطاع %</label>
-    <input id="rDeduction" type="number" value="33.33" step="0.01">
-  </div>
+  <h2>
+    اختر سؤالك وFINO ترتب لك الأرقام
+  </h2>
 
-  <div class="field">
-    <label>هامش الربح الجديد %</label>
-    <input id="rRate" type="number" step="0.01">
-  </div>
-
-  <div class="field">
-    <label>المدة الجديدة بالأشهر</label>
-    <input id="rMonths" type="number" value="60">
-  </div>
-
-  <div class="field">
-    <label>المبلغ المطلوب لإغلاق التمويل الحالي</label>
-    <input id="rSettlement" type="number">
-  </div>
-
-  <div class="field">
-    <label>رسوم إضافية</label>
-    <input id="rCommodity" type="number" value="0">
-  </div>
+  <p>
+    المنصة ما تحتاج ترشح لك بنك من بيانات قد تكون قديمة.
+    أنت تدخل العرض اللي وصلك ونوضح لك نتيجته.
+  </p>
 
 </div>
 
 
-<div class="action-row">
-  <button class="calculate" onclick="calculateRefinance()">احسب</button>
-  <button class="reset" onclick="resetFields('tool-refinance')">مسح</button>
-</div>
+<div class="features">
 
+  <div class="feature">
 
-<div id="resultRefinance" class="result">
-
-  <div class="result-title">الكاش المتوقع بعد إعادة التمويل</div>
-
-  <div id="refinanceMain" class="result-main"></div>
-
-  <div class="result-grid">
-
-    <div class="result-item">
-      <span>صافي التمويل الجديد</span>
-      <strong id="refinanceFinance"></strong>
+    <div class="feature-icon">
+      💵
     </div>
 
-    <div class="result-item">
-      <span>إغلاق التمويل الحالي</span>
-      <strong id="refinanceSettlement"></strong>
-    </div>
+    <h3>
+      كم يصفي لي؟
+    </h3>
 
-    <div class="result-item">
-      <span>القسط الجديد</span>
-      <strong id="refinanceInstallment"></strong>
-    </div>
-
-    <div class="result-item">
-      <span>إجمالي الأقساط الجديدة</span>
-      <strong id="refinanceTotal"></strong>
-    </div>
+    <p>
+      احسب المتوقع يبقى لك بعد سداد مديونيتك الحالية.
+    </p>
 
   </div>
 
-  <button class="save-btn" onclick="saveCurrentResult()">
-    حفظ هذه الحسبة
+
+  <div class="feature">
+
+    <div class="feature-icon">
+      💰
+    </div>
+
+    <h3>
+      كم ممكن يكون تمويلي؟
+    </h3>
+
+    <p>
+      أدخل الراتب والنسبة والمدة وشوف الحسبة.
+    </p>
+
+  </div>
+
+
+  <div class="feature">
+
+    <div class="feature-icon">
+      ⚖️
+    </div>
+
+    <h3>
+      قارن عرضين
+    </h3>
+
+    <p>
+      قارن الصافي والقسط وإجمالي السداد بين عرضين.
+    </p>
+
+  </div>
+
+
+  <div class="feature">
+
+    <div class="feature-icon">
+      📊
+    </div>
+
+    <h3>
+      حلل عرض البنك
+    </h3>
+
+    <p>
+      حول العرض إلى أرقام مختصرة وأسهل في الفهم.
+    </p>
+
+  </div>
+
+</div>
+
+
+<div
+  style="
+    text-align:center;
+    margin-top:25px;
+  "
+>
+
+  <button
+    class="primary"
+    onclick="startOnboarding()"
+  >
+    ابدأ واعرف حسبتك
   </button>
 
 </div>
 
-</section>
-
-
-<!-- =====================================================
-     مقارنة عرضين
-===================================================== -->
-
-<section id="tool-compare" class="calc-section hidden">
-
-<div class="calc-head">
-
-  <div>
-    <h2>قارن عرضين</h2>
-    <p>أدخل بيانات العرضين واعرف الفرق بالأرقام.</p>
-  </div>
-
-  <button class="back-btn" onclick="backHome()">رجوع</button>
-
-</div>
-
-
-<div class="form-grid">
-
-  <div class="field full">
-    <label>العرض الأول</label>
-  </div>
-
-  <div class="field">
-    <label>الصافي الذي تستلمه</label>
-    <input id="cCash1" type="number">
-  </div>
-
-  <div class="field">
-    <label>القسط الشهري</label>
-    <input id="cInstallment1" type="number">
-  </div>
-
-  <div class="field">
-    <label>عدد الأشهر</label>
-    <input id="cMonths1" type="number" value="60">
-  </div>
-
-
-  <div class="field full">
-    <label>العرض الثاني</label>
-  </div>
-
-  <div class="field">
-    <label>الصافي الذي تستلمه</label>
-    <input id="cCash2" type="number">
-  </div>
-
-  <div class="field">
-    <label>القسط الشهري</label>
-    <input id="cInstallment2" type="number">
-  </div>
-
-  <div class="field">
-    <label>عدد الأشهر</label>
-    <input id="cMonths2" type="number" value="60">
-  </div>
-
-</div>
-
-
-<div class="action-row">
-  <button class="calculate" onclick="compareOffers()">قارن الآن</button>
-  <button class="reset" onclick="resetFields('tool-compare')">مسح</button>
-</div>
-
-
-<div id="resultCompare" class="result">
-
-  <div id="compareWinner" class="comparison-winner"></div>
-
-  <div class="result-grid">
-
-    <div class="result-item">
-      <span>فرق الصافي</span>
-      <strong id="compareCash"></strong>
-    </div>
-
-    <div class="result-item">
-      <span>فرق القسط</span>
-      <strong id="compareInstallment"></strong>
-    </div>
-
-    <div class="result-item">
-      <span>إجمالي سداد العرض الأول</span>
-      <strong id="compareTotal1"></strong>
-    </div>
-
-    <div class="result-item">
-      <span>إجمالي سداد العرض الثاني</span>
-      <strong id="compareTotal2"></strong>
-    </div>
-
-  </div>
-
-  <div class="result-note">
-    الأعلى صافيًا ليس بالضرورة الأقل تكلفة. قارن القسط وإجمالي السداد والمدة بما يناسب احتياجك.
-  </div>
 
 </div>
 
 </section>
 
 
-<!-- =====================================================
-     تحليل عرض البنك
-===================================================== -->
+<footer>
 
-<section id="tool-analyze" class="calc-section hidden">
+FINO © 2026
 
-<div class="calc-head">
+<br>
 
-  <div>
-    <h2>حلل عرض البنك</h2>
-    <p>أدخل بيانات العرض كما وصلتك من البنك.</p>
-  </div>
+الحسبات تقديرية وتعتمد على البيانات المدخلة ولا تمثل موافقة أو عرضًا ملزمًا من أي بنك أو جهة تمويلية.
 
-  <button class="back-btn" onclick="backHome()">رجوع</button>
-
-</div>
-
-
-<div class="form-grid">
-
-  <div class="field">
-    <label>مبلغ التمويل / الصافي</label>
-    <input id="aCash" type="number">
-  </div>
-
-  <div class="field">
-    <label>القسط الشهري</label>
-    <input id="aInstallment" type="number">
-  </div>
-
-  <div class="field">
-    <label>عدد الأشهر</label>
-    <input id="aMonths" type="number">
-  </div>
-
-  <div class="field">
-    <label>الرسوم المدفوعة إن وجدت</label>
-    <input id="aFees" type="number" value="0">
-  </div>
-
-  <div class="field">
-    <label>النسبة المعلنة %</label>
-    <input id="aRate" type="number" step="0.01">
-  </div>
-
-  <div class="field">
-    <label>APR إن كانت موجودة %</label>
-    <input id="aAPR" type="number" step="0.01">
-  </div>
-
-</div>
-
-
-<div class="action-row">
-  <button class="calculate" onclick="analyzeOffer()">حلل العرض</button>
-  <button class="reset" onclick="resetFields('tool-analyze')">مسح</button>
-</div>
-
-
-<div id="resultAnalyze" class="result">
-
-  <div class="result-title">إجمالي المبلغ الذي ستدفعه</div>
-
-  <div id="analyzeMain" class="result-main"></div>
-
-  <div class="result-grid">
-
-    <div class="result-item">
-      <span>المبلغ الذي تستلمه</span>
-      <strong id="analyzeCash"></strong>
-    </div>
-
-    <div class="result-item">
-      <span>إجمالي الأقساط</span>
-      <strong id="analyzeTotal"></strong>
-    </div>
-
-    <div class="result-item">
-      <span>الفرق بين ما تستلمه وما تدفعه</span>
-      <strong id="analyzeCost"></strong>
-    </div>
-
-    <div class="result-item">
-      <span>النسبة / APR المدخلة</span>
-      <strong id="analyzeRates"></strong>
-    </div>
-
-  </div>
-
-  <button class="save-btn" onclick="saveCurrentResult()">
-    حفظ تحليل العرض
-  </button>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     القدرة التمويلية
-===================================================== -->
-
-<section id="tool-capacity" class="calc-section hidden">
-
-<div class="calc-head">
-
-  <div>
-    <h2>قدرتي التمويلية</h2>
-    <p>تعرف على مبلغ القسط بناءً على نسبة الاستقطاع المدخلة.</p>
-  </div>
-
-  <button class="back-btn" onclick="backHome()">رجوع</button>
-
-</div>
-
-
-<div class="form-grid">
-
-  <div class="field">
-    <label>صافي الراتب</label>
-    <input id="pSalary" type="number">
-  </div>
-
-  <div class="field">
-    <label>نسبة الاستقطاع %</label>
-    <input id="pDeduction" type="number" step="0.01" value="33.33">
-  </div>
-
-</div>
-
-
-<div class="action-row">
-  <button class="calculate" onclick="calculateCapacity()">احسب القسط</button>
-  <button class="reset" onclick="resetFields('tool-capacity')">مسح</button>
-</div>
-
-
-<div id="resultCapacity" class="result">
-
-  <div class="result-title">القسط بناءً على النسبة المدخلة</div>
-
-  <div id="capacityMain" class="result-main"></div>
-
-  <div class="result-grid">
-
-    <div class="result-item">
-      <span>الراتب</span>
-      <strong id="capacitySalary"></strong>
-    </div>
-
-    <div class="result-item">
-      <span>نسبة الاستقطاع</span>
-      <strong id="capacityPercent"></strong>
-    </div>
-
-  </div>
-
-  <div class="result-note">
-    هذه عملية حسابية فقط ولا تعني أن البنك سيعتمد نسبة الاستقطاع المدخلة أو أن العميل مؤهل للتمويل.
-  </div>
-
-</div>
-
-</section>
-
-
-<div class="container">
-  <div class="notice">
-    تنبيه: جميع النتائج في FINO تقديرية وتعتمد على صحة البيانات المدخلة وطريقة الاحتساب المستخدمة.
-    النتيجة النهائية قد تختلف باختلاف البنك، العقد، معدل النسبة السنوي APR، الرسوم، السلعة، التأمين،
-    جهة العمل، العمر، الالتزامات والسياسات الائتمانية.
-  </div>
-</div>
-
-
-<footer class="footer">
-  FINO © 2026 — حاسبات التمويل الذكية
 </footer>
 
 </div>
 
 
-<div id="expiredOverlay" class="expired-overlay hidden">
 
-  <div class="expired-card">
+<!-- =========================================================
+     2. ONBOARDING
+========================================================= -->
 
-    <h2>انتهى اشتراك الكود</h2>
+<div
+  id="onboardingPage"
+  class="page hidden"
+>
 
-    <p id="expiredText">
-      تم استهلاك جميع العمليات المتاحة أو انتهت صلاحية الكود.
-    </p>
+<div class="shell page-head">
 
-    <button class="primary-btn" onclick="logout()">
-      إدخال كود جديد
-    </button>
+  <button
+    class="back-btn"
+    onclick="showLanding()"
+  >
+    ← رجوع
+  </button>
+
+</div>
+
+
+<div class="card">
+
+  <div class="step-pill">
+    👋 قبل نبدأ
+  </div>
+
+
+  <h2>
+    نتعرف عليك أول؟
+  </h2>
+
+
+  <p class="card-desc">
+
+    معلومات بسيطة تساعد FINO تكلمك بشكل أوضح
+    وتخصص لك تجربة الحسبة.
+
+  </p>
+
+
+  <div class="profile-field">
+
+    <label>
+      وش اسمك الأول؟
+    </label>
+
+    <input
+      id="customerName"
+      class="text-input"
+      type="text"
+      maxlength="20"
+      placeholder="مثال: نايف"
+    >
+
+  </div>
+
+
+  <div class="profile-field">
+
+    <label>
+      وش البنك اللي ينزل عليه راتبك؟
+    </label>
+
+    <select
+      id="salaryBank"
+      class="text-input"
+    >
+
+      <option value="">
+        اختر بنك الراتب
+      </option>
+
+      <option value="مصرف الراجحي">
+        مصرف الراجحي
+      </option>
+
+      <option value="البنك الأهلي السعودي">
+        البنك الأهلي السعودي
+      </option>
+
+      <option value="مصرف الإنماء">
+        مصرف الإنماء
+      </option>
+
+      <option value="بنك الرياض">
+        بنك الرياض
+      </option>
+
+      <option value="البنك السعودي الأول">
+        البنك السعودي الأول SAB
+      </option>
+
+      <option value="البنك العربي الوطني">
+        البنك العربي الوطني
+      </option>
+
+      <option value="البنك السعودي الفرنسي">
+        البنك السعودي الفرنسي
+      </option>
+
+      <option value="بنك البلاد">
+        بنك البلاد
+      </option>
+
+      <option value="بنك الجزيرة">
+        بنك الجزيرة
+      </option>
+
+      <option value="بنك آخر">
+        بنك آخر
+      </option>
+
+    </select>
+
+  </div>
+
+
+  <div class="profile-field">
+
+    <label>
+      وش وضعك الوظيفي؟
+    </label>
+
+    <div
+      id="employmentOptions"
+      class="option-grid"
+    >
+
+      <button
+        type="button"
+        class="option"
+        data-value="حكومي"
+        onclick="selectEmployment(this)"
+      >
+        حكومي
+      </button>
+
+      <button
+        type="button"
+        class="option"
+        data-value="عسكري"
+        onclick="selectEmployment(this)"
+      >
+        عسكري
+      </button>
+
+      <button
+        type="button"
+        class="option"
+        data-value="شبه حكومي"
+        onclick="selectEmployment(this)"
+      >
+        شبه حكومي
+      </button>
+
+      <button
+        type="button"
+        class="option"
+        data-value="قطاع خاص"
+        onclick="selectEmployment(this)"
+      >
+        قطاع خاص
+      </button>
+
+      <button
+        type="button"
+        class="option"
+        data-value="متقاعد"
+        onclick="selectEmployment(this)"
+      >
+        متقاعد
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="profile-field">
+
+    <label>
+      وش أهم شيء لك في العرض؟
+    </label>
+
+    <div
+      id="goalOptions"
+      class="option-grid"
+    >
+
+      <button
+        type="button"
+        class="option"
+        data-value="أعلى كاش"
+        onclick="selectGoal(this)"
+      >
+        💰 أعلى كاش
+      </button>
+
+      <button
+        type="button"
+        class="option"
+        data-value="أقل قسط"
+        onclick="selectGoal(this)"
+      >
+        📉 أقل قسط
+      </button>
+
+      <button
+        type="button"
+        class="option"
+        data-value="أقل إجمالي سداد"
+        onclick="selectGoal(this)"
+      >
+        💵 أقل تكلفة
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="continue-btn"
+    onclick="finishOnboarding()"
+  >
+    يلا نبدأ ←
+  </button>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     3. DASHBOARD
+========================================================= -->
+
+<div
+  id="dashboardPage"
+  class="page hidden"
+>
+
+<header class="navbar">
+
+<div class="nav-inner">
+
+  <div class="brand">
+
+    <div class="brand-logo">
+      F
+    </div>
+
+    <div>
+
+      <div class="brand-name">
+        FINO
+      </div>
+
+      <div class="brand-sub">
+        حاسبات التمويل الذكية
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <button
+    onclick="editProfile()"
+    class="secondary"
+    style="
+      padding:8px 11px;
+      font-size:8px;
+    "
+  >
+    تعديل بياناتي
+  </button>
+
+</div>
+
+</header>
+
+
+<div class="shell dashboard-top">
+
+<div class="welcome-card">
+
+  <div class="welcome-small">
+    أهلاً بك في FINO
+  </div>
+
+  <h1 id="welcomeName">
+    هلا 👋
+  </h1>
+
+  <p
+    id="welcomeMessage"
+    class="welcome-desc"
+  >
+  </p>
+
+
+  <div class="profile-chips">
+
+    <div
+      id="bankChip"
+      class="profile-chip"
+    >
+    </div>
+
+    <div
+      id="employmentChip"
+      class="profile-chip"
+    >
+    </div>
+
+    <div
+      id="goalChip"
+      class="profile-chip"
+    >
+    </div>
 
   </div>
 
 </div>
 
 
+<div class="question-heading">
+
+  <small id="personalQuestionSmall">
+    وش ودك تعرف؟
+  </small>
+
+  <h2 id="personalQuestion">
+    اختر الحسبة
+  </h2>
+
+</div>
+
+
+<div class="tool-grid">
+
+
+  <div
+    class="tool-card"
+    onclick="openTool('buyout')"
+  >
+
+    <div class="tool-icon">
+      💵
+    </div>
+
+    <h3 id="buyoutCardTitle">
+      كم يصفي لي؟
+    </h3>
+
+    <p id="buyoutCardText">
+      احسب المتوقع يبقى لك بعد سداد مديونيتك.
+    </p>
+
+    <div class="tool-link">
+      ابدأ الحسبة ←
+    </div>
+
+  </div>
+
+
+  <div
+    class="tool-card"
+    onclick="openTool('finance')"
+  >
+
+    <div class="tool-icon">
+      💰
+    </div>
+
+    <h3>
+      كم ممكن يكون تمويلي؟
+    </h3>
+
+    <p id="financeCardText">
+      تعرف نسبة العرض؟ أدخلها واحسب التمويل المتوقع.
+    </p>
+
+    <div class="tool-link">
+      احسب الآن ←
+    </div>
+
+  </div>
+
+
+  <div
+    class="tool-card"
+    onclick="openTool('compare')"
+  >
+
+    <div class="tool-icon">
+      ⚖️
+    </div>
+
+    <h3>
+      عندي عرضين.. وش الأفضل؟
+    </h3>
+
+    <p id="compareCardText">
+      قارن العرضين بالأرقام حسب الشيء الأهم لك.
+    </p>
+
+    <div class="tool-link">
+      قارن العرضين ←
+    </div>
+
+  </div>
+
+
+  <div
+    class="tool-card"
+    onclick="openTool('analyze')"
+  >
+
+    <div class="tool-icon">
+      📊
+    </div>
+
+    <h3>
+      حلل عرضي
+    </h3>
+
+    <p>
+      أدخل العرض اللي وصلك ونوضح لك المبلغ والقسط وإجمالي السداد.
+    </p>
+
+    <div class="tool-link">
+      حلل العرض ←
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<div class="notice">
+
+مهم: FINO لا تعتبر ظهور نتيجة موافقة تمويلية أو وعدًا من البنك.
+الحسبة تعتمد على المعلومات التي تدخلها أنت، وقد تختلف النتيجة النهائية حسب العقد والرسوم وطريقة احتساب الجهة الممولة.
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     4. CALCULATOR
+========================================================= -->
+
+<div
+  id="calculatorPage"
+  class="page hidden"
+>
+
+<div class="shell page-head">
+
+  <button
+    class="back-btn"
+    onclick="showDashboard()"
+  >
+    ← رجوع للحاسبات
+  </button>
+
+</div>
+
+
+<div class="calc-wrap">
+
+  <div class="calc-kicker">
+    FINO CALCULATOR
+  </div>
+
+
+  <h2
+    id="calcTitle"
+    class="calc-title"
+  >
+    الحسبة
+  </h2>
+
+
+  <p
+    id="calcDesc"
+    class="calc-desc"
+  >
+  </p>
+
+
+  <div
+    id="calcFields"
+    class="calc-fields"
+  >
+  </div>
+
+
+  <button
+    id="calculateButton"
+    class="calc-action"
+    onclick="handleCalculation()"
+  >
+    طلع نتيجتي
+  </button>
+
+
+  <div
+    id="resultBox"
+    class="result"
+  >
+
+    <div class="personal-result">
+
+      <div
+        id="resultIntro"
+        class="result-intro"
+      >
+      </div>
+
+
+      <div
+        id="resultLabel"
+        class="result-label"
+      >
+      </div>
+
+
+      <div
+        id="resultMain"
+        class="result-main"
+      >
+      </div>
+
+
+      <div
+        id="resultDetails"
+        class="result-grid"
+      >
+      </div>
+
+
+      <div
+        id="resultMessage"
+        class="result-message"
+      >
+      </div>
+
+
+      <div class="result-actions">
+
+        <button
+          class="dark-button"
+          onclick="openTool('compare')"
+        >
+          عندي عرض ثاني
+        </button>
+
+
+        <button
+          class="light-button"
+          onclick="showDashboard()"
+        >
+          حسبة ثانية
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="notice">
+
+الحسبة إرشادية وتقديرية وليست عرضًا تمويليًا أو موافقة ائتمانية.
+راجع العرض النهائي والعقد الصادر من البنك قبل اتخاذ القرار.
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     5. CODE MODAL
+========================================================= -->
+
+<div
+  id="codeModal"
+  class="modal hidden"
+>
+
+<div class="modal-card">
+
+  <button
+    class="close-modal"
+    onclick="closeCodeModal()"
+  >
+    ×
+  </button>
+
+
+  <div class="lock">
+    🔐
+  </div>
+
+
+  <h3 id="unlockTitle">
+    حسبتك جاهزة
+  </h3>
+
+
+  <p
+    id="unlockMessage"
+    class="modal-text"
+  >
+  </p>
+
+
+  <input
+    id="codeInput"
+    class="code-input"
+    type="text"
+    placeholder="أدخل كود الاشتراك"
+    autocomplete="off"
+  >
+
+
+  <button
+    class="unlock"
+    onclick="activateCode()"
+  >
+    افتح نتيجتي
+  </button>
+
+
+  <div
+    id="codeError"
+    class="modal-error"
+  >
+  </div>
+
+
+  <div class="demo-code">
+
+    للتجربة الآن
+
+    <strong>
+      FINO-7K29-X4
+    </strong>
+
+    10 حسبات • 24 ساعة من أول تفعيل
+
+  </div>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     6. MEMBER BAR
+========================================================= -->
+
+<div
+  id="memberBar"
+  class="memberbar hidden"
+>
+
+  <span>
+    المتبقي:
+    <strong id="usesLeft">
+      -
+    </strong>
+  </span>
+
+  <span>
+    •
+  </span>
+
+  <span>
+    الصلاحية:
+    <strong id="timeLeft">
+      -
+    </strong>
+  </span>
+
+</div>
+
+
+
 <script>
 
 /* =========================================================
-   إعداد أكواد الاشتراك
-
-   مهم:
-   هذا نظام Front-End للتجربة.
-   في الموقع التجاري الحقيقي يجب تخزين الأكواد والتحقق منها
-   من السيرفر وليس داخل JavaScript حتى لا يستطيع المستخدم
-   مشاهدة الأكواد أو تعديل عدد الاستخدامات.
+   FINO
+   Application State
 ========================================================= */
 
-const ACCESS_CODES = {
+let profile = {
+
+  name:"",
+  bank:"",
+  employment:"",
+  goal:""
+
+};
+
+let selectedEmployment="";
+let selectedGoal="";
+
+let currentTool="";
+let pendingCalculation=null;
+
+
+/* =========================================================
+   SUBSCRIPTION CODES
+   للتجربة فقط
+========================================================= */
+
+const ACCESS_CODES={
 
   "FINO-7K29-X4":{
-    name:"FINO Plus تجريبي",
     uses:10,
-    hours:24
+    hours:24,
+    plan:"تجريبي"
   },
 
   "FINO-BASIC-25":{
-    name:"FINO Basic",
-    uses:3,
-    hours:24
+    uses:5,
+    hours:24,
+    plan:"Basic"
   },
 
   "FINO-PLUS-40":{
-    name:"FINO Plus",
     uses:15,
-    hours:72
+    hours:72,
+    plan:"Plus"
   },
 
   "FINO-PRO-70":{
-    name:"FINO Pro",
     uses:30,
-    hours:168
+    hours:168,
+    plan:"Pro"
   }
 
 };
 
 
-let currentResult = null;
-let activeTool = null;
-
-
 /* =========================================================
-   الأدوات العامة
+   ELEMENT HELPERS
 ========================================================= */
 
-function money(n){
+function el(id){
+  return document.getElementById(id);
+}
 
-  if(!Number.isFinite(Number(n))){
-    return "0 ريال";
+function hide(id){
+  el(id).classList.add("hidden");
+}
+
+function show(id){
+  el(id).classList.remove("hidden");
+}
+
+function num(id){
+
+  const element=el(id);
+
+  if(!element){
+    return 0;
   }
+
+  return Number(element.value)||0;
+
+}
+
+function money(value){
+
+  const number=Number(value)||0;
 
   return new Intl.NumberFormat(
     "ar-SA",
     {
       maximumFractionDigits:0
     }
-  ).format(Number(n)) + " ريال";
+  ).format(number)+" ريال";
 
 }
 
+function safeName(){
 
-function val(id){
-
-  return Number(
-    document.getElementById(id).value
-  ) || 0;
-
-}
-
-
-function show(id){
-
-  document
-    .getElementById(id)
-    .classList.remove("hidden");
-
-}
-
-
-function hide(id){
-
-  document
-    .getElementById(id)
-    .classList.add("hidden");
+  return profile.name || "يا هلا";
 
 }
 
 
 /* =========================================================
-   تفعيل الكود
+   LANDING
 ========================================================= */
 
-function activateCode(){
+function scrollToExplain(){
 
-  const input =
-    document.getElementById("accessCode");
+  el("explain").scrollIntoView({
+    behavior:"smooth"
+  });
 
-  const code =
-    input.value.trim().toUpperCase();
+}
 
-  const error =
-    document.getElementById("loginError");
+function showLanding(){
 
-  const success =
-    document.getElementById("loginSuccess");
+  hideAllPages();
 
-  error.style.display="none";
-  success.style.display="none";
+  show("landingPage");
 
-  if(!ACCESS_CODES[code]){
+  window.scrollTo({
+    top:0
+  });
 
-    error.style.display="block";
+}
+
+function startOnboarding(){
+
+  hideAllPages();
+
+  show("onboardingPage");
+
+  restoreOnboardingFields();
+
+  window.scrollTo({
+    top:0
+  });
+
+}
+
+
+/* =========================================================
+   HIDE PAGES
+========================================================= */
+
+function hideAllPages(){
+
+  [
+    "landingPage",
+    "onboardingPage",
+    "dashboardPage",
+    "calculatorPage"
+  ].forEach(id=>{
+
+    hide(id);
+
+  });
+
+}
+
+
+/* =========================================================
+   ONBOARDING SELECTIONS
+========================================================= */
+
+function selectEmployment(button){
+
+  document
+    .querySelectorAll("#employmentOptions .option")
+    .forEach(item=>{
+
+      item.classList.remove("active");
+
+    });
+
+  button.classList.add("active");
+
+  selectedEmployment=
+    button.dataset.value;
+
+}
+
+
+function selectGoal(button){
+
+  document
+    .querySelectorAll("#goalOptions .option")
+    .forEach(item=>{
+
+      item.classList.remove("active");
+
+    });
+
+  button.classList.add("active");
+
+  selectedGoal=
+    button.dataset.value;
+
+}
+
+
+/* =========================================================
+   FINISH ONBOARDING
+========================================================= */
+
+function finishOnboarding(){
+
+  const name=
+    el("customerName")
+    .value
+    .trim();
+
+  const bank=
+    el("salaryBank")
+    .value;
+
+
+  if(name.length<2){
+
+    alert(
+      "اكتب اسمك الأول عشان نكمل."
+    );
+
+    el("customerName").focus();
+
     return;
 
   }
 
 
-  let subscriptions =
-    JSON.parse(
-      localStorage.getItem("finoSubscriptions") || "{}"
+  if(!bank){
+
+    alert(
+      "اختر البنك اللي ينزل عليه راتبك."
+    );
+
+    return;
+
+  }
+
+
+  if(!selectedEmployment){
+
+    alert(
+      "اختر وضعك الوظيفي."
+    );
+
+    return;
+
+  }
+
+
+  if(!selectedGoal){
+
+    alert(
+      "اختر الشيء الأهم لك في العرض."
+    );
+
+    return;
+
+  }
+
+
+  profile={
+
+    name:name,
+
+    bank:bank,
+
+    employment:selectedEmployment,
+
+    goal:selectedGoal
+
+  };
+
+
+  localStorage.setItem(
+    "finoProfile",
+    JSON.stringify(profile)
+  );
+
+
+  renderDashboard();
+
+  showDashboard();
+
+}
+
+
+/* =========================================================
+   RESTORE PROFILE
+========================================================= */
+
+function loadProfile(){
+
+  const stored=
+    localStorage.getItem("finoProfile");
+
+  if(!stored){
+    return false;
+  }
+
+
+  try{
+
+    const parsed=
+      JSON.parse(stored);
+
+
+    if(
+      !parsed.name ||
+      !parsed.bank ||
+      !parsed.employment ||
+      !parsed.goal
+    ){
+
+      return false;
+
+    }
+
+
+    profile=parsed;
+
+    selectedEmployment=
+      profile.employment;
+
+    selectedGoal=
+      profile.goal;
+
+    return true;
+
+  }catch(error){
+
+    return false;
+
+  }
+
+}
+
+
+function restoreOnboardingFields(){
+
+  if(!loadProfile()){
+    return;
+  }
+
+
+  el("customerName").value=
+    profile.name;
+
+  el("salaryBank").value=
+    profile.bank;
+
+
+  document
+    .querySelectorAll("#employmentOptions .option")
+    .forEach(button=>{
+
+      button.classList.toggle(
+        "active",
+        button.dataset.value===profile.employment
+      );
+
+    });
+
+
+  document
+    .querySelectorAll("#goalOptions .option")
+    .forEach(button=>{
+
+      button.classList.toggle(
+        "active",
+        button.dataset.value===profile.goal
+      );
+
+    });
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function showDashboard(){
+
+  if(!loadProfile()){
+
+    startOnboarding();
+
+    return;
+
+  }
+
+
+  hideAllPages();
+
+  renderDashboard();
+
+  show("dashboardPage");
+
+  window.scrollTo({
+    top:0
+  });
+
+}
+
+
+function renderDashboard(){
+
+  el("welcomeName").innerText=
+    "هلا "+profile.name+" 👋";
+
+
+  el("welcomeMessage").innerText=
+    "راتبك ينزل على "+profile.bank+
+    "، وإذا عندك عرض من بنكك أو من بنك ثاني أدخل أرقامه وخل FINO توضح لك الحسبة بدون ما نفترض أن بنك معين هو الأفضل لك.";
+
+
+  el("bankChip").innerText=
+    "🏦 بنك الراتب: "+profile.bank;
+
+
+  el("employmentChip").innerText=
+    "💼 "+profile.employment;
+
+
+  el("goalChip").innerText=
+    "🎯 هدفك: "+profile.goal;
+
+
+  el("personalQuestionSmall").innerText=
+    "وش ودك تعرف يا "+profile.name+"؟";
+
+
+  el("personalQuestion").innerText=
+    "اختر الحسبة اللي تحتاجها";
+
+
+  el("buyoutCardTitle").innerText=
+    "كم يصفي لي يا "+profile.name+"؟";
+
+
+  el("buyoutCardText").innerText=
+    "إذا عندك عرض شراء مديونية من بنك آخر، أدخل النسبة ومبلغ السداد الحالي ونحسب لك المتوقع.";
+
+
+  el("financeCardText").innerText=
+    "إذا تعرف النسبة اللي عرضها عليك البنك، نحسب لك التمويل المتوقع بناءً على البيانات اللي تدخلها.";
+
+
+  el("compareCardText").innerText=
+    "بما إن الأهم لك "+profile.goal+
+    "، نقارن لك العرضين ونوضح لك الفروقات الأساسية.";
+
+}
+
+
+function editProfile(){
+
+  startOnboarding();
+
+}
+
+
+/* =========================================================
+   DEFAULT DEDUCTION
+========================================================= */
+
+function defaultDeduction(){
+
+  if(profile.employment==="متقاعد"){
+    return 25;
+  }
+
+  return 33.33;
+
+}
+
+
+/* =========================================================
+   CALCULATOR DEFINITIONS
+========================================================= */
+
+const TOOL_DATA={
+
+
+buyout:{
+
+  title:()=>(
+    "يا "+safeName()+"، كم يصفي لك بعد شراء المديونية؟"
+  ),
+
+  description:()=>(
+    "راتبك حاليًا على "+profile.bank+
+    ". إذا عندك عرض شراء مديونية من بنك آخر، أدخل النسبة اللي عطوك إياها ومبلغ السداد المبكر الحالي."
+  ),
+
+  fields:()=>`
+
+    <div class="field">
+
+      <label>
+        صافي الراتب
+      </label>
+
+      <input
+        id="buyoutSalary"
+        type="number"
+        inputmode="decimal"
+        placeholder="مثال: 15000"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        نسبة الاستقطاع المستخدمة بالحسبة %
+      </label>
+
+      <input
+        id="buyoutDeduction"
+        type="number"
+        inputmode="decimal"
+        step="0.01"
+        value="${defaultDeduction()}"
+      >
+
+      <div class="field-note">
+        يمكنك تعديلها حسب العرض الفعلي.
+      </div>
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        هامش الربح السنوي في العرض %
+      </label>
+
+      <input
+        id="buyoutRate"
+        type="number"
+        inputmode="decimal"
+        step="0.01"
+        placeholder="مثال: 1.99"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        مدة التمويل بالأشهر
+      </label>
+
+      <input
+        id="buyoutMonths"
+        type="number"
+        inputmode="numeric"
+        value="60"
+      >
+
+    </div>
+
+
+    <div class="field full">
+
+      <label>
+        مبلغ السداد المبكر لتمويلك الحالي
+      </label>
+
+      <input
+        id="buyoutSettlement"
+        type="number"
+        inputmode="decimal"
+        placeholder="مثال: 190000"
+      >
+
+      <div class="field-note">
+        الأفضل إدخال مبلغ السداد المبكر الصادر من البنك الحالي.
+      </div>
+
+    </div>
+
+  `
+
+},
+
+
+finance:{
+
+  title:()=>(
+    "يا "+safeName()+"، كم ممكن يكون مبلغ تمويلك؟"
+  ),
+
+  description:()=>(
+    "إذا البنك أعطاك نسبة تمويل، أدخلها هنا مع راتبك والمدة ونحسب لك نتيجة تقريبية."
+  ),
+
+  fields:()=>`
+
+    <div class="field">
+
+      <label>
+        صافي الراتب
+      </label>
+
+      <input
+        id="financeSalary"
+        type="number"
+        inputmode="decimal"
+        placeholder="مثال: 15000"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        نسبة الاستقطاع %
+      </label>
+
+      <input
+        id="financeDeduction"
+        type="number"
+        inputmode="decimal"
+        step="0.01"
+        value="${defaultDeduction()}"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        هامش الربح السنوي %
+      </label>
+
+      <input
+        id="financeRate"
+        type="number"
+        inputmode="decimal"
+        step="0.01"
+        placeholder="مثال: 1.99"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        مدة التمويل بالأشهر
+      </label>
+
+      <input
+        id="financeMonths"
+        type="number"
+        inputmode="numeric"
+        value="60"
+      >
+
+    </div>
+
+  `
+
+},
+
+
+compare:{
+
+  title:()=>(
+    "يا "+safeName()+"، خلنا نقارن العرضين"
+  ),
+
+  description:()=>(
+    "بما أن هدفك "+profile.goal+
+    "، بنوضح لك فرق الصافي والقسط وإجمالي السداد بين العرضين."
+  ),
+
+  fields:()=>`
+
+    <div class="field full">
+
+      <label style="
+        color:var(--blue);
+        font-size:12px;
+      ">
+        العرض الأول
+      </label>
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        الصافي اللي تستلمه
+      </label>
+
+      <input
+        id="compareCash1"
+        type="number"
+        inputmode="decimal"
+        placeholder="مثال: 250000"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        القسط الشهري
+      </label>
+
+      <input
+        id="compareInstallment1"
+        type="number"
+        inputmode="decimal"
+        placeholder="مثال: 4800"
+      >
+
+    </div>
+
+
+    <div class="field full">
+
+      <label>
+        مدة العرض الأول بالأشهر
+      </label>
+
+      <input
+        id="compareMonths1"
+        type="number"
+        inputmode="numeric"
+        value="60"
+      >
+
+    </div>
+
+
+    <div class="field full">
+
+      <label style="
+        color:var(--blue);
+        font-size:12px;
+        margin-top:7px;
+      ">
+        العرض الثاني
+      </label>
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        الصافي اللي تستلمه
+      </label>
+
+      <input
+        id="compareCash2"
+        type="number"
+        inputmode="decimal"
+        placeholder="مثال: 260000"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        القسط الشهري
+      </label>
+
+      <input
+        id="compareInstallment2"
+        type="number"
+        inputmode="decimal"
+        placeholder="مثال: 4950"
+      >
+
+    </div>
+
+
+    <div class="field full">
+
+      <label>
+        مدة العرض الثاني بالأشهر
+      </label>
+
+      <input
+        id="compareMonths2"
+        type="number"
+        inputmode="numeric"
+        value="60"
+      >
+
+    </div>
+
+  `
+
+},
+
+
+analyze:{
+
+  title:()=>(
+    "يا "+safeName()+"، خلنا نفهم عرض البنك"
+  ),
+
+  description:()=>(
+    "أدخل الأرقام اللي وصلتك من البنك ونحولها لك إلى ملخص واضح."
+  ),
+
+  fields:()=>`
+
+    <div class="field">
+
+      <label>
+        المبلغ اللي تستلمه
+      </label>
+
+      <input
+        id="analyzeCash"
+        type="number"
+        inputmode="decimal"
+        placeholder="مثال: 250000"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        القسط الشهري
+      </label>
+
+      <input
+        id="analyzeInstallment"
+        type="number"
+        inputmode="decimal"
+        placeholder="مثال: 4800"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        مدة التمويل بالأشهر
+      </label>
+
+      <input
+        id="analyzeMonths"
+        type="number"
+        inputmode="numeric"
+        value="60"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        رسوم إضافية مدفوعة إن وجدت
+      </label>
+
+      <input
+        id="analyzeFees"
+        type="number"
+        inputmode="decimal"
+        value="0"
+      >
+
+    </div>
+
+  `
+
+}
+
+};
+
+
+/* =========================================================
+   OPEN TOOL
+========================================================= */
+
+function openTool(tool){
+
+  currentTool=tool;
+
+  const data=
+    TOOL_DATA[tool];
+
+
+  if(!data){
+    return;
+  }
+
+
+  hideAllPages();
+
+
+  el("calcTitle").innerText=
+    data.title();
+
+
+  el("calcDesc").innerText=
+    data.description();
+
+
+  el("calcFields").innerHTML=
+    data.fields();
+
+
+  el("resultBox").style.display=
+    "none";
+
+
+  show("calculatorPage");
+
+
+  window.scrollTo({
+    top:0
+  });
+
+}
+
+
+/* =========================================================
+   FINANCE BASE
+========================================================= */
+
+function financeBase(
+  salary,
+  deduction,
+  annualRate,
+  months
+){
+
+  const installment=
+    salary*(deduction/100);
+
+
+  const totalPayments=
+    installment*months;
+
+
+  const years=
+    months/12;
+
+
+  const factor=
+    1+(
+      years*
+      annualRate/
+      100
     );
 
 
-  let subscription =
+  const grossFinance=
+    totalPayments/factor;
+
+
+  /*
+    هذه المعادلة مبنية على النموذج الحسابي
+    المستخدم في المشروع وليست محرك تسعير مصرفي رسمي.
+
+    الرسوم الإدارية هنا:
+    0.5%
+    وضريبة 15% على الرسوم.
+  */
+
+  const adminFee=
+    grossFinance*0.005;
+
+
+  const vat=
+    adminFee*0.15;
+
+
+  const fees=
+    adminFee+vat;
+
+
+  const netFinance=
+    Math.max(
+      0,
+      grossFinance-fees
+    );
+
+
+  return{
+
+    installment,
+    totalPayments,
+    grossFinance,
+    adminFee,
+    vat,
+    fees,
+    netFinance
+
+  };
+
+}
+
+
+/* =========================================================
+   CALCULATION ROUTER
+========================================================= */
+
+function handleCalculation(){
+
+  const calculation=
+    buildCalculation();
+
+
+  if(!calculation){
+    return;
+  }
+
+
+  /*
+    العميل يرى قيمة المنصة أولاً.
+    الكود لا يطلب إلا لحظة عرض النتيجة.
+  */
+
+  if(!hasValidAccess()){
+
+    pendingCalculation=
+      calculation;
+
+    openCodeModal();
+
+    return;
+
+  }
+
+
+  if(!consumeUse()){
+    return;
+  }
+
+
+  showCalculation(
+    calculation
+  );
+
+}
+
+
+/* =========================================================
+   BUILD CALCULATIONS
+========================================================= */
+
+function buildCalculation(){
+
+
+/* ---------------------------------------------------------
+   BUYOUT
+--------------------------------------------------------- */
+
+if(currentTool==="buyout"){
+
+  const salary=
+    num("buyoutSalary");
+
+  const deduction=
+    num("buyoutDeduction");
+
+  const rate=
+    num("buyoutRate");
+
+  const months=
+    num("buyoutMonths");
+
+  const settlement=
+    num("buyoutSettlement");
+
+
+  if(
+    salary<=0 ||
+    deduction<=0 ||
+    months<=0 ||
+    settlement<=0
+  ){
+
+    alert(
+      "يا "+safeName()+"، تأكد من إدخال الراتب والاستقطاع والمدة والسداد المبكر."
+    );
+
+    return null;
+
+  }
+
+
+  if(rate<0){
+
+    alert(
+      "تأكد من نسبة الربح."
+    );
+
+    return null;
+
+  }
+
+
+  const result=
+    financeBase(
+      salary,
+      deduction,
+      rate,
+      months
+    );
+
+
+  const leftover=
+    result.netFinance-
+    settlement;
+
+
+  return{
+
+    label:
+      "المتوقع يصفي لك بعد السداد",
+
+    main:
+      leftover,
+
+    details:[
+
+      [
+        "صافي التمويل المتوقع",
+        money(result.netFinance)
+      ],
+
+      [
+        "السداد المبكر",
+        money(settlement)
+      ],
+
+      [
+        "القسط المستخدم بالحسبة",
+        money(result.installment)
+      ],
+
+      [
+        "إجمالي الأقساط",
+        money(result.totalPayments)
+      ]
+
+    ],
+
+    message:
+      leftover>0
+
+      ?
+
+      "يا "+profile.name+
+      "، بناءً على البيانات اللي أدخلتها، المتوقع يتبقى لك "+
+      money(leftover)+
+      " بعد سداد التمويل الحالي. إذا عندك عرض ثاني من بنك آخر، قارنه قبل اتخاذ القرار."
+
+      :
+
+      "يا "+profile.name+
+      "، حسب البيانات المدخلة مبلغ التمويل المتوقع لا يغطي مبلغ السداد الحالي بالكامل. راجع بيانات العرض أو مبلغ السداد المبكر."
+
+  };
+
+}
+
+
+/* ---------------------------------------------------------
+   FINANCE
+--------------------------------------------------------- */
+
+if(currentTool==="finance"){
+
+  const salary=
+    num("financeSalary");
+
+  const deduction=
+    num("financeDeduction");
+
+  const rate=
+    num("financeRate");
+
+  const months=
+    num("financeMonths");
+
+
+  if(
+    salary<=0 ||
+    deduction<=0 ||
+    months<=0
+  ){
+
+    alert(
+      "يا "+safeName()+"، تأكد من إدخال الراتب والاستقطاع والمدة."
+    );
+
+    return null;
+
+  }
+
+
+  const result=
+    financeBase(
+      salary,
+      deduction,
+      rate,
+      months
+    );
+
+
+  return{
+
+    label:
+      "صافي التمويل المتوقع",
+
+    main:
+      result.netFinance,
+
+    details:[
+
+      [
+        "القسط المستخدم بالحسبة",
+        money(result.installment)
+      ],
+
+      [
+        "إجمالي الأقساط",
+        money(result.totalPayments)
+      ],
+
+      [
+        "قبل خصم الرسوم",
+        money(result.grossFinance)
+      ],
+
+      [
+        "الرسوم المستخدمة بالحسبة",
+        money(result.fees)
+      ]
+
+    ],
+
+    message:
+      "يا "+profile.name+
+      "، هذه الحسبة مبنية على النسبة والمدة اللي أدخلتها أنت. لو البنك عطاك عرضًا مختلفًا في القسط أو الرسوم، استخدم أداة «حلل عرضي» للمقارنة."
+
+  };
+
+}
+
+
+/* ---------------------------------------------------------
+   COMPARE
+--------------------------------------------------------- */
+
+if(currentTool==="compare"){
+
+  const cash1=
+    num("compareCash1");
+
+  const installment1=
+    num("compareInstallment1");
+
+  const months1=
+    num("compareMonths1");
+
+
+  const cash2=
+    num("compareCash2");
+
+  const installment2=
+    num("compareInstallment2");
+
+  const months2=
+    num("compareMonths2");
+
+
+  if(
+    cash1<=0 ||
+    installment1<=0 ||
+    months1<=0 ||
+    cash2<=0 ||
+    installment2<=0 ||
+    months2<=0
+  ){
+
+    alert(
+      "يا "+safeName()+"، أدخل بيانات العرضين كاملة."
+    );
+
+    return null;
+
+  }
+
+
+  const total1=
+    installment1*
+    months1;
+
+
+  const total2=
+    installment2*
+    months2;
+
+
+  let winnerText="";
+
+
+  if(profile.goal==="أعلى كاش"){
+
+    winnerText=
+      cash1>cash2
+      ? "العرض الأول يعطيك كاش أعلى."
+      : cash2>cash1
+      ? "العرض الثاني يعطيك كاش أعلى."
+      : "العرضان متساويان في مبلغ الكاش.";
+
+  }
+
+
+  else if(profile.goal==="أقل قسط"){
+
+    winnerText=
+      installment1<installment2
+      ? "العرض الأول قسطه أقل."
+      : installment2<installment1
+      ? "العرض الثاني قسطه أقل."
+      : "العرضان متساويان في القسط.";
+
+  }
+
+
+  else{
+
+    winnerText=
+      total1<total2
+      ? "العرض الأول أقل في إجمالي السداد."
+      : total2<total1
+      ? "العرض الثاني أقل في إجمالي السداد."
+      : "العرضان متساويان في إجمالي السداد.";
+
+  }
+
+
+  const cashDifference=
+    Math.abs(
+      cash1-cash2
+    );
+
+
+  return{
+
+    label:
+      "نتيجة المقارنة حسب هدفك",
+
+    mainText:
+      winnerText,
+
+    details:[
+
+      [
+        "فرق الصافي",
+        money(cashDifference)
+      ],
+
+      [
+        "قسط العرض الأول",
+        money(installment1)
+      ],
+
+      [
+        "قسط العرض الثاني",
+        money(installment2)
+      ],
+
+      [
+        "إجمالي سداد الأول",
+        money(total1)
+      ],
+
+      [
+        "إجمالي سداد الثاني",
+        money(total2)
+      ]
+
+    ],
+
+    message:
+      "يا "+profile.name+
+      "، بما إنك اخترت أن الأهم لك هو «"+
+      profile.goal+
+      "»، رتبت لك النتيجة على هذا الأساس. لكن لا تعتمد على عامل واحد فقط؛ راجع الصافي والقسط وإجمالي السداد والمدة معًا."
+
+  };
+
+}
+
+
+/* ---------------------------------------------------------
+   ANALYZE
+--------------------------------------------------------- */
+
+if(currentTool==="analyze"){
+
+  const cash=
+    num("analyzeCash");
+
+  const installment=
+    num("analyzeInstallment");
+
+  const months=
+    num("analyzeMonths");
+
+  const extraFees=
+    num("analyzeFees");
+
+
+  if(
+    cash<=0 ||
+    installment<=0 ||
+    months<=0
+  ){
+
+    alert(
+      "يا "+safeName()+"، أدخل مبلغ التمويل والقسط والمدة."
+    );
+
+    return null;
+
+  }
+
+
+  const totalPayments=
+    installment*
+    months;
+
+
+  const difference=
+    totalPayments-
+    cash+
+    extraFees;
+
+
+  return{
+
+    label:
+      "إجمالي الأقساط حسب العرض",
+
+    main:
+      totalPayments,
+
+    details:[
+
+      [
+        "المبلغ اللي تستلمه",
+        money(cash)
+      ],
+
+      [
+        "القسط الشهري",
+        money(installment)
+      ],
+
+      [
+        "مدة التمويل",
+        months+" شهر"
+      ],
+
+      [
+        "الفرق بين المستلم وإجمالي المدفوع",
+        money(difference)
+      ]
+
+    ],
+
+    message:
+      "يا "+profile.name+
+      "، هذا تحليل مبسط للأرقام اللي أدخلتها. إذا كانت هناك رسوم أو تأمين أو تكاليف إضافية غير مدخلة، فالنتيجة النهائية قد تختلف."
+
+  };
+
+}
+
+
+return null;
+
+}
+
+
+/* =========================================================
+   SHOW RESULT
+========================================================= */
+
+function showCalculation(data){
+
+  el("resultIntro").innerText=
+    "يا "+profile.name+
+    "، هذه نتيجة الحسبة بناءً على بياناتك 👇";
+
+
+  el("resultLabel").innerText=
+    data.label;
+
+
+  if(data.mainText){
+
+    el("resultMain").innerText=
+      data.mainText;
+
+    el("resultMain").style.fontSize=
+      "22px";
+
+  }else{
+
+    el("resultMain").innerText=
+      money(data.main);
+
+    el("resultMain").style.fontSize=
+      "";
+
+  }
+
+
+  el("resultDetails").innerHTML=
+    data.details
+    .map(item=>`
+
+      <div class="result-cell">
+
+        <span>
+          ${item[0]}
+        </span>
+
+        <strong>
+          ${item[1]}
+        </strong>
+
+      </div>
+
+    `)
+    .join("");
+
+
+  el("resultMessage").innerText=
+    data.message;
+
+
+  el("resultBox").style.display=
+    "block";
+
+
+  setTimeout(()=>{
+
+    el("resultBox").scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
+  },100);
+
+}
+
+
+/* =========================================================
+   CODE MODAL
+========================================================= */
+
+function openCodeModal(){
+
+  el("unlockTitle").innerText=
+    "حسبتك جاهزة يا "+profile.name+" 🔐";
+
+
+  el("unlockMessage").innerText=
+    "خلصنا الحسبة بناءً على البيانات اللي أدخلتها. أدخل كود FINO لفتح النتيجة واستخدام بقية الحاسبات حسب باقتك.";
+
+
+  el("codeError").style.display=
+    "none";
+
+
+  el("codeInput").value=
+    "";
+
+
+  show("codeModal");
+
+
+  setTimeout(()=>{
+
+    el("codeInput").focus();
+
+  },100);
+
+}
+
+
+function closeCodeModal(){
+
+  hide("codeModal");
+
+}
+
+
+/* =========================================================
+   SUBSCRIPTION HELPERS
+========================================================= */
+
+function getSubscriptions(){
+
+  try{
+
+    return JSON.parse(
+      localStorage.getItem("finoSubscriptions") ||
+      "{}"
+    );
+
+  }catch(error){
+
+    return {};
+
+  }
+
+}
+
+
+function saveSubscriptions(data){
+
+  localStorage.setItem(
+    "finoSubscriptions",
+    JSON.stringify(data)
+  );
+
+}
+
+
+function getActiveCode(){
+
+  return localStorage.getItem(
+    "finoActiveCode"
+  );
+
+}
+
+
+function getActiveSubscription(){
+
+  const code=
+    getActiveCode();
+
+
+  if(!code){
+    return null;
+  }
+
+
+  const subscriptions=
+    getSubscriptions();
+
+
+  return subscriptions[code] || null;
+
+}
+
+
+/* =========================================================
+   ACTIVATE CODE
+========================================================= */
+
+function activateCode(){
+
+  const code=
+    el("codeInput")
+    .value
+    .trim()
+    .toUpperCase();
+
+
+  const error=
+    el("codeError");
+
+
+  error.style.display=
+    "none";
+
+
+  if(!ACCESS_CODES[code]){
+
+    error.innerText=
+      "الكود غير صحيح. تأكد من كتابته كما وصلك.";
+
+    error.style.display=
+      "block";
+
+    return;
+
+  }
+
+
+  const subscriptions=
+    getSubscriptions();
+
+
+  let subscription=
     subscriptions[code];
 
 
+  /*
+    أول استخدام للكود:
+    يبدأ الوقت الآن.
+  */
+
   if(!subscription){
 
-    const data =
+    const template=
       ACCESS_CODES[code];
 
-    const now =
+
+    const now=
       Date.now();
+
 
     subscription={
 
       code:code,
 
-      name:data.name,
+      plan:template.plan,
 
-      remainingUses:data.uses,
+      remainingUses:
+        template.uses,
 
-      activatedAt:now,
+      activatedAt:
+        now,
 
       expiresAt:
-        now + data.hours * 60 * 60 * 1000
+        now+
+        (
+          template.hours*
+          60*
+          60*
+          1000
+        )
 
     };
 
-    subscriptions[code]=subscription;
 
-    localStorage.setItem(
-      "finoSubscriptions",
-      JSON.stringify(subscriptions)
+    subscriptions[code]=
+      subscription;
+
+
+    saveSubscriptions(
+      subscriptions
     );
+
+  }
+
+
+  if(
+    subscription.remainingUses<=0
+  ){
+
+    error.innerText=
+      "تم استهلاك جميع الحسبات الموجودة في هذا الكود.";
+
+    error.style.display=
+      "block";
+
+    return;
+
+  }
+
+
+  if(
+    Date.now()>=subscription.expiresAt
+  ){
+
+    error.innerText=
+      "انتهت صلاحية هذا الكود.";
+
+    error.style.display=
+      "block";
+
+    return;
 
   }
 
@@ -1645,132 +4933,65 @@ function activateCode(){
   );
 
 
+  closeCodeModal();
+
+
+  updateMembership();
+
+
+  /*
+    تنفيذ الحسبة التي كان العميل ينتظرها.
+  */
+
+  if(pendingCalculation){
+
+    const calculation=
+      pendingCalculation;
+
+
+    pendingCalculation=
+      null;
+
+
+    if(consumeUse()){
+
+      showCalculation(
+        calculation
+      );
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   ACCESS VALIDATION
+========================================================= */
+
+function hasValidAccess(){
+
+  const subscription=
+    getActiveSubscription();
+
+
+  if(!subscription){
+    return false;
+  }
+
+
   if(
-    subscription.remainingUses<=0 ||
+    subscription.remainingUses<=0
+  ){
+    return false;
+  }
+
+
+  if(
     Date.now()>=subscription.expiresAt
   ){
-
-    error.innerText=
-      "هذا الكود انتهت صلاحيته أو تم استهلاك عملياته.";
-
-    error.style.display="block";
-
-    return;
-
-  }
-
-
-  success.style.display="block";
-
-  setTimeout(()=>{
-
-    startApp();
-
-  },400);
-
-}
-
-
-/* =========================================================
-   تشغيل المنصة
-========================================================= */
-
-function startApp(){
-
-  hide("loginPage");
-  show("app");
-
-  updateSubscriptionUI();
-
-  renderSaved();
-
-}
-
-
-/* =========================================================
-   جلب الاشتراك الحالي
-========================================================= */
-
-function getSubscription(){
-
-  const code =
-    localStorage.getItem("finoActiveCode");
-
-  if(!code){
-    return null;
-  }
-
-  const all =
-    JSON.parse(
-      localStorage.getItem("finoSubscriptions") || "{}"
-    );
-
-  return all[code] || null;
-
-}
-
-
-/* =========================================================
-   تحديث الاشتراك
-========================================================= */
-
-function saveSubscription(subscription){
-
-  const all =
-    JSON.parse(
-      localStorage.getItem("finoSubscriptions") || "{}"
-    );
-
-  all[subscription.code]=subscription;
-
-  localStorage.setItem(
-    "finoSubscriptions",
-    JSON.stringify(all)
-  );
-
-}
-
-
-/* =========================================================
-   خصم عملية
-========================================================= */
-
-function consumeUse(){
-
-  let sub =
-    getSubscription();
-
-  if(!sub){
     return false;
-  }
-
-
-  if(
-    sub.remainingUses<=0 ||
-    Date.now()>=sub.expiresAt
-  ){
-
-    showExpired();
-
-    return false;
-
-  }
-
-
-  sub.remainingUses--;
-
-  saveSubscription(sub);
-
-  updateSubscriptionUI();
-
-
-  if(sub.remainingUses<=0){
-
-    setTimeout(
-      showExpired,
-      1000
-    );
-
   }
 
 
@@ -1780,1062 +5001,231 @@ function consumeUse(){
 
 
 /* =========================================================
-   الوقت والاستخدامات
+   CONSUME USE
 ========================================================= */
 
-function updateSubscriptionUI(){
+function consumeUse(){
 
-  const sub =
-    getSubscription();
+  const code=
+    getActiveCode();
 
-  if(!sub){
 
-    logout();
+  if(!code){
+    return false;
+  }
+
+
+  const subscriptions=
+    getSubscriptions();
+
+
+  const subscription=
+    subscriptions[code];
+
+
+  if(!subscription){
+    return false;
+  }
+
+
+  if(
+    subscription.remainingUses<=0 ||
+    Date.now()>=subscription.expiresAt
+  ){
+
+    localStorage.removeItem(
+      "finoActiveCode"
+    );
+
+    updateMembership();
+
+    openCodeModal();
+
+    return false;
+
+  }
+
+
+  subscription.remainingUses=
+    Math.max(
+      0,
+      subscription.remainingUses-1
+    );
+
+
+  subscriptions[code]=
+    subscription;
+
+
+  saveSubscriptions(
+    subscriptions
+  );
+
+
+  updateMembership();
+
+
+  return true;
+
+}
+
+
+/* =========================================================
+   MEMBER BAR
+========================================================= */
+
+function updateMembership(){
+
+  const bar=
+    el("memberBar");
+
+
+  const subscription=
+    getActiveSubscription();
+
+
+  if(
+    !subscription ||
+    subscription.remainingUses<=0 ||
+    Date.now()>=subscription.expiresAt
+  ){
+
+    bar.classList.add(
+      "hidden"
+    );
+
     return;
 
   }
 
 
-  document.getElementById(
-    "remainingUses"
-  ).innerText=
-    sub.remainingUses;
+  bar.classList.remove(
+    "hidden"
+  );
+
+
+  el("usesLeft").innerText=
+    subscription.remainingUses+
+    " حسبة";
 
 
   updateRemainingTime();
-
-
-  if(
-    sub.remainingUses<=0 ||
-    Date.now()>=sub.expiresAt
-  ){
-
-    showExpired();
-
-  }
 
 }
 
 
 function updateRemainingTime(){
 
-  const sub =
-    getSubscription();
+  const subscription=
+    getActiveSubscription();
 
-  if(!sub){
+
+  if(!subscription){
     return;
   }
 
 
-  let diff =
-    sub.expiresAt - Date.now();
+  const difference=
+    subscription.expiresAt-
+    Date.now();
 
 
-  if(diff<=0){
+  if(difference<=0){
 
-    document.getElementById(
-      "remainingTime"
-    ).innerText="منتهي";
+    el("timeLeft").innerText=
+      "منتهية";
 
-    showExpired();
+    updateMembership();
 
     return;
 
   }
 
 
-  const hours =
+  const hours=
     Math.floor(
-      diff / 3600000
-    );
-
-  const minutes =
-    Math.floor(
-      (diff % 3600000) / 60000
+      difference/
+      3600000
     );
 
 
-  document.getElementById(
-    "remainingTime"
-  ).innerText=
-    hours + "س " + minutes + "د";
+  const minutes=
+    Math.floor(
+      (
+        difference%
+        3600000
+      )/
+      60000
+    );
+
+
+  el("timeLeft").innerText=
+    hours+"س "+minutes+"د";
 
 }
 
 
+/* =========================================================
+   ENTER KEY SUPPORT
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event=>{
+
+    if(
+      event.key==="Enter" &&
+      !el("codeModal").classList.contains("hidden")
+    ){
+
+      activateCode();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   TIMER
+========================================================= */
+
 setInterval(
-  updateRemainingTime,
+  ()=>{
+
+    if(hasValidAccess()){
+
+      updateRemainingTime();
+
+    }
+
+  },
   30000
 );
 
 
 /* =========================================================
-   انتهاء الاشتراك
-========================================================= */
-
-function showExpired(){
-
-  show("expiredOverlay");
-
-}
-
-
-function logout(){
-
-  localStorage.removeItem(
-    "finoActiveCode"
-  );
-
-  location.reload();
-
-}
-
-
-/* =========================================================
-   التنقل
-========================================================= */
-
-const toolIds=[
-  "finance",
-  "buyout",
-  "refinance",
-  "compare",
-  "analyze",
-  "capacity"
-];
-
-
-function openTool(tool){
-
-  hide("dashboard");
-
-  toolIds.forEach(t=>{
-
-    hide("tool-"+t);
-
-  });
-
-  show("tool-"+tool);
-
-  activeTool=tool;
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-function backHome(){
-
-  toolIds.forEach(t=>{
-
-    hide("tool-"+t);
-
-  });
-
-  show("dashboard");
-
-  activeTool=null;
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-/* =========================================================
-   معادلة التمويل الأساسية
-
-   إجمالي الأقساط = القسط × الأشهر
-
-   معامل الربح =
-   1 + (السنوات × هامش الربح ÷ 100)
-
-   التمويل قبل الرسوم =
-   إجمالي الأقساط ÷ معامل الربح
-
-   الرسوم الإدارية =
-   0.5% من التمويل
-   مع ضريبة 15% على الرسوم
-
-========================================================= */
-
-function financeCalculation(
-  salary,
-  deduction,
-  annualRate,
-  months,
-  commodity
-){
-
-  const installment =
-    salary * (deduction / 100);
-
-
-  const totalPayments =
-    installment * months;
-
-
-  const years =
-    months / 12;
-
-
-  const factor =
-    1 + (
-      years *
-      annualRate /
-      100
-    );
-
-
-  const financeBeforeFees =
-    factor > 0
-      ? totalPayments / factor
-      : 0;
-
-
-  /*
-    رسوم إدارية 0.5%
-    ويمكن تعديل الحد أو طريقة الرسوم لاحقاً.
-  */
-
-  const adminFee =
-    financeBeforeFees * 0.005;
-
-
-  const vat =
-    adminFee * 0.15;
-
-
-  const totalFees =
-    adminFee +
-    vat +
-    commodity;
-
-
-  const netFinance =
-    Math.max(
-      0,
-      financeBeforeFees - totalFees
-    );
-
-
-  const approximateProfit =
-    Math.max(
-      0,
-      totalPayments -
-      financeBeforeFees
-    );
-
-
-  return{
-
-    installment,
-
-    totalPayments,
-
-    factor,
-
-    financeBeforeFees,
-
-    adminFee,
-
-    vat,
-
-    totalFees,
-
-    netFinance,
-
-    approximateProfit
-
-  };
-
-}
-
-
-/* =========================================================
-   كم يعطيني البنك؟
-========================================================= */
-
-function calculateFinance(){
-
-  const salary=val("fSalary");
-  const deduction=val("fDeduction");
-  const rate=val("fRate");
-  const months=val("fMonths");
-  const commodity=val("fCommodity");
-
-
-  if(
-    salary<=0 ||
-    deduction<=0 ||
-    months<=0
-  ){
-
-    alert(
-      "تأكد من إدخال الراتب ونسبة الاستقطاع والمدة."
-    );
-
-    return;
-
-  }
-
-
-  if(!consumeUse()){
-    return;
-  }
-
-
-  const r=
-    financeCalculation(
-      salary,
-      deduction,
-      rate,
-      months,
-      commodity
-    );
-
-
-  document.getElementById(
-    "financeMain"
-  ).innerHTML=
-    money(r.netFinance);
-
-
-  document.getElementById(
-    "financeInstallment"
-  ).innerText=
-    money(r.installment);
-
-
-  document.getElementById(
-    "financeTotal"
-  ).innerText=
-    money(r.totalPayments);
-
-
-  document.getElementById(
-    "financeFees"
-  ).innerText=
-    money(r.totalFees);
-
-
-  document.getElementById(
-    "financeProfit"
-  ).innerText=
-    money(r.approximateProfit);
-
-
-  document.getElementById(
-    "resultFinance"
-  ).style.display="block";
-
-
-  currentResult={
-
-    title:"كم يعطيني البنك؟",
-
-    value:r.netFinance,
-
-    details:
-      "راتب " +
-      money(salary) +
-      " • نسبة " +
-      rate +
-      "%"
-
-  };
-
-}
-
-
-/* =========================================================
-   شراء المديونية
-========================================================= */
-
-function calculateBuyout(){
-
-  const salary=val("bSalary");
-  const deduction=val("bDeduction");
-  const rate=val("bRate");
-  const months=val("bMonths");
-  const settlement=val("bSettlement");
-  const commodity=val("bCommodity");
-
-
-  if(
-    salary<=0 ||
-    months<=0 ||
-    settlement<=0
-  ){
-
-    alert(
-      "تأكد من إدخال بيانات الحسبة كاملة."
-    );
-
-    return;
-
-  }
-
-
-  if(!consumeUse()){
-    return;
-  }
-
-
-  const r=
-    financeCalculation(
-      salary,
-      deduction,
-      rate,
-      months,
-      commodity
-    );
-
-
-  const leftover=
-    r.netFinance - settlement;
-
-
-  document.getElementById(
-    "buyoutMain"
-  ).innerHTML=
-    money(leftover);
-
-
-  document.getElementById(
-    "buyoutFinance"
-  ).innerText=
-    money(r.netFinance);
-
-
-  document.getElementById(
-    "buyoutSettlement"
-  ).innerText=
-    money(settlement);
-
-
-  document.getElementById(
-    "buyoutInstallment"
-  ).innerText=
-    money(r.installment);
-
-
-  document.getElementById(
-    "buyoutFees"
-  ).innerText=
-    money(r.totalFees);
-
-
-  document.getElementById(
-    "resultBuyout"
-  ).style.display="block";
-
-
-  currentResult={
-
-    title:"شراء مديونية",
-
-    value:leftover,
-
-    details:
-      "صافي التمويل " +
-      money(r.netFinance) +
-      " • سداد " +
-      money(settlement)
-
-  };
-
-}
-
-
-/* =========================================================
-   إعادة التمويل
-========================================================= */
-
-function calculateRefinance(){
-
-  const salary=val("rSalary");
-  const deduction=val("rDeduction");
-  const rate=val("rRate");
-  const months=val("rMonths");
-  const settlement=val("rSettlement");
-  const commodity=val("rCommodity");
-
-
-  if(
-    salary<=0 ||
-    months<=0 ||
-    settlement<=0
-  ){
-
-    alert(
-      "تأكد من إدخال بيانات الحسبة."
-    );
-
-    return;
-
-  }
-
-
-  if(!consumeUse()){
-    return;
-  }
-
-
-  const r=
-    financeCalculation(
-      salary,
-      deduction,
-      rate,
-      months,
-      commodity
-    );
-
-
-  const cash=
-    r.netFinance - settlement;
-
-
-  document.getElementById(
-    "refinanceMain"
-  ).innerHTML=
-    money(cash);
-
-
-  document.getElementById(
-    "refinanceFinance"
-  ).innerText=
-    money(r.netFinance);
-
-
-  document.getElementById(
-    "refinanceSettlement"
-  ).innerText=
-    money(settlement);
-
-
-  document.getElementById(
-    "refinanceInstallment"
-  ).innerText=
-    money(r.installment);
-
-
-  document.getElementById(
-    "refinanceTotal"
-  ).innerText=
-    money(r.totalPayments);
-
-
-  document.getElementById(
-    "resultRefinance"
-  ).style.display="block";
-
-
-  currentResult={
-
-    title:"إعادة التمويل",
-
-    value:cash,
-
-    details:
-      "صافي جديد " +
-      money(r.netFinance)
-
-  };
-
-}
-
-
-/* =========================================================
-   مقارنة عرضين
-========================================================= */
-
-function compareOffers(){
-
-  const cash1=val("cCash1");
-  const installment1=val("cInstallment1");
-  const months1=val("cMonths1");
-
-  const cash2=val("cCash2");
-  const installment2=val("cInstallment2");
-  const months2=val("cMonths2");
-
-
-  if(
-    cash1<=0 ||
-    cash2<=0 ||
-    installment1<=0 ||
-    installment2<=0
-  ){
-
-    alert(
-      "أدخل بيانات العرضين كاملة."
-    );
-
-    return;
-
-  }
-
-
-  if(!consumeUse()){
-    return;
-  }
-
-
-  const total1=
-    installment1 * months1;
-
-  const total2=
-    installment2 * months2;
-
-
-  const cashDiff=
-    Math.abs(
-      cash1-cash2
-    );
-
-
-  const installmentDiff=
-    Math.abs(
-      installment1-installment2
-    );
-
-
-  let message="";
-
-
-  if(
-    cash1>cash2 &&
-    total1<total2
-  ){
-
-    message=
-      "العرض الأول أعلى صافيًا وأقل إجمالي سداد وفق البيانات المدخلة.";
-
-  }
-
-  else if(
-    cash2>cash1 &&
-    total2<total1
-  ){
-
-    message=
-      "العرض الثاني أعلى صافيًا وأقل إجمالي سداد وفق البيانات المدخلة.";
-
-  }
-
-  else{
-
-    message=
-      "لا يوجد عرض متفوق في كل شيء؛ قارن بين الصافي والقسط وإجمالي السداد.";
-
-  }
-
-
-  document.getElementById(
-    "compareWinner"
-  ).innerText=
-    message;
-
-
-  document.getElementById(
-    "compareCash"
-  ).innerText=
-    money(cashDiff);
-
-
-  document.getElementById(
-    "compareInstallment"
-  ).innerText=
-    money(installmentDiff);
-
-
-  document.getElementById(
-    "compareTotal1"
-  ).innerText=
-    money(total1);
-
-
-  document.getElementById(
-    "compareTotal2"
-  ).innerText=
-    money(total2);
-
-
-  document.getElementById(
-    "resultCompare"
-  ).style.display="block";
-
-}
-
-
-/* =========================================================
-   تحليل عرض البنك
-========================================================= */
-
-function analyzeOffer(){
-
-  const cash=val("aCash");
-  const installment=val("aInstallment");
-  const months=val("aMonths");
-  const fees=val("aFees");
-  const rate=val("aRate");
-  const apr=val("aAPR");
-
-
-  if(
-    cash<=0 ||
-    installment<=0 ||
-    months<=0
-  ){
-
-    alert(
-      "أدخل مبلغ التمويل والقسط والمدة."
-    );
-
-    return;
-
-  }
-
-
-  if(!consumeUse()){
-    return;
-  }
-
-
-  const total=
-    installment * months;
-
-
-  const cost=
-    Math.max(
-      0,
-      total - cash + fees
-    );
-
-
-  document.getElementById(
-    "analyzeMain"
-  ).innerHTML=
-    money(total);
-
-
-  document.getElementById(
-    "analyzeCash"
-  ).innerText=
-    money(cash);
-
-
-  document.getElementById(
-    "analyzeTotal"
-  ).innerText=
-    money(total);
-
-
-  document.getElementById(
-    "analyzeCost"
-  ).innerText=
-    money(cost);
-
-
-  document.getElementById(
-    "analyzeRates"
-  ).innerText=
-    "النسبة: " +
-    (rate || "-") +
-    "% | APR: " +
-    (apr || "-") +
-    "%";
-
-
-  document.getElementById(
-    "resultAnalyze"
-  ).style.display="block";
-
-
-  currentResult={
-
-    title:"تحليل عرض",
-
-    value:cash,
-
-    details:
-      "إجمالي السداد " +
-      money(total)
-
-  };
-
-}
-
-
-/* =========================================================
-   القدرة التمويلية
-========================================================= */
-
-function calculateCapacity(){
-
-  const salary=
-    val("pSalary");
-
-  const deduction=
-    val("pDeduction");
-
-
-  if(
-    salary<=0 ||
-    deduction<=0
-  ){
-
-    alert(
-      "أدخل الراتب ونسبة الاستقطاع."
-    );
-
-    return;
-
-  }
-
-
-  if(!consumeUse()){
-    return;
-  }
-
-
-  const installment=
-    salary *
-    deduction /
-    100;
-
-
-  document.getElementById(
-    "capacityMain"
-  ).innerHTML=
-    money(installment);
-
-
-  document.getElementById(
-    "capacitySalary"
-  ).innerText=
-    money(salary);
-
-
-  document.getElementById(
-    "capacityPercent"
-  ).innerText=
-    deduction.toFixed(2) + "%";
-
-
-  document.getElementById(
-    "resultCapacity"
-  ).style.display="block";
-
-}
-
-
-/* =========================================================
-   حفظ الحسبات
-========================================================= */
-
-function saveCurrentResult(){
-
-  if(!currentResult){
-
-    alert(
-      "نفذ الحسبة أولًا."
-    );
-
-    return;
-
-  }
-
-
-  const saved=
-    JSON.parse(
-      localStorage.getItem("finoSavedResults") || "[]"
-    );
-
-
-  saved.unshift({
-
-    ...currentResult,
-
-    createdAt:
-      new Date().toLocaleString("ar-SA")
-
-  });
-
-
-  localStorage.setItem(
-    "finoSavedResults",
-    JSON.stringify(
-      saved.slice(0,20)
-    )
-  );
-
-
-  renderSaved();
-
-  alert(
-    "تم حفظ الحسبة ✓"
-  );
-
-}
-
-
-function renderSaved(){
-
-  const box=
-    document.getElementById("savedList");
-
-  if(!box){
-    return;
-  }
-
-
-  const saved=
-    JSON.parse(
-      localStorage.getItem("finoSavedResults") || "[]"
-    );
-
-
-  if(!saved.length){
-
-    box.innerHTML=`
-      <div class="saved-card">
-        <div>
-          <h4>ما عندك حسبات محفوظة حتى الآن</h4>
-          <p>بعد ظهور النتيجة اضغط حفظ الحسبة.</p>
-        </div>
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  box.innerHTML=
-    saved.map(
-      (item,index)=>`
-
-      <div class="saved-card">
-
-        <div>
-
-          <h4>
-            ${item.title}
-          </h4>
-
-          <p>
-            ${item.details || ""}
-            <br>
-            ${item.createdAt}
-          </p>
-
-        </div>
-
-        <div class="saved-value">
-          ${money(item.value)}
-        </div>
-
-      </div>
-
-    `
-    ).join("");
-
-}
-
-
-/* =========================================================
-   مسح الحقول
-========================================================= */
-
-function resetFields(sectionId){
-
-  const section=
-    document.getElementById(sectionId);
-
-  section
-    .querySelectorAll("input")
-    .forEach(input=>{
-
-      if(
-        input.id.includes("Deduction")
-      ){
-
-        input.value="33.33";
-
-      }
-
-      else if(
-        input.id.includes("Months")
-      ){
-
-        input.value="60";
-
-      }
-
-      else if(
-        input.id.includes("Commodity") ||
-        input.id==="aFees"
-      ){
-
-        input.value="0";
-
-      }
-
-      else{
-
-        input.value="";
-
-      }
-
-    });
-
-
-  section
-    .querySelectorAll(".result")
-    .forEach(result=>{
-
-      result.style.display="none";
-
-    });
-
-
-  currentResult=null;
-
-}
-
-
-/* =========================================================
-   استعادة جلسة سابقة
+   INITIAL LOAD
 ========================================================= */
 
 window.addEventListener(
   "load",
   ()=>{
 
-    const activeCode=
-      localStorage.getItem("finoActiveCode");
+    const hasProfile=
+      loadProfile();
 
-    if(activeCode){
 
-      const sub=
-        getSubscription();
+    if(hasProfile){
 
-      if(
-        sub &&
-        sub.remainingUses>0 &&
-        Date.now()<sub.expiresAt
-      ){
+      renderDashboard();
 
-        startApp();
+    }
 
-      }
+
+    if(hasValidAccess()){
+
+      updateMembership();
 
     }
 
