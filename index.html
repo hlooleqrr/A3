@@ -1,25 +1,4740 @@
-القسط = الراتب × نسبة الاستقطاع
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
 
-الإجمالي = القسط × الأشهر الفعلية
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1,viewport-fit=cover"
+/>
 
-معامل الربح =
-1 + (السنوات × النسبة ÷ 100)
+<meta name="theme-color" content="#071d35">
 
-الصافي قبل الرسوم =
-الإجمالي ÷ معامل الربح
+<title>FINO | حاسبة التمويل الذكية</title>
 
-الرسوم الإدارية =
-الصافي قبل الرسوم × 0.5%
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-ضريبة الرسوم =
-الرسوم الإدارية × 15%
+<link
+href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
+rel="stylesheet"
+/>
 
-الصافي النهائي =
-الصافي قبل الرسوم
-- الرسوم الإدارية
-- الضريبة
-- رسوم السلعة
+<style>
 
-الفائض في شراء المديونية =
-الصافي النهائي
-- السداد المبكر
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+:root{
+
+--navy:#071d35;
+--navy2:#0a3458;
+
+--blue:#097bc1;
+--blue2:#16a6df;
+
+--cyan:#5ed8ff;
+
+--purple:#7259dd;
+--purpleSoft:#f1efff;
+
+--green:#15966c;
+--greenSoft:#eaf9f3;
+
+--orange:#ee923b;
+--orangeSoft:#fff3e6;
+
+--pink:#df5c92;
+--pinkSoft:#fff0f6;
+
+--white:#ffffff;
+
+--page:#f5f9fc;
+
+--text:#163247;
+--muted:#748a98;
+
+--border:#dce9f1;
+
+--shadow:
+0 22px 60px rgba(5,52,82,.10);
+
+--shadow2:
+0 30px 90px rgba(5,45,73,.15);
+
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+
+font-family:"Cairo",sans-serif;
+
+background:
+radial-gradient(circle at 4% 5%,rgba(22,166,223,.13),transparent 24%),
+radial-gradient(circle at 96% 30%,rgba(114,89,221,.08),transparent 25%),
+radial-gradient(circle at 20% 85%,rgba(223,92,146,.06),transparent 24%),
+var(--page);
+
+color:var(--text);
+
+min-height:100vh;
+
+overflow-x:hidden;
+
+}
+
+button,
+input,
+select{
+font-family:inherit;
+}
+
+button{
+cursor:pointer;
+}
+
+.hidden{
+display:none!important;
+}
+
+.container{
+width:min(1160px,92%);
+margin:auto;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+
+height:72px;
+
+display:flex;
+align-items:center;
+
+}
+
+.header-inner{
+
+width:min(1160px,92%);
+margin:auto;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+.brand{
+
+display:flex;
+align-items:center;
+gap:10px;
+
+}
+
+.logo{
+
+width:44px;
+height:44px;
+
+display:grid;
+place-items:center;
+
+border-radius:15px;
+
+background:
+linear-gradient(
+135deg,
+var(--blue2),
+var(--navy2)
+);
+
+color:#fff;
+
+font-size:15px;
+font-weight:900;
+
+box-shadow:
+0 12px 28px rgba(9,123,193,.25);
+
+}
+
+.brand-name{
+
+font-size:21px;
+font-weight:900;
+color:var(--navy);
+
+}
+
+.brand-sub{
+
+font-size:8px;
+color:var(--muted);
+
+margin-top:-4px;
+
+}
+
+.safe-badge{
+
+display:flex;
+align-items:center;
+gap:6px;
+
+border:1px solid var(--border);
+
+background:rgba(255,255,255,.78);
+
+padding:8px 11px;
+
+border-radius:30px;
+
+font-size:8px;
+font-weight:800;
+
+color:var(--navy2);
+
+}
+
+.safe-dot{
+
+width:7px;
+height:7px;
+
+border-radius:50%;
+
+background:var(--green);
+
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+
+padding:48px 0 65px;
+
+}
+
+.hero-grid{
+
+display:grid;
+
+grid-template-columns:1.05fr .95fr;
+
+gap:50px;
+
+align-items:center;
+
+}
+
+.eyebrow{
+
+display:inline-flex;
+align-items:center;
+gap:7px;
+
+background:#e8f6fd;
+
+border:1px solid #c8e9f7;
+
+color:var(--blue);
+
+padding:7px 12px;
+
+border-radius:30px;
+
+font-size:9px;
+font-weight:900;
+
+margin-bottom:16px;
+
+}
+
+.hero h1{
+
+font-size:clamp(38px,5vw,62px);
+
+line-height:1.2;
+
+letter-spacing:-1.4px;
+
+font-weight:900;
+
+color:var(--navy);
+
+}
+
+.hero h1 span{
+
+display:block;
+
+background:
+linear-gradient(
+90deg,
+var(--blue),
+var(--purple)
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+}
+
+.hero-text{
+
+max-width:610px;
+
+margin-top:15px;
+
+font-size:13px;
+
+line-height:2;
+
+color:var(--muted);
+
+}
+
+.hero-buttons{
+
+margin-top:24px;
+
+display:flex;
+gap:9px;
+
+flex-wrap:wrap;
+
+}
+
+.main-btn{
+
+border:none;
+
+border-radius:15px;
+
+padding:14px 21px;
+
+background:
+linear-gradient(
+135deg,
+var(--navy2),
+var(--blue)
+);
+
+color:white;
+
+font-size:11px;
+font-weight:900;
+
+box-shadow:
+0 14px 30px rgba(7,112,176,.2);
+
+}
+
+.ghost-btn{
+
+border:1px solid var(--border);
+
+background:white;
+
+border-radius:15px;
+
+padding:13px 18px;
+
+color:var(--navy);
+
+font-size:10px;
+font-weight:800;
+
+}
+
+
+/* =====================================================
+   HERO MOCKUP
+===================================================== */
+
+.mock-wrap{
+position:relative;
+}
+
+.glow{
+
+position:absolute;
+
+width:330px;
+height:330px;
+
+right:30px;
+top:30px;
+
+border-radius:50%;
+
+background:rgba(69,191,235,.16);
+
+filter:blur(65px);
+
+}
+
+.mock-card{
+
+position:relative;
+
+max-width:450px;
+
+margin:auto;
+
+border-radius:30px;
+
+padding:19px;
+
+background:rgba(255,255,255,.96);
+
+border:1px solid var(--border);
+
+box-shadow:var(--shadow2);
+
+}
+
+.mock-head{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+.mock-live{
+
+background:var(--greenSoft);
+
+color:var(--green);
+
+font-size:8px;
+font-weight:900;
+
+padding:6px 9px;
+
+border-radius:30px;
+
+}
+
+.mock-title{
+
+margin-top:21px;
+
+font-size:23px;
+font-weight:900;
+
+color:var(--navy);
+
+}
+
+.mock-grid{
+
+display:grid;
+grid-template-columns:1fr 1fr;
+
+gap:8px;
+
+margin-top:15px;
+
+}
+
+.mock-cell{
+
+background:#f8fbfd;
+
+border:1px solid var(--border);
+
+border-radius:13px;
+
+padding:11px;
+
+}
+
+.mock-cell span{
+
+display:block;
+
+font-size:8px;
+color:var(--muted);
+
+}
+
+.mock-cell strong{
+
+display:block;
+
+font-size:12px;
+color:var(--navy);
+
+}
+
+.mock-result{
+
+margin-top:11px;
+
+padding:18px;
+
+border-radius:18px;
+
+background:
+linear-gradient(
+135deg,
+#08253e,
+#0a6a9f
+);
+
+color:white;
+
+}
+
+.mock-result span{
+
+font-size:8px;
+opacity:.7;
+
+}
+
+.mock-result strong{
+
+display:block;
+
+font-size:29px;
+
+margin-top:2px;
+
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile-section{
+
+padding:65px 0;
+
+}
+
+.section-head{
+
+text-align:center;
+
+max-width:700px;
+
+margin:0 auto 27px;
+
+}
+
+.section-head small{
+
+font-size:9px;
+font-weight:900;
+
+color:var(--purple);
+
+}
+
+.section-head h2{
+
+font-size:clamp(25px,4vw,38px);
+
+font-weight:900;
+
+color:var(--navy);
+
+margin-top:4px;
+
+}
+
+.section-head p{
+
+font-size:10px;
+line-height:1.9;
+
+color:var(--muted);
+
+margin-top:6px;
+
+}
+
+.profile-card{
+
+max-width:870px;
+
+margin:auto;
+
+padding:24px;
+
+border-radius:26px;
+
+background:white;
+
+border:1px solid var(--border);
+
+box-shadow:var(--shadow);
+
+}
+
+.profile-grid{
+
+display:grid;
+grid-template-columns:1fr 1fr;
+
+gap:12px;
+
+}
+
+.field{
+
+display:flex;
+flex-direction:column;
+
+gap:6px;
+
+}
+
+.field.full{
+grid-column:1/-1;
+}
+
+.field label{
+
+font-size:9px;
+font-weight:800;
+
+color:#3c5b70;
+
+}
+
+.field input,
+.field select{
+
+width:100%;
+
+padding:13px;
+
+border-radius:13px;
+
+border:1px solid var(--border);
+
+background:#f9fcfd;
+
+outline:none;
+
+color:var(--navy);
+
+font-size:11px;
+font-weight:700;
+
+}
+
+.field input:focus,
+.field select:focus{
+
+border-color:var(--blue2);
+
+background:white;
+
+box-shadow:
+0 0 0 4px rgba(22,166,223,.07);
+
+}
+
+.option-row{
+
+display:grid;
+grid-template-columns:repeat(5,1fr);
+
+gap:7px;
+
+}
+
+.select-option{
+
+border:1px solid var(--border);
+
+background:#fff;
+
+padding:10px 7px;
+
+border-radius:12px;
+
+font-size:9px;
+font-weight:800;
+
+color:var(--navy);
+
+}
+
+.select-option.active{
+
+color:var(--blue);
+
+border-color:var(--blue);
+
+background:#eaf7fd;
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+.dashboard{
+
+padding:50px 0 70px;
+
+}
+
+.welcome{
+
+position:relative;
+
+overflow:hidden;
+
+padding:25px;
+
+border-radius:26px;
+
+background:
+linear-gradient(
+135deg,
+#071f37,
+#0a5f91
+);
+
+color:white;
+
+box-shadow:
+0 22px 55px rgba(5,66,103,.16);
+
+}
+
+.welcome:after{
+
+content:"";
+
+position:absolute;
+
+width:260px;
+height:260px;
+
+border-radius:50%;
+
+background:rgba(102,219,255,.10);
+
+left:-80px;
+top:-90px;
+
+}
+
+.welcome small{
+
+font-size:8px;
+opacity:.65;
+
+}
+
+.welcome h2{
+
+font-size:28px;
+font-weight:900;
+
+margin-top:3px;
+
+}
+
+.welcome p{
+
+margin-top:4px;
+
+font-size:9px;
+
+line-height:1.9;
+
+opacity:.74;
+
+max-width:720px;
+
+}
+
+.chips{
+
+display:flex;
+gap:6px;
+flex-wrap:wrap;
+
+margin-top:14px;
+
+}
+
+.chip{
+
+padding:6px 9px;
+
+border-radius:30px;
+
+border:1px solid rgba(255,255,255,.12);
+
+background:rgba(255,255,255,.09);
+
+font-size:8px;
+
+}
+
+
+/* =====================================================
+   TOOL TABS
+===================================================== */
+
+.tools-title{
+
+margin-top:27px;
+
+}
+
+.tools-title small{
+
+font-size:9px;
+font-weight:900;
+
+color:var(--blue);
+
+}
+
+.tools-title h3{
+
+font-size:23px;
+font-weight:900;
+
+color:var(--navy);
+
+}
+
+.tool-tabs{
+
+display:grid;
+grid-template-columns:repeat(4,1fr);
+
+gap:10px;
+
+margin-top:15px;
+
+}
+
+.tool-tab{
+
+padding:16px;
+
+border-radius:18px;
+
+border:1px solid var(--border);
+
+background:#fff;
+
+text-align:right;
+
+transition:.2s;
+
+}
+
+.tool-tab:hover{
+
+transform:translateY(-3px);
+
+box-shadow:
+0 14px 35px rgba(7,57,87,.07);
+
+}
+
+.tool-tab.active{
+
+border-color:#b9ddec;
+
+box-shadow:
+0 12px 32px rgba(8,100,153,.08);
+
+}
+
+.tool-tab:nth-child(1).active{
+background:var(--orangeSoft);
+}
+
+.tool-tab:nth-child(2).active{
+background:#eaf7fd;
+}
+
+.tool-tab:nth-child(3).active{
+background:var(--purpleSoft);
+}
+
+.tool-tab:nth-child(4).active{
+background:var(--pinkSoft);
+}
+
+.tab-icon{
+
+width:40px;
+height:40px;
+
+display:grid;
+place-items:center;
+
+border-radius:12px;
+
+background:white;
+
+font-size:19px;
+
+}
+
+.tool-tab h4{
+
+font-size:12px;
+font-weight:900;
+
+color:var(--navy);
+
+margin-top:9px;
+
+}
+
+.tool-tab p{
+
+font-size:8px;
+
+line-height:1.7;
+
+color:var(--muted);
+
+margin-top:3px;
+
+}
+
+
+/* =====================================================
+   CALCULATOR
+===================================================== */
+
+.calculator-card{
+
+margin-top:13px;
+
+padding:25px;
+
+border-radius:25px;
+
+border:1px solid var(--border);
+
+background:white;
+
+box-shadow:var(--shadow);
+
+}
+
+.calc-head{
+
+margin-bottom:20px;
+
+}
+
+.calc-head small{
+
+font-size:8px;
+font-weight:900;
+
+color:var(--blue);
+
+}
+
+.calc-head h2{
+
+font-size:24px;
+font-weight:900;
+
+color:var(--navy);
+
+margin-top:3px;
+
+}
+
+.calc-head p{
+
+margin-top:3px;
+
+font-size:9px;
+line-height:1.8;
+
+color:var(--muted);
+
+}
+
+.calc-grid{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:11px;
+
+}
+
+.helper{
+
+font-size:7px;
+color:var(--muted);
+
+}
+
+.toggle-box{
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+gap:12px;
+
+padding:12px;
+
+border-radius:13px;
+
+border:1px solid var(--border);
+
+background:#f9fcfd;
+
+}
+
+.toggle-copy strong{
+
+font-size:9px;
+color:var(--navy);
+
+display:block;
+
+}
+
+.toggle-copy span{
+
+font-size:7px;
+color:var(--muted);
+
+}
+
+.switch{
+
+position:relative;
+
+width:46px;
+height:25px;
+
+flex:none;
+
+}
+
+.switch input{
+display:none;
+}
+
+.slider{
+
+position:absolute;
+
+inset:0;
+
+background:#d9e4ea;
+
+border-radius:30px;
+
+transition:.2s;
+
+}
+
+.slider:before{
+
+content:"";
+
+position:absolute;
+
+width:19px;
+height:19px;
+
+right:3px;
+top:3px;
+
+border-radius:50%;
+
+background:white;
+
+transition:.2s;
+
+box-shadow:
+0 2px 5px rgba(0,0,0,.14);
+
+}
+
+.switch input:checked + .slider{
+
+background:var(--green);
+
+}
+
+.switch input:checked + .slider:before{
+
+transform:translateX(-21px);
+
+}
+
+.calc-btn{
+
+width:100%;
+
+border:none;
+
+margin-top:16px;
+
+padding:14px;
+
+border-radius:14px;
+
+background:
+linear-gradient(
+135deg,
+var(--navy2),
+var(--blue)
+);
+
+color:white;
+
+font-size:11px;
+font-weight:900;
+
+}
+
+
+/* =====================================================
+   RESULT
+===================================================== */
+
+.result{
+
+display:none;
+
+margin-top:18px;
+
+border-radius:22px;
+
+padding:20px;
+
+background:
+linear-gradient(
+145deg,
+#eff9fd,
+#fafcff
+);
+
+border:1px solid #d4eaf4;
+
+}
+
+.result-personal{
+
+text-align:center;
+
+font-size:9px;
+
+color:var(--muted);
+
+}
+
+.result-label{
+
+text-align:center;
+
+font-size:11px;
+font-weight:800;
+
+color:var(--navy);
+
+margin-top:3px;
+
+}
+
+.result-main{
+
+text-align:center;
+
+font-size:37px;
+font-weight:900;
+
+color:var(--navy);
+
+margin-top:2px;
+
+}
+
+.result-grid{
+
+display:grid;
+grid-template-columns:repeat(2,1fr);
+
+gap:8px;
+
+margin-top:14px;
+
+}
+
+.result-item{
+
+background:white;
+
+border:1px solid var(--border);
+
+border-radius:13px;
+
+padding:11px;
+
+}
+
+.result-item span{
+
+display:block;
+
+font-size:7px;
+
+color:var(--muted);
+
+}
+
+.result-item strong{
+
+font-size:11px;
+
+color:var(--navy);
+
+}
+
+.result-note{
+
+margin-top:11px;
+
+background:white;
+
+border:1px solid var(--border);
+
+border-radius:12px;
+
+padding:11px;
+
+font-size:8px;
+
+line-height:1.9;
+
+color:#506d7f;
+
+}
+
+
+/* =====================================================
+   CODE MODAL
+===================================================== */
+
+.modal{
+
+position:fixed;
+
+inset:0;
+
+z-index:200;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+padding:18px;
+
+background:
+rgba(4,21,34,.78);
+
+backdrop-filter:blur(13px);
+
+}
+
+.modal-card{
+
+width:min(420px,100%);
+
+background:white;
+
+border-radius:26px;
+
+padding:26px;
+
+box-shadow:
+0 35px 100px rgba(0,0,0,.26);
+
+position:relative;
+
+}
+
+.close{
+
+position:absolute;
+
+left:12px;
+top:12px;
+
+width:31px;
+height:31px;
+
+border:none;
+
+border-radius:50%;
+
+background:#eef4f7;
+
+color:var(--navy);
+
+}
+
+.lock{
+
+width:56px;
+height:56px;
+
+margin:auto;
+
+display:grid;
+place-items:center;
+
+border-radius:17px;
+
+background:#e9f7fd;
+
+font-size:23px;
+
+}
+
+.modal-card h3{
+
+text-align:center;
+
+font-size:21px;
+
+font-weight:900;
+
+color:var(--navy);
+
+margin-top:10px;
+
+}
+
+.modal-card p{
+
+text-align:center;
+
+font-size:9px;
+
+color:var(--muted);
+
+line-height:1.8;
+
+margin-top:5px;
+
+}
+
+.code-input{
+
+width:100%;
+
+margin-top:14px;
+
+padding:13px;
+
+border:1px solid var(--border);
+
+border-radius:13px;
+
+direction:ltr;
+text-align:center;
+
+font-size:12px;
+font-weight:900;
+
+letter-spacing:1.4px;
+
+outline:none;
+
+}
+
+.unlock{
+
+width:100%;
+
+border:none;
+
+border-radius:13px;
+
+padding:13px;
+
+margin-top:8px;
+
+background:
+linear-gradient(
+135deg,
+var(--navy2),
+var(--blue)
+);
+
+color:white;
+
+font-size:10px;
+font-weight:900;
+
+}
+
+.demo{
+
+margin-top:11px;
+
+padding:9px;
+
+border-radius:12px;
+
+background:#eef9fd;
+
+border:1px dashed #a7d8eb;
+
+text-align:center;
+
+font-size:8px;
+
+}
+
+.demo strong{
+
+display:block;
+
+direction:ltr;
+
+font-size:11px;
+
+margin:2px;
+
+}
+
+.error{
+
+display:none;
+
+font-size:8px;
+
+font-weight:800;
+
+color:#d54d4d;
+
+text-align:center;
+
+margin-top:7px;
+
+}
+
+
+/* =====================================================
+   MEMBERSHIP
+===================================================== */
+
+.member{
+
+position:fixed;
+
+left:50%;
+bottom:13px;
+
+transform:translateX(-50%);
+
+z-index:100;
+
+background:rgba(6,30,47,.95);
+
+backdrop-filter:blur(12px);
+
+color:white;
+
+border-radius:16px;
+
+padding:8px 12px;
+
+display:flex;
+gap:10px;
+
+font-size:8px;
+
+box-shadow:
+0 12px 30px rgba(0,0,0,.16);
+
+}
+
+
+/* =====================================================
+   NOTICE
+===================================================== */
+
+.notice{
+
+margin-top:13px;
+
+padding:11px;
+
+border-radius:13px;
+
+background:#fff8e9;
+
+border:1px solid #f0dfb9;
+
+font-size:7px;
+
+line-height:1.9;
+
+color:#795c26;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:900px){
+
+.hero-grid{
+grid-template-columns:1fr;
+}
+
+.hero-copy{
+text-align:center;
+}
+
+.hero-text{
+margin-left:auto;
+margin-right:auto;
+}
+
+.hero-buttons{
+justify-content:center;
+}
+
+.option-row{
+grid-template-columns:repeat(3,1fr);
+}
+
+.tool-tabs{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:560px){
+
+.header{
+height:64px;
+}
+
+.hero{
+padding-top:25px;
+}
+
+.hero h1{
+font-size:37px;
+}
+
+.hero-text{
+font-size:10px;
+}
+
+.hero-buttons{
+flex-direction:column;
+}
+
+.hero-buttons button{
+width:100%;
+}
+
+.profile-grid{
+grid-template-columns:1fr;
+}
+
+.option-row{
+grid-template-columns:repeat(2,1fr);
+}
+
+.tool-tabs{
+grid-template-columns:1fr 1fr;
+}
+
+.tool-tab{
+padding:12px;
+}
+
+.calc-grid{
+grid-template-columns:1fr;
+}
+
+.result-grid{
+grid-template-columns:1fr;
+}
+
+.calculator-card{
+padding:18px 13px;
+}
+
+.profile-card{
+padding:18px 13px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<header class="header">
+
+<div class="header-inner">
+
+<div class="brand">
+
+<div class="logo">
+F
+</div>
+
+<div>
+
+<div class="brand-name">
+FINO
+</div>
+
+<div class="brand-sub">
+حاسبات التمويل الذكية
+</div>
+
+</div>
+
+</div>
+
+
+<div class="safe-badge">
+
+<span class="safe-dot"></span>
+
+حسبة واضحة قبل القرار
+
+</div>
+
+</div>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+<div class="container hero-grid">
+
+
+<div class="hero-copy">
+
+<div class="eyebrow">
+✦ افهم عرض التمويل بالأرقام
+</div>
+
+
+<h1>
+
+عندك نسبة من البنك؟
+
+<span>
+اعرف وش تعني لك فعليًا.
+</span>
+
+</h1>
+
+
+<p class="hero-text">
+
+كم ممكن يكون تمويلك؟
+كم يصفي لك بعد سداد مديونيتك؟
+وعندك عرضين وتبي تعرف الفرق بينهم؟
+دخل بيانات العرض وFINO ترتب لك الأرقام بشكل أوضح.
+
+</p>
+
+
+<div class="hero-buttons">
+
+<button
+class="main-btn"
+onclick="goToProfile()"
+>
+ابدأ حسبتك
+</button>
+
+<button
+class="ghost-btn"
+onclick="scrollToTools()"
+>
+شوف الحاسبات
+</button>
+
+</div>
+
+</div>
+
+
+
+<div class="mock-wrap">
+
+<div class="glow"></div>
+
+<div class="mock-card">
+
+
+<div class="mock-head">
+
+<div class="brand">
+
+<div
+class="logo"
+style="
+width:33px;
+height:33px;
+font-size:10px;
+border-radius:10px;
+"
+>
+F
+</div>
+
+<strong style="
+font-size:12px;
+color:var(--navy);
+">
+FINO
+</strong>
+
+</div>
+
+
+<div class="mock-live">
+● مثال
+</div>
+
+</div>
+
+
+<div class="mock-title">
+كم يصفي لك بعد شراء المديونية؟
+</div>
+
+
+<div class="mock-grid">
+
+<div class="mock-cell">
+
+<span>
+الراتب
+</span>
+
+<strong>
+15,000 ريال
+</strong>
+
+</div>
+
+
+<div class="mock-cell">
+
+<span>
+النسبة
+</span>
+
+<strong>
+1.99%
+</strong>
+
+</div>
+
+
+<div class="mock-cell">
+
+<span>
+السداد
+</span>
+
+<strong>
+190,000 ريال
+</strong>
+
+</div>
+
+
+<div class="mock-cell">
+
+<span>
+المدة
+</span>
+
+<strong>
+60 شهر
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="mock-result">
+
+<span>
+المبلغ المتوقع المتبقي
+</span>
+
+<strong>
+يظهر هنا
+</strong>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROFILE
+===================================================== -->
+
+<section
+id="profileSection"
+class="profile-section"
+>
+
+<div class="container">
+
+
+<div class="section-head">
+
+<small>
+قبل الحسبة
+</small>
+
+<h2>
+نتعرف عليك يا هلا 👋
+</h2>
+
+<p>
+معلومات بسيطة تخلي FINO تكلمك باسمك وتضبط الحسبة حسب وضعك.
+</p>
+
+</div>
+
+
+<div class="profile-card">
+
+
+<div class="profile-grid">
+
+
+<div class="field">
+
+<label>
+وش اسمك الأول؟
+</label>
+
+<input
+id="customerName"
+type="text"
+maxlength="20"
+placeholder="مثال: نايف"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+وش البنك اللي ينزل عليه راتبك؟
+</label>
+
+<select id="salaryBank">
+
+<option value="">
+اختر بنك الراتب
+</option>
+
+<option>
+مصرف الراجحي
+</option>
+
+<option>
+البنك الأهلي السعودي
+</option>
+
+<option>
+مصرف الإنماء
+</option>
+
+<option>
+بنك الرياض
+</option>
+
+<option>
+البنك السعودي الأول SAB
+</option>
+
+<option>
+البنك العربي الوطني
+</option>
+
+<option>
+البنك السعودي الفرنسي
+</option>
+
+<option>
+بنك البلاد
+</option>
+
+<option>
+بنك الجزيرة
+</option>
+
+<option>
+بنك آخر
+</option>
+
+</select>
+
+</div>
+
+
+
+<div class="field full">
+
+<label>
+وش وضعك الوظيفي؟
+</label>
+
+<div
+id="employmentOptions"
+class="option-row"
+>
+
+<button
+class="select-option"
+data-value="حكومي"
+onclick="selectEmployment(this)"
+>
+حكومي
+</button>
+
+<button
+class="select-option"
+data-value="عسكري"
+onclick="selectEmployment(this)"
+>
+عسكري
+</button>
+
+<button
+class="select-option"
+data-value="شبه حكومي"
+onclick="selectEmployment(this)"
+>
+شبه حكومي
+</button>
+
+<button
+class="select-option"
+data-value="قطاع خاص"
+onclick="selectEmployment(this)"
+>
+قطاع خاص
+</button>
+
+<button
+class="select-option"
+data-value="متقاعد"
+onclick="selectEmployment(this)"
+>
+متقاعد
+</button>
+
+</div>
+
+</div>
+
+
+
+<div class="field full">
+
+<label>
+وش أهم شيء لك؟
+</label>
+
+<div
+id="goalOptions"
+class="option-row"
+style="
+grid-template-columns:repeat(3,1fr);
+"
+>
+
+<button
+class="select-option"
+data-value="أعلى كاش"
+onclick="selectGoal(this)"
+>
+💰 أعلى كاش
+</button>
+
+<button
+class="select-option"
+data-value="أقل قسط"
+onclick="selectGoal(this)"
+>
+📉 أقل قسط
+</button>
+
+<button
+class="select-option"
+data-value="أقل تكلفة"
+onclick="selectGoal(this)"
+>
+💵 أقل تكلفة
+</button>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<button
+class="main-btn"
+style="
+width:100%;
+margin-top:17px;
+"
+onclick="saveProfile()"
+>
+جهز حاسبتي ←
+</button>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section
+id="dashboard"
+class="dashboard hidden"
+>
+
+<div class="container">
+
+
+<div class="welcome">
+
+<small>
+FINO جاهزة لك
+</small>
+
+<h2 id="welcomeName">
+هلا 👋
+</h2>
+
+<p id="welcomeText">
+</p>
+
+
+<div class="chips">
+
+<div
+id="bankChip"
+class="chip"
+>
+</div>
+
+<div
+id="employmentChip"
+class="chip"
+>
+</div>
+
+<div
+id="goalChip"
+class="chip"
+>
+</div>
+
+</div>
+
+</div>
+
+
+
+<div
+id="tools"
+class="tools-title"
+>
+
+<small id="toolsSmall">
+وش ودك تعرف؟
+</small>
+
+<h3>
+اختر الحسبة
+</h3>
+
+</div>
+
+
+
+<div class="tool-tabs">
+
+
+<button
+id="tab-buyout"
+class="tool-tab active"
+onclick="openTool('buyout')"
+>
+
+<div class="tab-icon">
+💵
+</div>
+
+<h4>
+كم يصفي لي؟
+</h4>
+
+<p>
+شراء مديونية وحساب الفائض بعد السداد.
+</p>
+
+</button>
+
+
+
+<button
+id="tab-finance"
+class="tool-tab"
+onclick="openTool('finance')"
+>
+
+<div class="tab-icon">
+💰
+</div>
+
+<h4>
+كم ممكن يكون تمويلي؟
+</h4>
+
+<p>
+احسب الصافي من الراتب والنسبة.
+</p>
+
+</button>
+
+
+
+<button
+id="tab-compare"
+class="tool-tab"
+onclick="openTool('compare')"
+>
+
+<div class="tab-icon">
+⚖️
+</div>
+
+<h4>
+قارن عرضين
+</h4>
+
+<p>
+قارن الكاش والقسط وإجمالي السداد.
+</p>
+
+</button>
+
+
+
+<button
+id="tab-analyze"
+class="tool-tab"
+onclick="openTool('analyze')"
+>
+
+<div class="tab-icon">
+📊
+</div>
+
+<h4>
+حلل عرضي
+</h4>
+
+<p>
+حول عرض البنك إلى أرقام واضحة.
+</p>
+
+</button>
+
+
+</div>
+
+
+
+<!-- CALCULATOR -->
+
+<div class="calculator-card">
+
+
+<div class="calc-head">
+
+<small>
+FINO CALCULATOR
+</small>
+
+<h2 id="calcTitle">
+</h2>
+
+<p id="calcDescription">
+</p>
+
+</div>
+
+
+<div
+id="calculatorFields"
+class="calc-grid"
+>
+</div>
+
+
+<button
+class="calc-btn"
+onclick="calculateCurrentTool()"
+>
+طلع نتيجتي
+</button>
+
+
+
+<div
+id="resultBox"
+class="result"
+>
+
+
+<div
+id="resultPersonal"
+class="result-personal"
+>
+</div>
+
+
+<div
+id="resultLabel"
+class="result-label"
+>
+</div>
+
+
+<div
+id="resultMain"
+class="result-main"
+>
+</div>
+
+
+<div
+id="resultDetails"
+class="result-grid"
+>
+</div>
+
+
+<div
+id="resultNote"
+class="result-note"
+>
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<div class="notice">
+
+تنبيه: الحسبة إرشادية وتعتمد على البيانات المدخلة وطريقة الحساب المستخدمة في FINO.
+النسبة الفعلية والرسوم ورسوم السلعة والحد الائتماني والمبلغ النهائي قد تختلف حسب البنك والعرض والعقد النهائي.
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ACCESS MODAL
+===================================================== -->
+
+<div
+id="accessModal"
+class="modal hidden"
+>
+
+<div class="modal-card">
+
+
+<button
+class="close"
+onclick="closeAccessModal()"
+>
+×
+</button>
+
+
+<div class="lock">
+🔐
+</div>
+
+
+<h3 id="modalTitle">
+حسبتك جاهزة
+</h3>
+
+
+<p id="modalMessage">
+</p>
+
+
+<input
+id="accessCodeInput"
+class="code-input"
+type="text"
+placeholder="أدخل كود الاشتراك"
+autocomplete="off"
+>
+
+
+<button
+class="unlock"
+onclick="activateCode()"
+>
+عرض النتيجة
+</button>
+
+
+<div
+id="codeError"
+class="error"
+>
+</div>
+
+
+<div class="demo">
+
+كود التجربة
+
+<strong>
+FINO-7K29-X4
+</strong>
+
+10 عمليات • 24 ساعة
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     MEMBER
+===================================================== -->
+
+<div
+id="memberBar"
+class="member hidden"
+>
+
+<span>
+المتبقي:
+<strong id="memberUses">
+-
+</strong>
+</span>
+
+<span>
+•
+</span>
+
+<span>
+الوقت:
+<strong id="memberTime">
+-
+</strong>
+</span>
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   STATE
+===================================================== */
+
+let profile={
+name:"",
+bank:"",
+employment:"",
+goal:""
+};
+
+let selectedEmployment="";
+let selectedGoal="";
+
+let activeTool="buyout";
+
+let pendingResult=null;
+
+
+/* =====================================================
+   ACCESS CODES
+   Front-end demo only
+===================================================== */
+
+const ACCESS_CODES={
+
+"FINO-7K29-X4":{
+uses:10,
+hours:24
+},
+
+"FINO-BASIC-25":{
+uses:5,
+hours:24
+},
+
+"FINO-PLUS-40":{
+uses:15,
+hours:72
+},
+
+"FINO-PRO-70":{
+uses:30,
+hours:168
+}
+
+};
+
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
+function el(id){
+return document.getElementById(id);
+}
+
+
+function money(value){
+
+const number=
+Number(value)||0;
+
+return new Intl.NumberFormat(
+"ar-SA",
+{
+maximumFractionDigits:0
+}
+).format(number)+" ريال";
+
+}
+
+
+function decimalMoney(value){
+
+const number=
+Number(value)||0;
+
+return new Intl.NumberFormat(
+"ar-SA",
+{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+}
+).format(number)+" ريال";
+
+}
+
+
+function numberValue(id){
+
+const element=
+el(id);
+
+if(!element){
+return 0;
+}
+
+return Number(element.value)||0;
+
+}
+
+
+/* =====================================================
+   SCROLL
+===================================================== */
+
+function goToProfile(){
+
+el("profileSection")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+function scrollToTools(){
+
+if(
+el("dashboard")
+.classList.contains("hidden")
+){
+
+goToProfile();
+
+return;
+
+}
+
+el("tools")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+function selectEmployment(button){
+
+document
+.querySelectorAll(
+"#employmentOptions .select-option"
+)
+.forEach(item=>{
+
+item.classList.remove("active");
+
+});
+
+button.classList.add("active");
+
+selectedEmployment=
+button.dataset.value;
+
+}
+
+
+function selectGoal(button){
+
+document
+.querySelectorAll(
+"#goalOptions .select-option"
+)
+.forEach(item=>{
+
+item.classList.remove("active");
+
+});
+
+button.classList.add("active");
+
+selectedGoal=
+button.dataset.value;
+
+}
+
+
+function saveProfile(){
+
+const name=
+el("customerName")
+.value
+.trim();
+
+
+const bank=
+el("salaryBank")
+.value;
+
+
+if(name.length<2){
+
+alert(
+"اكتب اسمك الأول."
+);
+
+return;
+
+}
+
+
+if(!bank){
+
+alert(
+"اختر بنك الراتب."
+);
+
+return;
+
+}
+
+
+if(!selectedEmployment){
+
+alert(
+"اختر وضعك الوظيفي."
+);
+
+return;
+
+}
+
+
+if(!selectedGoal){
+
+alert(
+"اختر الشيء الأهم لك."
+);
+
+return;
+
+}
+
+
+profile={
+
+name,
+bank,
+employment:selectedEmployment,
+goal:selectedGoal
+
+};
+
+
+localStorage.setItem(
+"finoProfile",
+JSON.stringify(profile)
+);
+
+
+renderProfile();
+
+
+el("dashboard")
+.classList.remove("hidden");
+
+
+openTool("buyout");
+
+
+setTimeout(()=>{
+
+el("dashboard")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+},100);
+
+}
+
+
+/* =====================================================
+   RENDER PROFILE
+===================================================== */
+
+function renderProfile(){
+
+el("welcomeName").innerText=
+"هلا "+profile.name+" 👋";
+
+
+el("welcomeText").innerText=
+"راتبك ينزل على "+profile.bank+
+"، وإذا عندك نسبة أو عرض من بنكك أو من بنك ثاني أدخل الأرقام ونحسبها لك بدون ما نفترض أن بنكًا معينًا هو الأفضل.";
+
+
+el("bankChip").innerText=
+"🏦 "+profile.bank;
+
+
+el("employmentChip").innerText=
+"💼 "+profile.employment;
+
+
+el("goalChip").innerText=
+"🎯 "+profile.goal;
+
+
+el("toolsSmall").innerText=
+"وش ودك تعرف يا "+profile.name+"؟";
+
+}
+
+
+/* =====================================================
+   DEDUCTION
+===================================================== */
+
+function defaultDeduction(){
+
+if(
+profile.employment==="متقاعد"
+){
+
+return 25;
+
+}
+
+return 33.33;
+
+}
+
+
+/* =====================================================
+   FINO ORIGINAL FORMULA
+===================================================== */
+
+function finoFinanceCalculation({
+
+salary,
+annualRate,
+months,
+deductionPercent,
+commodityFee=0,
+exemptMonths=0
+
+}){
+
+
+/*
+=========================================
+1) القسط الشهري
+=========================================
+*/
+
+const monthlyInstallment=
+salary*
+(
+deductionPercent/
+100
+);
+
+
+/*
+=========================================
+2) الأشهر الفعلية
+
+مثال:
+60 شهر
+إعفاء شهرين حقيقي
+=> 58 شهر
+=========================================
+*/
+
+const actualMonths=
+Math.max(
+1,
+months-exemptMonths
+);
+
+
+/*
+=========================================
+3) إجمالي الأقساط مع الأرباح
+=========================================
+*/
+
+const totalWithProfit=
+monthlyInstallment*
+actualMonths;
+
+
+/*
+=========================================
+4) عدد السنوات
+
+معامل الربح حسب طريقة المستخدم الأصلية
+يُبنى على مدة التمويل الأصلية بالسنوات.
+
+مثال:
+60 شهر = 5 سنوات
+=========================================
+*/
+
+const years=
+months/12;
+
+
+/*
+=========================================
+5) معامل الربح
+
+1 + (السنوات × هامش الربح ÷100)
+
+مثال:
+5 × 3.78 ÷100 +1
+= 1.189
+=========================================
+*/
+
+const profitFactor=
+1+
+(
+years*
+annualRate/
+100
+);
+
+
+/*
+=========================================
+6) الصافي قبل الرسوم
+=========================================
+*/
+
+const beforeFees=
+totalWithProfit/
+profitFactor;
+
+
+/*
+=========================================
+7) الرسوم الإدارية
+
+0.5%
+=========================================
+*/
+
+const adminFee=
+beforeFees*
+0.005;
+
+
+/*
+=========================================
+8) ضريبة 15%
+على الرسوم الإدارية فقط
+=========================================
+*/
+
+const feeVAT=
+adminFee*
+0.15;
+
+
+/*
+=========================================
+9) إجمالي الخصومات
+=========================================
+*/
+
+const totalFees=
+adminFee+
+feeVAT+
+commodityFee;
+
+
+/*
+=========================================
+10) الصافي النهائي
+=========================================
+*/
+
+const finalNet=
+beforeFees-
+totalFees;
+
+
+/*
+=========================================
+11) الربح الإجمالي التقريبي
+=========================================
+*/
+
+const totalProfit=
+totalWithProfit-
+beforeFees;
+
+
+return{
+
+monthlyInstallment,
+
+actualMonths,
+
+totalWithProfit,
+
+years,
+
+profitFactor,
+
+beforeFees,
+
+adminFee,
+
+feeVAT,
+
+commodityFee,
+
+totalFees,
+
+finalNet,
+
+totalProfit
+
+};
+
+}
+
+
+/* =====================================================
+   TOOL DEFINITIONS
+===================================================== */
+
+const TOOLS={
+
+
+buyout:{
+
+title:()=>(
+"كم يصفي لك يا "+
+profile.name+
+"؟"
+),
+
+description:()=>(
+"أدخل نسبة العرض ومبلغ السداد المبكر، ونحسب لك التمويل والصافي المتوقع بعد سداد مديونيتك."
+),
+
+fields:()=>`
+
+<div class="field">
+
+<label>
+صافي الراتب
+</label>
+
+<input
+id="bSalary"
+type="number"
+inputmode="decimal"
+placeholder="مثال: 15000"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+هامش الربح السنوي %
+</label>
+
+<input
+id="bRate"
+type="number"
+inputmode="decimal"
+step="0.01"
+placeholder="مثال: 1.99"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+مدة التمويل
+</label>
+
+<select id="bMonths">
+
+<option value="60">
+5 سنوات - 60 شهر
+</option>
+
+<option value="48">
+4 سنوات - 48 شهر
+</option>
+
+<option value="36">
+3 سنوات - 36 شهر
+</option>
+
+<option value="24">
+سنتان - 24 شهر
+</option>
+
+<option value="12">
+سنة - 12 شهر
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+نسبة الاستقطاع المستخدمة %
+</label>
+
+<input
+id="bDeduction"
+type="number"
+step="0.01"
+value="${defaultDeduction()}"
+>
+
+<div class="helper">
+تم وضع النسبة تلقائيًا حسب وضعك ويمكن تعديلها.
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>
+مبلغ السداد المبكر
+</label>
+
+<input
+id="bSettlement"
+type="number"
+inputmode="decimal"
+placeholder="مثال: 190000"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+رسوم السلعة إن وجدت
+</label>
+
+<input
+id="bCommodity"
+type="number"
+inputmode="decimal"
+value="0"
+>
+
+</div>
+
+
+<div class="field full">
+
+<div class="toggle-box">
+
+<div class="toggle-copy">
+
+<strong>
+هل العرض فيه إعفاء حقيقي من قسطين؟
+</strong>
+
+<span>
+إذا كان مجرد تأجيل قسطين لا تفعل هذا الخيار.
+</span>
+
+</div>
+
+
+<label class="switch">
+
+<input
+id="bExemption"
+type="checkbox"
+>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+</div>
+
+`
+
+},
+
+
+
+finance:{
+
+title:()=>(
+"كم ممكن يكون تمويلك يا "+
+profile.name+
+"؟"
+),
+
+description:()=>(
+"أدخل راتبك والنسبة اللي أعطاك البنك والمدة، ونحسب لك الصافي بطريقة FINO."
+),
+
+fields:()=>`
+
+<div class="field">
+
+<label>
+صافي الراتب
+</label>
+
+<input
+id="fSalary"
+type="number"
+inputmode="decimal"
+placeholder="مثال: 15000"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+هامش الربح السنوي %
+</label>
+
+<input
+id="fRate"
+type="number"
+step="0.01"
+placeholder="مثال: 1.99"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+مدة التمويل
+</label>
+
+<select id="fMonths">
+
+<option value="60">
+5 سنوات - 60 شهر
+</option>
+
+<option value="48">
+4 سنوات - 48 شهر
+</option>
+
+<option value="36">
+3 سنوات - 36 شهر
+</option>
+
+<option value="24">
+سنتان - 24 شهر
+</option>
+
+<option value="12">
+سنة - 12 شهر
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+نسبة الاستقطاع %
+</label>
+
+<input
+id="fDeduction"
+type="number"
+step="0.01"
+value="${defaultDeduction()}"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+رسوم السلعة إن وجدت
+</label>
+
+<input
+id="fCommodity"
+type="number"
+value="0"
+>
+
+</div>
+
+
+<div class="field">
+
+<div class="toggle-box">
+
+<div class="toggle-copy">
+
+<strong>
+إعفاء حقيقي من قسطين
+</strong>
+
+<span>
+يحسب الإجمالي على 58 شهرًا إذا كانت المدة 60.
+</span>
+
+</div>
+
+
+<label class="switch">
+
+<input
+id="fExemption"
+type="checkbox"
+>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+</div>
+
+`
+
+},
+
+
+
+compare:{
+
+title:()=>(
+"خلنا نقارن عرضين يا "+
+profile.name
+),
+
+description:()=>(
+"أدخل صافي كل عرض وقسطه ومدته، ونوضح لك الفرق حسب هدفك: "+profile.goal+"."
+),
+
+fields:()=>`
+
+<div class="field full">
+
+<label style="
+color:var(--purple);
+font-size:11px;
+">
+العرض الأول
+</label>
+
+</div>
+
+
+<div class="field">
+
+<label>
+الصافي الذي تستلمه
+</label>
+
+<input
+id="cCash1"
+type="number"
+placeholder="250000"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+القسط الشهري
+</label>
+
+<input
+id="cInstallment1"
+type="number"
+placeholder="4800"
+>
+
+</div>
+
+
+<div class="field full">
+
+<label>
+المدة بالأشهر
+</label>
+
+<input
+id="cMonths1"
+type="number"
+value="60"
+>
+
+</div>
+
+
+<div class="field full">
+
+<label style="
+color:var(--pink);
+font-size:11px;
+margin-top:8px;
+">
+العرض الثاني
+</label>
+
+</div>
+
+
+<div class="field">
+
+<label>
+الصافي الذي تستلمه
+</label>
+
+<input
+id="cCash2"
+type="number"
+placeholder="260000"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+القسط الشهري
+</label>
+
+<input
+id="cInstallment2"
+type="number"
+placeholder="4950"
+>
+
+</div>
+
+
+<div class="field full">
+
+<label>
+المدة بالأشهر
+</label>
+
+<input
+id="cMonths2"
+type="number"
+value="60"
+>
+
+</div>
+
+`
+
+},
+
+
+
+analyze:{
+
+title:()=>(
+"نفهم عرض البنك يا "+
+profile.name
+),
+
+description:()=>(
+"أدخل العرض كما وصلك: الصافي والقسط والمدة، ونرتب لك الأرقام."
+),
+
+fields:()=>`
+
+<div class="field">
+
+<label>
+المبلغ الصافي الذي تستلمه
+</label>
+
+<input
+id="aCash"
+type="number"
+placeholder="250000"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+القسط الشهري
+</label>
+
+<input
+id="aInstallment"
+type="number"
+placeholder="4800"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+مدة التمويل بالأشهر
+</label>
+
+<input
+id="aMonths"
+type="number"
+value="60"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+رسوم إضافية خارج المبلغ إن وجدت
+</label>
+
+<input
+id="aFees"
+type="number"
+value="0"
+>
+
+</div>
+
+`
+
+}
+
+};
+
+
+/* =====================================================
+   OPEN TOOL
+===================================================== */
+
+function openTool(tool){
+
+activeTool=tool;
+
+
+Object.keys(TOOLS)
+.forEach(key=>{
+
+const tab=
+el("tab-"+key);
+
+if(tab){
+
+tab.classList.toggle(
+"active",
+key===tool
+);
+
+}
+
+});
+
+
+const data=
+TOOLS[tool];
+
+
+el("calcTitle").innerText=
+data.title();
+
+
+el("calcDescription").innerText=
+data.description();
+
+
+el("calculatorFields").innerHTML=
+data.fields();
+
+
+el("resultBox").style.display=
+"none";
+
+}
+
+
+/* =====================================================
+   CALCULATE
+===================================================== */
+
+function calculateCurrentTool(){
+
+const result=
+buildResult();
+
+
+if(!result){
+return;
+}
+
+
+if(!hasAccess()){
+
+pendingResult=
+result;
+
+openAccessModal();
+
+return;
+
+}
+
+
+if(!consumeUse()){
+return;
+}
+
+
+showResult(result);
+
+}
+
+
+/* =====================================================
+   BUILD RESULT
+===================================================== */
+
+function buildResult(){
+
+
+/* ================= BUYOUT ================= */
+
+if(activeTool==="buyout"){
+
+const salary=
+numberValue("bSalary");
+
+const rate=
+numberValue("bRate");
+
+const months=
+numberValue("bMonths");
+
+const deduction=
+numberValue("bDeduction");
+
+const settlement=
+numberValue("bSettlement");
+
+const commodity=
+numberValue("bCommodity");
+
+const exemption=
+el("bExemption").checked
+? 2
+: 0;
+
+
+if(
+salary<=0 ||
+months<=0 ||
+deduction<=0 ||
+settlement<=0
+){
+
+alert(
+"يا "+profile.name+
+"، تأكد من إدخال الراتب والمدة والاستقطاع ومبلغ السداد."
+);
+
+return null;
+
+}
+
+
+const r=
+finoFinanceCalculation({
+
+salary,
+
+annualRate:rate,
+
+months,
+
+deductionPercent:deduction,
+
+commodityFee:commodity,
+
+exemptMonths:exemption
+
+});
+
+
+const leftover=
+r.finalNet-
+settlement;
+
+
+return{
+
+label:
+"المتوقع يصفي لك بعد السداد",
+
+main:
+leftover,
+
+details:[
+
+[
+"القسط الشهري",
+decimalMoney(
+r.monthlyInstallment
+)
+],
+
+[
+"الأشهر المحتسبة",
+r.actualMonths+" شهر"
+],
+
+[
+"إجمالي التمويل مع الأرباح",
+money(
+r.totalWithProfit
+)
+],
+
+[
+"معامل الربح",
+r.profitFactor.toFixed(4)
+],
+
+[
+"الصافي قبل الرسوم",
+money(
+r.beforeFees
+)
+],
+
+[
+"الرسوم الإدارية 0.5%",
+money(
+r.adminFee
+)
+],
+
+[
+"ضريبة الرسوم 15%",
+money(
+r.feeVAT
+)
+],
+
+[
+"رسوم السلعة",
+money(
+r.commodityFee
+)
+],
+
+[
+"صافي التمويل النهائي",
+money(
+r.finalNet
+)
+],
+
+[
+"السداد المبكر",
+money(
+settlement
+)
+]
+
+],
+
+note:
+leftover>=0
+
+?
+
+"يا "+profile.name+
+"، حسب البيانات التي أدخلتها، المتوقع يتبقى لك "+
+money(leftover)+
+" بعد سداد مديونيتك الحالية. هذه نتيجة تقديرية وليست عرضًا بنكيًا نهائيًا."
+
+:
+
+"يا "+profile.name+
+"، حسب البيانات المدخلة التمويل المتوقع أقل من مبلغ السداد المبكر بفارق "+
+money(Math.abs(leftover))+
+". راجع بيانات العرض مع البنك."
+
+};
+
+}
+
+
+
+/* ================= FINANCE ================= */
+
+if(activeTool==="finance"){
+
+const salary=
+numberValue("fSalary");
+
+const rate=
+numberValue("fRate");
+
+const months=
+numberValue("fMonths");
+
+const deduction=
+numberValue("fDeduction");
+
+const commodity=
+numberValue("fCommodity");
+
+const exemption=
+el("fExemption").checked
+? 2
+: 0;
+
+
+if(
+salary<=0 ||
+months<=0 ||
+deduction<=0
+){
+
+alert(
+"يا "+profile.name+
+"، تأكد من إدخال الراتب والمدة والاستقطاع."
+);
+
+return null;
+
+}
+
+
+const r=
+finoFinanceCalculation({
+
+salary,
+
+annualRate:rate,
+
+months,
+
+deductionPercent:deduction,
+
+commodityFee:commodity,
+
+exemptMonths:exemption
+
+});
+
+
+return{
+
+label:
+"صافي التمويل المتوقع",
+
+main:
+r.finalNet,
+
+details:[
+
+[
+"القسط الشهري",
+decimalMoney(
+r.monthlyInstallment
+)
+],
+
+[
+"الأشهر المحتسبة",
+r.actualMonths+" شهر"
+],
+
+[
+"إجمالي التمويل مع الأرباح",
+money(
+r.totalWithProfit
+)
+],
+
+[
+"معامل الربح",
+r.profitFactor.toFixed(4)
+],
+
+[
+"الصافي قبل الرسوم",
+money(
+r.beforeFees
+)
+],
+
+[
+"الرسوم الإدارية",
+money(
+r.adminFee
+)
+],
+
+[
+"ضريبة الرسوم",
+money(
+r.feeVAT
+)
+],
+
+[
+"رسوم السلعة",
+money(
+r.commodityFee
+)
+]
+
+],
+
+note:
+"يا "+profile.name+
+"، هذا الصافي محسوب بطريقة FINO بناءً على الراتب والنسبة والمدة التي أدخلتها. إذا تغيّر القسط أو الرسوم في العرض الفعلي تتغيّر النتيجة."
+
+};
+
+}
+
+
+
+/* ================= COMPARE ================= */
+
+if(activeTool==="compare"){
+
+const cash1=
+numberValue("cCash1");
+
+const installment1=
+numberValue("cInstallment1");
+
+const months1=
+numberValue("cMonths1");
+
+
+const cash2=
+numberValue("cCash2");
+
+const installment2=
+numberValue("cInstallment2");
+
+const months2=
+numberValue("cMonths2");
+
+
+if(
+cash1<=0 ||
+cash2<=0 ||
+installment1<=0 ||
+installment2<=0 ||
+months1<=0 ||
+months2<=0
+){
+
+alert(
+"يا "+profile.name+
+"، أدخل بيانات العرضين كاملة."
+);
+
+return null;
+
+}
+
+
+const total1=
+installment1*
+months1;
+
+
+const total2=
+installment2*
+months2;
+
+
+let mainText="";
+
+
+if(profile.goal==="أعلى كاش"){
+
+mainText=
+cash1>cash2
+? "العرض الأول"
+: cash2>cash1
+? "العرض الثاني"
+: "العرضان متساويان";
+
+}
+
+else if(profile.goal==="أقل قسط"){
+
+mainText=
+installment1<installment2
+? "العرض الأول"
+: installment2<installment1
+? "العرض الثاني"
+: "العرضان متساويان";
+
+}
+
+else{
+
+mainText=
+total1<total2
+? "العرض الأول"
+: total2<total1
+? "العرض الثاني"
+: "العرضان متساويان";
+
+}
+
+
+return{
+
+label:
+"الأقرب لهدفك: "+profile.goal,
+
+mainText,
+
+details:[
+
+[
+"صافي العرض الأول",
+money(cash1)
+],
+
+[
+"صافي العرض الثاني",
+money(cash2)
+],
+
+[
+"قسط العرض الأول",
+money(installment1)
+],
+
+[
+"قسط العرض الثاني",
+money(installment2)
+],
+
+[
+"إجمالي سداد الأول",
+money(total1)
+],
+
+[
+"إجمالي سداد الثاني",
+money(total2)
+]
+
+],
+
+note:
+"يا "+profile.name+
+"، الترتيب هنا مبني على الهدف الذي اخترته: «"+
+profile.goal+
+"». الأفضل ماليًا لا يُحدد بعامل واحد فقط، لذلك راجع الصافي والقسط والمدة وإجمالي السداد معًا."
+
+};
+
+}
+
+
+
+/* ================= ANALYZE ================= */
+
+if(activeTool==="analyze"){
+
+const cash=
+numberValue("aCash");
+
+const installment=
+numberValue("aInstallment");
+
+const months=
+numberValue("aMonths");
+
+const fees=
+numberValue("aFees");
+
+
+if(
+cash<=0 ||
+installment<=0 ||
+months<=0
+){
+
+alert(
+"يا "+profile.name+
+"، أدخل الصافي والقسط والمدة."
+);
+
+return null;
+
+}
+
+
+const total=
+installment*
+months;
+
+
+const difference=
+total-
+cash+
+fees;
+
+
+return{
+
+label:
+"إجمالي الأقساط",
+
+main:
+total,
+
+details:[
+
+[
+"الصافي الذي تستلمه",
+money(cash)
+],
+
+[
+"القسط",
+money(installment)
+],
+
+[
+"المدة",
+months+" شهر"
+],
+
+[
+"إجمالي الأقساط",
+money(total)
+],
+
+[
+"الفرق بين الصافي وإجمالي الأقساط",
+money(difference)
+],
+
+[
+"رسوم إضافية مدخلة",
+money(fees)
+]
+
+],
+
+note:
+"يا "+profile.name+
+"، هذا تحليل للأرقام التي أدخلتها من العرض، وليس حسابًا لمعدل النسبة السنوي APR."
+
+};
+
+}
+
+
+return null;
+
+}
+
+
+/* =====================================================
+   SHOW RESULT
+===================================================== */
+
+function showResult(result){
+
+el("resultPersonal").innerText=
+"يا "+profile.name+
+"، هذه نتيجة الحسبة بناءً على بياناتك 👇";
+
+
+el("resultLabel").innerText=
+result.label;
+
+
+if(result.mainText){
+
+el("resultMain").innerText=
+result.mainText;
+
+el("resultMain").style.fontSize=
+"23px";
+
+}
+else{
+
+el("resultMain").innerText=
+money(result.main);
+
+el("resultMain").style.fontSize=
+"";
+
+}
+
+
+el("resultDetails").innerHTML=
+result.details
+.map(item=>`
+
+<div class="result-item">
+
+<span>
+${item[0]}
+</span>
+
+<strong>
+${item[1]}
+</strong>
+
+</div>
+
+`)
+.join("");
+
+
+el("resultNote").innerText=
+result.note;
+
+
+el("resultBox").style.display=
+"block";
+
+
+setTimeout(()=>{
+
+el("resultBox")
+.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+},100);
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+function openAccessModal(){
+
+el("modalTitle").innerText=
+"حسبتك جاهزة يا "+
+profile.name+
+" 🔐";
+
+
+el("modalMessage").innerText=
+"تم تجهيز الحسبة بناءً على بياناتك. أدخل كود FINO لعرض النتيجة واستخدام بقية الأدوات.";
+
+
+el("accessCodeInput").value=
+"";
+
+
+el("codeError").style.display=
+"none";
+
+
+el("accessModal")
+.classList.remove("hidden");
+
+}
+
+
+function closeAccessModal(){
+
+el("accessModal")
+.classList.add("hidden");
+
+}
+
+
+/* =====================================================
+   ACCESS
+===================================================== */
+
+function subscriptions(){
+
+try{
+
+return JSON.parse(
+localStorage.getItem(
+"finoSubscriptions"
+)||"{}"
+);
+
+}
+catch{
+
+return {};
+
+}
+
+}
+
+
+function activeSubscription(){
+
+const code=
+localStorage.getItem(
+"finoActiveCode"
+);
+
+
+if(!code){
+return null;
+}
+
+
+return subscriptions()[code]
+|| null;
+
+}
+
+
+function activateCode(){
+
+const code=
+el("accessCodeInput")
+.value
+.trim()
+.toUpperCase();
+
+
+const error=
+el("codeError");
+
+
+error.style.display=
+"none";
+
+
+if(!ACCESS_CODES[code]){
+
+error.innerText=
+"الكود غير صحيح.";
+
+error.style.display=
+"block";
+
+return;
+
+}
+
+
+let all=
+subscriptions();
+
+
+let sub=
+all[code];
+
+
+if(!sub){
+
+const template=
+ACCESS_CODES[code];
+
+const now=
+Date.now();
+
+
+sub={
+
+code,
+
+remainingUses:
+template.uses,
+
+expiresAt:
+now+
+template.hours*
+60*
+60*
+1000
+
+};
+
+
+all[code]=sub;
+
+
+localStorage.setItem(
+"finoSubscriptions",
+JSON.stringify(all)
+);
+
+}
+
+
+if(
+sub.remainingUses<=0 ||
+Date.now()>=sub.expiresAt
+){
+
+error.innerText=
+"الكود منتهي أو تم استهلاك جميع الحسبات.";
+
+error.style.display=
+"block";
+
+return;
+
+}
+
+
+localStorage.setItem(
+"finoActiveCode",
+code
+);
+
+
+closeAccessModal();
+
+
+updateMember();
+
+
+if(pendingResult){
+
+const result=
+pendingResult;
+
+pendingResult=null;
+
+
+if(consumeUse()){
+
+showResult(result);
+
+}
+
+}
+
+}
+
+
+/* =====================================================
+   ACCESS CHECK
+===================================================== */
+
+function hasAccess(){
+
+const sub=
+activeSubscription();
+
+
+return !!(
+sub &&
+sub.remainingUses>0 &&
+Date.now()<sub.expiresAt
+);
+
+}
+
+
+/* =====================================================
+   CONSUME
+===================================================== */
+
+function consumeUse(){
+
+const code=
+localStorage.getItem(
+"finoActiveCode"
+);
+
+
+if(!code){
+return false;
+}
+
+
+let all=
+subscriptions();
+
+
+let sub=
+all[code];
+
+
+if(
+!sub ||
+sub.remainingUses<=0 ||
+Date.now()>=sub.expiresAt
+){
+
+localStorage.removeItem(
+"finoActiveCode"
+);
+
+updateMember();
+
+openAccessModal();
+
+return false;
+
+}
+
+
+sub.remainingUses--;
+
+
+all[code]=sub;
+
+
+localStorage.setItem(
+"finoSubscriptions",
+JSON.stringify(all)
+);
+
+
+updateMember();
+
+
+return true;
+
+}
+
+
+/* =====================================================
+   MEMBER
+===================================================== */
+
+function updateMember(){
+
+const sub=
+activeSubscription();
+
+
+if(
+!sub ||
+sub.remainingUses<=0 ||
+Date.now()>=sub.expiresAt
+){
+
+el("memberBar")
+.classList.add("hidden");
+
+return;
+
+}
+
+
+el("memberBar")
+.classList.remove("hidden");
+
+
+el("memberUses").innerText=
+sub.remainingUses;
+
+
+updateMemberTime();
+
+}
+
+
+function updateMemberTime(){
+
+const sub=
+activeSubscription();
+
+
+if(!sub){
+return;
+}
+
+
+const diff=
+sub.expiresAt-
+Date.now();
+
+
+if(diff<=0){
+
+el("memberTime").innerText=
+"منتهي";
+
+return;
+
+}
+
+
+const hours=
+Math.floor(
+diff/
+3600000
+);
+
+
+const minutes=
+Math.floor(
+(
+diff%
+3600000
+)/
+60000
+);
+
+
+el("memberTime").innerText=
+hours+"س "+minutes+"د";
+
+}
+
+
+/* =====================================================
+   LOAD SAVED PROFILE
+===================================================== */
+
+function loadProfile(){
+
+try{
+
+const stored=
+JSON.parse(
+localStorage.getItem(
+"finoProfile"
+)
+);
+
+
+if(
+!stored ||
+!stored.name
+){
+
+return;
+
+}
+
+
+profile=stored;
+
+
+selectedEmployment=
+profile.employment;
+
+
+selectedGoal=
+profile.goal;
+
+
+el("customerName").value=
+profile.name;
+
+
+el("salaryBank").value=
+profile.bank;
+
+
+document
+.querySelectorAll(
+"#employmentOptions .select-option"
+)
+.forEach(button=>{
+
+button.classList.toggle(
+"active",
+button.dataset.value===
+profile.employment
+);
+
+});
+
+
+document
+.querySelectorAll(
+"#goalOptions .select-option"
+)
+.forEach(button=>{
+
+button.classList.toggle(
+"active",
+button.dataset.value===
+profile.goal
+);
+
+});
+
+
+renderProfile();
+
+
+el("dashboard")
+.classList.remove("hidden");
+
+
+openTool("buyout");
+
+}
+catch{}
+
+}
+
+
+/* =====================================================
+   ENTER ON CODE
+===================================================== */
+
+document.addEventListener(
+"keydown",
+event=>{
+
+if(
+event.key==="Enter" &&
+!el("accessModal")
+.classList.contains("hidden")
+){
+
+activateCode();
+
+}
+
+}
+);
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+setInterval(
+()=>{
+
+if(hasAccess()){
+
+updateMemberTime();
+
+}
+
+},
+30000
+);
+
+
+/* =====================================================
+   LOAD
+===================================================== */
+
+window.addEventListener(
+"load",
+()=>{
+
+loadProfile();
+
+updateMember();
+
+}
+);
+
+</script>
+
+</body>
+</html>
